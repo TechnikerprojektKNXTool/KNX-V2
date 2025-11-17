@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KNX_V2
 {
-    internal class Raum
+    public class Raum
     {
         string name;
         string typ;
@@ -33,7 +33,7 @@ namespace KNX_V2
 
         public Raum()
         {
-            funktionen = new Funktion[25];
+            funktionen = new Funktion[50];
         }
     }
 }
