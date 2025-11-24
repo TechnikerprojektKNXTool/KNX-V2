@@ -12,8 +12,7 @@ namespace KNX_V2
 {
     public partial class Form2 : Form
     {
-        int index;
-        int i;  
+        int index;        
         public Form2()
         {
             InitializeComponent();
@@ -69,7 +68,7 @@ namespace KNX_V2
             }            
         }
 
-        //gibt Index der ersten leeren Stelle zurück
+        //gibt Index der ersten leeren Stelle im Funktionen-Array zurück
         public int Index()
         {
             int i = 0;
@@ -97,8 +96,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox3.Text != "")
@@ -114,8 +111,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox4.Text != "")
@@ -131,8 +126,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox5.Text != "")
@@ -148,8 +141,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox6.Text != "")
@@ -165,8 +156,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox7.Text != "")
@@ -182,8 +171,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox8.Text != "")
@@ -199,8 +186,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox9.Text != "")
@@ -216,8 +201,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox10.Text != "")
@@ -233,8 +216,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox11.Text != "")
@@ -250,8 +231,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox12.Text != "")
@@ -266,8 +245,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox13.Text != "")
@@ -282,8 +259,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox14.Text != "")
@@ -298,8 +273,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox15.Text != "")
@@ -314,8 +287,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox16.Text != "")
@@ -330,8 +301,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox17.Text != "")
@@ -346,8 +315,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox18.Text != "")
@@ -362,8 +329,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox19.Text != "")
@@ -378,8 +343,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox20.Text != "")
@@ -394,8 +357,6 @@ namespace KNX_V2
                 fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             textBox1.Clear();
@@ -483,8 +444,6 @@ namespace KNX_V2
                 fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox23.Text != "")
@@ -500,8 +459,6 @@ namespace KNX_V2
                 fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox24.Text != "")
@@ -517,8 +474,6 @@ namespace KNX_V2
                 fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox25.Text != "")
@@ -534,8 +489,6 @@ namespace KNX_V2
                 fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox26.Text != "")
@@ -551,8 +504,6 @@ namespace KNX_V2
                 fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox27.Text != "")
@@ -568,8 +519,6 @@ namespace KNX_V2
                 fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             textBox39.Clear();
@@ -610,8 +559,6 @@ namespace KNX_V2
                 fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox30.Text != "")
@@ -626,8 +573,6 @@ namespace KNX_V2
                 fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox31.Text != "")
@@ -642,8 +587,6 @@ namespace KNX_V2
                 fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox32.Text != "")
@@ -658,8 +601,6 @@ namespace KNX_V2
                 fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             textBox51.Clear();
@@ -695,8 +636,6 @@ namespace KNX_V2
                 fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox35.Text != "")
@@ -711,8 +650,6 @@ namespace KNX_V2
                 fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox36.Text != "")
@@ -727,8 +664,6 @@ namespace KNX_V2
                 fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox37.Text != "")
@@ -743,8 +678,6 @@ namespace KNX_V2
                 fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             textBox59.Clear();
@@ -769,7 +702,7 @@ namespace KNX_V2
         {
             if (comboBox39.Text != "")
             {
-                int index = Index();
+                int i = Index();
                 Funktion fkt = new Funktion();
                 fkt.Verbraucher = comboBox38.Text;
                 fkt.Bedienelement = comboBox39.Text;
@@ -780,13 +713,11 @@ namespace KNX_V2
                 fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox40.Text != "")
             {
-                int index = Index();
+                int i = Index();
                 Funktion fkt = new Funktion();
                 fkt.Verbraucher = comboBox38.Text;
                 fkt.Bedienelement = comboBox40.Text;
@@ -797,13 +728,11 @@ namespace KNX_V2
                 fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox41.Text != "")
             {
-                int index = Index();
+                int i = Index();
                 Funktion fkt = new Funktion();
                 fkt.Verbraucher = comboBox38.Text;
                 fkt.Bedienelement = comboBox41.Text;
@@ -814,13 +743,11 @@ namespace KNX_V2
                 fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             if (comboBox42.Text != "")
             {
-                int index = Index();
+                int i = Index();
                 Funktion fkt = new Funktion();
                 fkt.Verbraucher = comboBox38.Text;
                 fkt.Bedienelement = comboBox42.Text;
@@ -831,8 +758,6 @@ namespace KNX_V2
                 fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
-
-                i++;
             }
 
             textBox67.Clear();
