@@ -135,7 +135,7 @@ namespace KNX_V2
                     {
                         if (funktion != null)
                         {
-                            string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar;
+                            string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar + "\t" + funktion.Art.ToString();
                             writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t" + fkt);
                         }
                     }
@@ -145,6 +145,7 @@ namespace KNX_V2
             writer.Close();
         }
 
+        //Textdatei einlesen
         private void button8_Click(object sender, EventArgs e)
         {
             Array.Clear(liste, 0, 1000);
@@ -186,6 +187,7 @@ namespace KNX_V2
                 fkt.Dimmen = Convert.ToBoolean(einlesen [8]);
                 fkt.Jalousie = Convert.ToBoolean(einlesen[9]);
                 fkt.Kommentar = einlesen[10];
+                fkt.Art = Convert.ToInt32(einlesen[11]);
                 liste[i].Funktionen[j] = fkt;
                 j++;
             }

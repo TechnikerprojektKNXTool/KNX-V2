@@ -16,10 +16,8 @@ namespace KNX_V2
         bool schalten;
         bool dimmen;
         bool jalousie;
-        bool licht;
-        bool oberlicht;
-        bool heizen;
-        bool steckdosen;
+        int art;
+
 
         public string Name { get { return name; } set { name = value; } }
         public string Bedienelement { get { return bedienelement; } set { bedienelement = value; } }
@@ -29,10 +27,7 @@ namespace KNX_V2
         public bool Schalten { get { return schalten; } set { schalten = value; } }
         public bool Dimmen { get { return dimmen; } set { dimmen = value; } }
         public bool Jalousie { get { return jalousie; } set { jalousie = value; } }
-        public bool Licht { get { return licht; } set { licht = value; } }
-        public bool Oberlicht { get { return oberlicht; } set { oberlicht = value; } }
-        public bool Heizen { get { return heizen; } set { heizen = value; } }
-        public bool Steckdosen { get { return steckdosen; } set { steckdosen = value; } }
+        public int Art { get { return art; } set { art = value; } }       
 
 
         public Funktion()
@@ -40,10 +35,6 @@ namespace KNX_V2
             schalten = false;
             dimmen = false;
             jalousie = false;
-            licht = false;
-            oberlicht = false;
-            heizen = false;
-            steckdosen = false;
         }
     }
 }

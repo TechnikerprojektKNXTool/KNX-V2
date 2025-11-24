@@ -23,41 +23,53 @@ namespace KNX_V2
         public Form2(int index) : this()
         {
             this.index = index;
-            foreach (Raum raum in Form1.liste)
+            
+            Raum raum = new Raum();
+            raum = Form1.liste[index];
+            foreach (Funktion fkt in raum.Funktionen)
             {
-                if (raum != null)
+                if (fkt != null)
                 {
-                    foreach (Funktion fkt in raum.Funktionen)
+                    switch (fkt.Art)
                     {
-                        if (fkt != null)
-                        {
-                            if (fkt.Licht)
+                        case 1:
+                            if (!comboBox1.Items.Contains(fkt.Verbraucher))
                             {
                                 comboBox1.Items.Add(fkt.Verbraucher);
                             }
-                            if (fkt.Jalousie)
+                            break;
+                        case 2:
+                            if (!comboBox21.Items.Contains(fkt.Verbraucher))
                             {
                                 comboBox21.Items.Add(fkt.Verbraucher);
                             }
-                            if (fkt.Oberlicht)
+                            break;
+                        case 3:
+                            if (!comboBox28.Items.Contains(fkt.Verbraucher))
                             {
                                 comboBox28.Items.Add(fkt.Verbraucher);
                             }
-                            if (fkt.Heizen)
+                            break;
+                        case 4:
+                            if (!comboBox33.Items.Contains(fkt.Verbraucher))
                             {
                                 comboBox33.Items.Add(fkt.Verbraucher);
                             }
-                            if (fkt.Steckdosen)
+                            break;
+                        case 5:
+                            if (!comboBox38.Items.Contains(fkt.Verbraucher))
                             {
                                 comboBox38.Items.Add(fkt.Verbraucher);
                             }
-                        }
+                            break;
+                        default:
+                            break;
                     }
                 }
-            }
-            
+            }            
         }
 
+        //gibt Index der ersten leeren Stelle zurück
         public int Index()
         {
             int i = 0;
@@ -82,7 +94,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox2.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Licht Ein/Aus";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -99,7 +111,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox4.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Licht Ein/Aus";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -116,7 +128,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox6.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Licht Ein/Aus";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -133,7 +145,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox8.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Licht Ein/Aus";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -150,7 +162,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox10.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Licht Ein/Aus";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -167,7 +179,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox12.Text;
                 fkt.Dimmen = true;
                 fkt.Name = "Licht Dimmen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -184,7 +196,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox14.Text;
                 fkt.Dimmen = true;
                 fkt.Name = "Licht Dimmen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -201,7 +213,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox16.Text;
                 fkt.Dimmen = true;
                 fkt.Name = "Licht Dimmen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -218,7 +230,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox18.Text;
                 fkt.Dimmen = true;
                 fkt.Name = "Licht Dimmen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -235,7 +247,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox20.Text;
                 fkt.Dimmen = true;
                 fkt.Name = "Licht Dimmen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -251,7 +263,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox21.Text;
                 fkt.Kommentar = textBox22.Text;
                 fkt.Name = "Farbtemperatur Einstellen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -267,7 +279,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox23.Text;
                 fkt.Kommentar = textBox24.Text;
                 fkt.Name = "Farbtemperatur Einstellen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -283,7 +295,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox25.Text;
                 fkt.Kommentar = textBox26.Text;
                 fkt.Name = "Farbtemperatur Einstellen";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -299,7 +311,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox27.Text;
                 fkt.Kommentar = textBox28.Text;
                 fkt.Name = "RGB";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -315,7 +327,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox29.Text;
                 fkt.Kommentar = textBox30.Text;
                 fkt.Name = "RGB";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -331,7 +343,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox31.Text;
                 fkt.Kommentar = textBox32.Text;
                 fkt.Name = "RGB";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -347,7 +359,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox33.Text;
                 fkt.Kommentar = textBox34.Text;
                 fkt.Name = "Direkt / Indirekt";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -363,7 +375,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox35.Text;
                 fkt.Kommentar = textBox36.Text;
                 fkt.Name = "Direkt / Indirekt";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -379,7 +391,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox37.Text;
                 fkt.Kommentar = textBox38.Text;
                 fkt.Name = "Direkt / Indirekt";
-                fkt.Licht = true;
+                fkt.Art = 1;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -468,6 +480,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox40.Text;
                 fkt.Jalousie = true;
                 fkt.Name = comboBox21.Text;
+                fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -484,6 +497,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox42.Text;
                 fkt.Jalousie = true;
                 fkt.Name = comboBox21.Text;
+                fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -500,6 +514,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox44.Text;
                 fkt.Jalousie = true;
                 fkt.Name = comboBox21.Text;
+                fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -516,6 +531,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox46.Text;
                 fkt.Jalousie = true;
                 fkt.Name = comboBox21.Text;
+                fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -532,6 +548,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox48.Text;
                 fkt.Jalousie = true;
                 fkt.Name = comboBox21.Text;
+                fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -548,6 +565,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox50.Text;
                 fkt.Jalousie = true;
                 fkt.Name = comboBox21.Text;
+                fkt.Art = 2;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -589,7 +607,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox51.Text;
                 fkt.Kommentar = textBox52.Text;                
                 fkt.Name = "Oberlicht";
-                fkt.Oberlicht = true;
+                fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -605,7 +623,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox53.Text;
                 fkt.Kommentar = textBox54.Text;
                 fkt.Name = "Oberlicht";
-                fkt.Oberlicht = true;
+                fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -621,7 +639,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox55.Text;
                 fkt.Kommentar = textBox56.Text;
                 fkt.Name = "Oberlicht";
-                fkt.Oberlicht = true;
+                fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -637,7 +655,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox57.Text;
                 fkt.Kommentar = textBox58.Text;
                 fkt.Name = "Oberlicht";
-                fkt.Oberlicht = true;
+                fkt.Art = 3;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -674,7 +692,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox59.Text;
                 fkt.Kommentar = textBox60.Text;
                 fkt.Name = "Heizen";
-                fkt.Heizen = true;
+                fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -690,7 +708,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox61.Text;
                 fkt.Kommentar = textBox62.Text;
                 fkt.Name = "Heizen";
-                fkt.Heizen = true;
+                fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -706,7 +724,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox63.Text;
                 fkt.Kommentar = textBox64.Text;
                 fkt.Name = "Heizen";
-                fkt.Heizen = true;
+                fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -722,7 +740,7 @@ namespace KNX_V2
                 fkt.Sollwert = textBox65.Text;
                 fkt.Kommentar = textBox66.Text;
                 fkt.Name = "Heizen";
-                fkt.Heizen = true;
+                fkt.Art = 4;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -759,7 +777,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox68.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Steckdosen Schalten";
-                fkt.Steckdosen = true;
+                fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -776,7 +794,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox70.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Steckdosen Schalten";
-                fkt.Steckdosen = true;
+                fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -793,7 +811,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox72.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Steckdosen Schalten";
-                fkt.Steckdosen = true;
+                fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 
@@ -810,7 +828,7 @@ namespace KNX_V2
                 fkt.Kommentar = textBox74.Text;
                 fkt.Schalten = true;
                 fkt.Name = "Steckdosen Schalten";
-                fkt.Steckdosen = true;
+                fkt.Art = 5;
 
                 Form1.liste[index].Funktionen[i] = fkt;
 

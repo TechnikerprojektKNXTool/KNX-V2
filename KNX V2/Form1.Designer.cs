@@ -197,7 +197,7 @@
             this.button8.Location = new System.Drawing.Point(598, 545);
             this.button8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(165, 36);
+            this.button8.Size = new System.Drawing.Size(276, 36);
             this.button8.TabIndex = 41;
             this.button8.Text = "Projekt Öffnen";
             this.button8.UseVisualStyleBackColor = true;

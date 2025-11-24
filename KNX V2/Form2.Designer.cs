@@ -1949,7 +1949,6 @@
             // 
             this.comboBox21.FormattingEnabled = true;
             this.comboBox21.Items.AddRange(new object[] {
-            "",
             ""});
             this.comboBox21.Location = new System.Drawing.Point(12, 50);
             this.comboBox21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
