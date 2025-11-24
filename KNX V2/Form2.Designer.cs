@@ -1483,6 +1483,10 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(8, 32);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBox1.Items.AddRange(new object[] {
+            ""});
+            this.comboBox1.Location = new System.Drawing.Point(12, 50);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(181, 24);
             this.comboBox1.TabIndex = 34;
@@ -1543,6 +1547,7 @@
             this.button5.TabIndex = 283;
             this.button5.Text = "Gruppe speichern";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // textBox50
             // 
@@ -1890,6 +1895,10 @@
             this.comboBox21.FormattingEnabled = true;
             this.comboBox21.Location = new System.Drawing.Point(8, 32);
             this.comboBox21.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBox21.Items.AddRange(new object[] {
+            ""});
+            this.comboBox21.Location = new System.Drawing.Point(12, 50);
+            this.comboBox21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox21.Name = "comboBox21";
             this.comboBox21.Size = new System.Drawing.Size(181, 24);
             this.comboBox21.TabIndex = 36;
@@ -1940,6 +1949,7 @@
             this.button6.TabIndex = 284;
             this.button6.Text = "Gruppe speichern";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // textBox58
             // 
@@ -2224,6 +2234,7 @@
             this.button7.TabIndex = 285;
             this.button7.Text = "Gruppe speichern";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // textBox66
             // 
@@ -2493,6 +2504,7 @@
             this.button8.TabIndex = 285;
             this.button8.Text = "Gruppe speichern";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // textBox74
             // 
@@ -2748,6 +2760,7 @@
             this.button2.TabIndex = 39;
             this.button2.Text = "Speichern";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 

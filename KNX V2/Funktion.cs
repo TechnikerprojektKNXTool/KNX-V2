@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KNX_V2
 {
-    internal class Funktion
+    public class Funktion
     {
         string name;
         string bedienelement;
@@ -16,6 +16,8 @@ namespace KNX_V2
         bool schalten;
         bool dimmen;
         bool jalousie;
+        int art;
+
 
         public string Name { get { return name; } set { name = value; } }
         public string Bedienelement { get { return bedienelement; } set { bedienelement = value; } }
@@ -25,6 +27,7 @@ namespace KNX_V2
         public bool Schalten { get { return schalten; } set { schalten = value; } }
         public bool Dimmen { get { return dimmen; } set { dimmen = value; } }
         public bool Jalousie { get { return jalousie; } set { jalousie = value; } }
+        public int Art { get { return art; } set { art = value; } }       
 
 
         public Funktion()
