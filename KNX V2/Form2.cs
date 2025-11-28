@@ -949,6 +949,23 @@ namespace KNX_V2
             textBox38.Enabled = aktiv;
         }
 
-       
+        private void button9_Click(object sender, EventArgs e)
+        {
+            textBox75.AppendText("\r\n" + textBox76.Text);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Listview eintrag abändern
+            //ListViewItem lvi = listView1.SelectedItems[0];
+            //int i = Convert.ToInt32(lvi.SubItems[3].Text);
+
+            //lvi.SubItems[1].Text = textBox76.Text;
+        }
+
+        private void textBox75_TextChanged(object sender, EventArgs e)
+        {
+            comboBox44.Text = textBox75.Text;
+        }
     }
 }
