@@ -952,6 +952,52 @@ namespace KNX_V2
         private void button9_Click(object sender, EventArgs e)
         {
             textBox75.AppendText("\r\n" + textBox76.Text);
+
+            //neue Schalter / Schalterstelle erstellt
+            // am besten Array? damit kann ich die Einträge wieder löschen
+            comboBox2.Items.Add(textBox75.Text);
+            comboBox3.Items.Add(textBox75.Text);
+            comboBox4.Items.Add(textBox75.Text);
+            comboBox5.Items.Add(textBox75.Text);
+            comboBox6.Items.Add(textBox75.Text);
+            comboBox7.Items.Add(textBox75.Text);
+            comboBox8.Items.Add(textBox75.Text);
+            comboBox9.Items.Add(textBox75.Text);
+            comboBox10.Items.Add(textBox75.Text);
+            comboBox11.Items.Add(textBox75.Text);
+            comboBox12.Items.Add(textBox75.Text);
+            comboBox13.Items.Add(textBox75.Text);
+            comboBox14.Items.Add(textBox75.Text);
+            comboBox15.Items.Add(textBox75.Text);
+            comboBox16.Items.Add(textBox75.Text);
+            comboBox17.Items.Add(textBox75.Text);
+            comboBox18.Items.Add(textBox75.Text);
+            comboBox19.Items.Add(textBox75.Text);
+            comboBox20.Items.Add(textBox75.Text);
+
+            comboBox22.Items.Add(textBox75.Text);
+            comboBox23.Items.Add(textBox75.Text);
+            comboBox24.Items.Add(textBox75.Text);
+            comboBox25.Items.Add(textBox75.Text);
+            comboBox26.Items.Add(textBox75.Text);
+            comboBox27.Items.Add(textBox75.Text);
+
+            comboBox29.Items.Add(textBox75.Text);
+            comboBox30.Items.Add(textBox75.Text);
+            comboBox31.Items.Add(textBox75.Text);
+            comboBox32.Items.Add(textBox75.Text);
+
+            comboBox34.Items.Add(textBox75.Text);
+            comboBox35.Items.Add(textBox75.Text);
+            comboBox36.Items.Add(textBox75.Text);
+            comboBox37.Items.Add(textBox75.Text);
+
+            comboBox39.Items.Add(textBox75.Text);
+            comboBox40.Items.Add(textBox75.Text);
+            comboBox41.Items.Add(textBox75.Text);
+            comboBox42.Items.Add(textBox75.Text);
+
+            comboBox44.Items.Add(textBox76.Text);
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -961,11 +1007,10 @@ namespace KNX_V2
             //int i = Convert.ToInt32(lvi.SubItems[3].Text);
 
             //lvi.SubItems[1].Text = textBox76.Text;
+
+            
         }
 
-        private void textBox75_TextChanged(object sender, EventArgs e)
-        {
-            comboBox44.Text = textBox75.Text;
-        }
+       
     }
 }
