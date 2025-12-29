@@ -12,7 +12,10 @@ namespace KNX_V2
 {
     public partial class Form2 : Form
     {
-        int index;        
+        int index;
+        public static Raum[] list;  // geändert #####
+
+       
         public Form2()
         {
             InitializeComponent();
@@ -30,7 +33,60 @@ namespace KNX_V2
             checkBox3.Checked = false;
             checkBox4.Checked = false;
             checkBox5.Checked = false;
+
+        //    InitializeComponent();   // GANZ WICHTIG: immer zuerst!
+
+        //    // Liste initialisieren
+        //    meineListe = new List<string>();
+
+        //    // Alle ComboBoxen sammeln
+        //    alleComboBoxen = new List<ComboBox>
+        //{
+        //    comboBox2,
+        //    comboBox3,
+        //    comboBox4,
+        //    comboBox5,
+        //    comboBox6,
+        //    comboBox7,
+        //    comboBox8,
+        //    comboBox9,
+        //    comboBox10,
+        //    comboBox11,
+        //    comboBox12,
+        //    comboBox13,
+        //    comboBox14,
+        //    comboBox15,
+        //    comboBox16,
+        //    comboBox17,
+        //    comboBox18,
+        //    comboBox19,
+        //    comboBox20,
+
+        //    comboBox22,
+        //    comboBox23,
+        //    comboBox24,
+        //    comboBox25,
+        //    comboBox26,
+        //    comboBox27,
+
+        //    comboBox29,
+        //    comboBox30,
+        //    comboBox31,
+        //    comboBox32,
+
+        //    comboBox34,
+        //    comboBox35,
+        //    comboBox36,
+        //    comboBox37,
+
+        //    comboBox39,
+        //    comboBox40,
+        //    comboBox41,
+        //    comboBox42,
+        //};
         }
+
+        private List<string> meineListe = new List<string>();
 
         public Form2(int index) : this()
         {
@@ -998,19 +1054,108 @@ namespace KNX_V2
             comboBox42.Items.Add(textBox75.Text);
 
             comboBox44.Items.Add(textBox76.Text);
-        }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            // Listview eintrag abändern
-            //ListViewItem lvi = listView1.SelectedItems[0];
-            //int i = Convert.ToInt32(lvi.SubItems[3].Text);
+            string text = textBox76.Text.Trim();
 
-            //lvi.SubItems[1].Text = textBox76.Text;
-
+            if (text == "")
+                return; // nichts einfügen, wenn Text leer ist
+           
+            meineListe.Add(text);   // Text in die Liste schreiben
             
+            textBox76.Clear();    // Textbox leeren
+            
+            UpdateListView();       // ListView aktualisieren
+
+        }
+        private void UpdateListView()
+        {
+            listView1.Items.Clear();   // alte Einträge entfernen
+
+            foreach (string eintrag in meineListe)
+            {
+                listView1.Items.Add(eintrag);
+            }
         }
 
-       
+    
+        private void button10_Click_1(object sender, EventArgs e)
+        {  
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            ListViewItem item = listView1.SelectedItems[0];
+
+            // Text aus ListView in TextBox schreiben
+            textBox76.Text = item.Text;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // Prüfen ob ein Eintrag ausgewählt ist
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            string neuerText = textBox76.Text.Trim();
+
+            if (neuerText == "")
+            {
+                MessageBox.Show("Text darf nicht leer sein.");
+                return;
+            }
+
+            // Ausgewählten ListView-Eintrag holen
+            ListViewItem item = listView1.SelectedItems[0];
+
+            // Index des Eintrags
+            int index = item.Index;
+
+            // Liste aktualisieren
+            meineListe[index] = neuerText;
+
+            // ListView aktualisieren
+            item.Text = neuerText;
+
+            // Optional: TextBox leeren
+            textBox76.Clear();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Prüfen ob ein Eintrag ausgewählt ist
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            // Optional: Sicherheitsabfrage
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            // Ausgewählten Eintrag holen
+            ListViewItem item = listView1.SelectedItems[0];
+            int index = item.Index;
+
+            // Aus Liste löschen
+            meineListe.RemoveAt(index);
+
+            // Aus ListView löschen
+            listView1.Items.RemoveAt(index);
+
+            // TextBox leeren (optional)
+            textBox76.Clear();
+        }
     }
 }
