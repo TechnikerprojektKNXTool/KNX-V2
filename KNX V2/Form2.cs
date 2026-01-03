@@ -15,12 +15,16 @@ namespace KNX_V2
         int index;
         public static Raum[] list;  // geändert #####
 
-       
+        private List<ComboBox> alleComboBoxen;
+        Dictionary<ComboBox, int> comboBoxFixCount;
+
         public Form2()
         {
             InitializeComponent();
             SetBounds(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
+            comboBoxFixCount = new Dictionary<ComboBox, int>();
+                       
             //Checkboxen werden erst angewählt und gleich wieder abgewählt um die Textboxen, labels, etc auszugrauen wenn Form2 aufgerufen wird!
             checkBox1.Checked = true;
             checkBox2.Checked = true;
@@ -34,56 +38,82 @@ namespace KNX_V2
             checkBox4.Checked = false;
             checkBox5.Checked = false;
 
-        //    InitializeComponent();   // GANZ WICHTIG: immer zuerst!
 
-        //    // Liste initialisieren
-        //    meineListe = new List<string>();
+            // Alle ComboBoxen sammeln
+            alleComboBoxen = new List<ComboBox>
+        {
+            comboBox2,
+            comboBox3,
+            comboBox4,
+            comboBox5,
+            comboBox6,
+            comboBox7,
+            comboBox8,
+            comboBox9,
+            comboBox10,
+            comboBox11,
+            comboBox12,
+            comboBox13,
+            comboBox14,
+            comboBox15,
+            comboBox16,
+            comboBox17,
+            comboBox18,
+            comboBox19,
+            comboBox20,
 
-        //    // Alle ComboBoxen sammeln
-        //    alleComboBoxen = new List<ComboBox>
-        //{
-        //    comboBox2,
-        //    comboBox3,
-        //    comboBox4,
-        //    comboBox5,
-        //    comboBox6,
-        //    comboBox7,
-        //    comboBox8,
-        //    comboBox9,
-        //    comboBox10,
-        //    comboBox11,
-        //    comboBox12,
-        //    comboBox13,
-        //    comboBox14,
-        //    comboBox15,
-        //    comboBox16,
-        //    comboBox17,
-        //    comboBox18,
-        //    comboBox19,
-        //    comboBox20,
+            comboBox22,
+            comboBox23,
+            comboBox24,
+            comboBox25,
+            comboBox26,
+            comboBox27,
 
-        //    comboBox22,
-        //    comboBox23,
-        //    comboBox24,
-        //    comboBox25,
-        //    comboBox26,
-        //    comboBox27,
+            comboBox29,
+            comboBox30,
+            comboBox31,
+            comboBox32,
 
-        //    comboBox29,
-        //    comboBox30,
-        //    comboBox31,
-        //    comboBox32,
+            comboBox34,
+            comboBox35,
+            comboBox36,
+            comboBox37,
 
-        //    comboBox34,
-        //    comboBox35,
-        //    comboBox36,
-        //    comboBox37,
+            comboBox39,
+            comboBox40,
+            comboBox41,
+            comboBox42,
+        };
+            // Fixe Einträge der Comboboxen zählen und speichern
 
-        //    comboBox39,
-        //    comboBox40,
-        //    comboBox41,
-        //    comboBox42,
-        //};
+            foreach (ComboBox cb in alleComboBoxen)
+            {
+                comboBoxFixCount[cb] = cb.Items.Count;
+            }
+        }
+
+        private void UpdateComboBoxenDynamisch()
+        {
+            foreach (ComboBox cb in alleComboBoxen)
+            {
+                int fixCount = comboBoxFixCount[cb];
+
+                cb.BeginUpdate();
+
+                // Dynamische Einträge entfernen
+                while (cb.Items.Count > fixCount)
+                {
+                    cb.Items.RemoveAt(cb.Items.Count - 1);
+                }
+
+                // Neue dynamische Einträge anhängen
+                foreach (string eintrag in meineListe)
+                {
+                    cb.Items.Add(eintrag);
+                }
+
+                cb.EndUpdate();
+            }
         }
 
         private List<string> meineListe = new List<string>();
@@ -1007,79 +1037,27 @@ namespace KNX_V2
 
         private void button9_Click(object sender, EventArgs e)
         {
-            textBox75.AppendText("\r\n" + textBox76.Text);
+            // Schaltstelle hinzufügen 
 
-            //neue Schalter / Schalterstelle erstellt
-            // am besten Array? damit kann ich die Einträge wieder löschen
-            comboBox2.Items.Add(textBox75.Text);
-            comboBox3.Items.Add(textBox75.Text);
-            comboBox4.Items.Add(textBox75.Text);
-            comboBox5.Items.Add(textBox75.Text);
-            comboBox6.Items.Add(textBox75.Text);
-            comboBox7.Items.Add(textBox75.Text);
-            comboBox8.Items.Add(textBox75.Text);
-            comboBox9.Items.Add(textBox75.Text);
-            comboBox10.Items.Add(textBox75.Text);
-            comboBox11.Items.Add(textBox75.Text);
-            comboBox12.Items.Add(textBox75.Text);
-            comboBox13.Items.Add(textBox75.Text);
-            comboBox14.Items.Add(textBox75.Text);
-            comboBox15.Items.Add(textBox75.Text);
-            comboBox16.Items.Add(textBox75.Text);
-            comboBox17.Items.Add(textBox75.Text);
-            comboBox18.Items.Add(textBox75.Text);
-            comboBox19.Items.Add(textBox75.Text);
-            comboBox20.Items.Add(textBox75.Text);
-
-            comboBox22.Items.Add(textBox75.Text);
-            comboBox23.Items.Add(textBox75.Text);
-            comboBox24.Items.Add(textBox75.Text);
-            comboBox25.Items.Add(textBox75.Text);
-            comboBox26.Items.Add(textBox75.Text);
-            comboBox27.Items.Add(textBox75.Text);
-
-            comboBox29.Items.Add(textBox75.Text);
-            comboBox30.Items.Add(textBox75.Text);
-            comboBox31.Items.Add(textBox75.Text);
-            comboBox32.Items.Add(textBox75.Text);
-
-            comboBox34.Items.Add(textBox75.Text);
-            comboBox35.Items.Add(textBox75.Text);
-            comboBox36.Items.Add(textBox75.Text);
-            comboBox37.Items.Add(textBox75.Text);
-
-            comboBox39.Items.Add(textBox75.Text);
-            comboBox40.Items.Add(textBox75.Text);
-            comboBox41.Items.Add(textBox75.Text);
-            comboBox42.Items.Add(textBox75.Text);
-
-            comboBox44.Items.Add(textBox76.Text);
-
+          
             string text = textBox76.Text.Trim();
 
             if (text == "")
                 return; // nichts einfügen, wenn Text leer ist
            
             meineListe.Add(text);   // Text in die Liste schreiben
-            
+            listView1.Items.Add(text);
+            UpdateComboBoxenDynamisch(); // neu
             textBox76.Clear();    // Textbox leeren
-            
-            UpdateListView();       // ListView aktualisieren
-
+                      
         }
-        private void UpdateListView()
-        {
-            listView1.Items.Clear();   // alte Einträge entfernen
+       
 
-            foreach (string eintrag in meineListe)
-            {
-                listView1.Items.Add(eintrag);
-            }
-        }
 
-    
         private void button10_Click_1(object sender, EventArgs e)
-        {  
+        {
+            // ListView Eintrag in TextBox laden für Änderung oder nur zum kopieren
+
             if (listView1.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Bitte einen Eintrag auswählen.");
@@ -1092,41 +1070,11 @@ namespace KNX_V2
             textBox76.Text = item.Text;
         }
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            // Prüfen ob ein Eintrag ausgewählt ist
-            if (listView1.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Bitte einen Eintrag auswählen.");
-                return;
-            }
-
-            string neuerText = textBox76.Text.Trim();
-
-            if (neuerText == "")
-            {
-                MessageBox.Show("Text darf nicht leer sein.");
-                return;
-            }
-
-            // Ausgewählten ListView-Eintrag holen
-            ListViewItem item = listView1.SelectedItems[0];
-
-            // Index des Eintrags
-            int index = item.Index;
-
-            // Liste aktualisieren
-            meineListe[index] = neuerText;
-
-            // ListView aktualisieren
-            item.Text = neuerText;
-
-            // Optional: TextBox leeren
-            textBox76.Clear();
-        }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            // Ausgwählten Listview Eintrag löschen
+
             // Prüfen ob ein Eintrag ausgewählt ist
             if (listView1.SelectedItems.Count == 0)
             {
@@ -1143,19 +1091,46 @@ namespace KNX_V2
 
             if (result != DialogResult.Yes)
                 return;
+                       
+            int index = listView1.SelectedItems[0].Index;
 
-            // Ausgewählten Eintrag holen
-            ListViewItem item = listView1.SelectedItems[0];
-            int index = item.Index;
-
-            // Aus Liste löschen
             meineListe.RemoveAt(index);
-
-            // Aus ListView löschen
             listView1.Items.RemoveAt(index);
 
-            // TextBox leeren (optional)
+            UpdateComboBoxenDynamisch();
             textBox76.Clear();
         }
+              
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // Änderungen speichern
+
+            // Prüfen ob ein Eintrag ausgewählt ist
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            string neuerText = textBox76.Text.Trim();
+
+            if (neuerText == "")
+            {
+                MessageBox.Show("Text darf nicht leer sein.");
+                return;
+            }
+
+            int index = listView1.SelectedItems[0].Index;
+
+            meineListe[index] = neuerText;
+            listView1.Items[index].Text = neuerText;
+
+            // ComboBoxen updaten nach Änderung
+            UpdateComboBoxenDynamisch();
+
+            textBox76.Clear();
+        }
+
+        
     }
 }

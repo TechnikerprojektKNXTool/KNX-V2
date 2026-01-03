@@ -255,15 +255,13 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.textBox76 = new System.Windows.Forms.TextBox();
-            this.comboBox44 = new System.Windows.Forms.ComboBox();
             this.button9 = new System.Windows.Forms.Button();
-            this.textBox75 = new System.Windows.Forms.TextBox();
             this.label91 = new System.Windows.Forms.Label();
-            this.button12 = new System.Windows.Forms.Button();
             this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -2843,9 +2841,7 @@
             this.tabPage1.Controls.Add(this.button10);
             this.tabPage1.Controls.Add(this.listView1);
             this.tabPage1.Controls.Add(this.textBox76);
-            this.tabPage1.Controls.Add(this.comboBox44);
             this.tabPage1.Controls.Add(this.button9);
-            this.tabPage1.Controls.Add(this.textBox75);
             this.tabPage1.Controls.Add(this.label91);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
@@ -2856,11 +2852,21 @@
             this.tabPage1.Text = "Schaltstellen";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(252, 26);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(92, 34);
+            this.button12.TabIndex = 190;
+            this.button12.Text = "Änderungen Speichern";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(405, 632);
+            this.button11.Location = new System.Drawing.Point(252, 627);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(97, 23);
+            this.button11.Size = new System.Drawing.Size(92, 23);
             this.button11.TabIndex = 189;
             this.button11.Text = "Löschen";
             this.button11.UseVisualStyleBackColor = true;
@@ -2868,7 +2874,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(267, 632);
+            this.button10.Location = new System.Drawing.Point(6, 627);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(132, 23);
             this.button10.TabIndex = 188;
@@ -2879,9 +2885,9 @@
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(267, 88);
+            this.listView1.Location = new System.Drawing.Point(6, 83);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(235, 538);
+            this.listView1.Size = new System.Drawing.Size(338, 538);
             this.listView1.TabIndex = 187;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -2893,17 +2899,6 @@
             this.textBox76.Size = new System.Drawing.Size(137, 20);
             this.textBox76.TabIndex = 186;
             // 
-            // comboBox44
-            // 
-            this.comboBox44.FormattingEnabled = true;
-            this.comboBox44.Items.AddRange(new object[] {
-            ""});
-            this.comboBox44.Location = new System.Drawing.Point(564, 88);
-            this.comboBox44.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.comboBox44.Name = "comboBox44";
-            this.comboBox44.Size = new System.Drawing.Size(137, 21);
-            this.comboBox44.TabIndex = 183;
-            // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(149, 26);
@@ -2914,14 +2909,6 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // textBox75
-            // 
-            this.textBox75.Location = new System.Drawing.Point(9, 88);
-            this.textBox75.Multiline = true;
-            this.textBox75.Name = "textBox75";
-            this.textBox75.Size = new System.Drawing.Size(237, 538);
-            this.textBox75.TabIndex = 181;
-            // 
             // label91
             // 
             this.label91.AutoSize = true;
@@ -2931,16 +2918,6 @@
             this.label91.Size = new System.Drawing.Size(152, 13);
             this.label91.TabIndex = 180;
             this.label91.Text = "Neue Schalter/-stelle erstellen ";
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(252, 26);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(92, 34);
-            this.button12.TabIndex = 190;
-            this.button12.Text = "Änderungen Speichern";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // Form2
             // 
@@ -3201,9 +3178,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.TextBox textBox75;
         private System.Windows.Forms.TextBox textBox76;
-        private System.Windows.Forms.ComboBox comboBox44;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.ListView listView1;
