@@ -92,31 +92,7 @@ namespace KNX_V2
             }
         }
 
-        private void UpdateComboBoxenDynamisch()
-        {
-            foreach (ComboBox cb in alleComboBoxen)
-            {
-                int fixCount = comboBoxFixCount[cb];
-
-                cb.BeginUpdate();
-
-                // Dynamische Einträge entfernen
-                while (cb.Items.Count > fixCount)
-                {
-                    cb.Items.RemoveAt(cb.Items.Count - 1);
-                }
-
-                // Neue dynamische Einträge anhängen
-                foreach (string eintrag in meineListe)
-                {
-                    cb.Items.Add(eintrag);
-                }
-
-                cb.EndUpdate();
-            }
-        }
-
-        private List<string> meineListe = new List<string>();
+        
 
         public Form2(int index) : this()
         {
@@ -124,6 +100,8 @@ namespace KNX_V2
             
             Raum raum = new Raum();
             raum = Form1.liste[index];
+            label92.Text = "Raum: " + raum.Name;
+            label93.Text = "Typ: " + raum.Typ;
             foreach (Funktion fkt in raum.Funktionen)
             {
                 if (fkt != null)
@@ -166,6 +144,34 @@ namespace KNX_V2
                 }
             }            
         }
+
+
+        private void UpdateComboBoxenDynamisch()
+        {
+            foreach (ComboBox cb in alleComboBoxen)
+            {
+                int fixCount = comboBoxFixCount[cb];
+
+                cb.BeginUpdate();
+
+                // Dynamische Einträge entfernen
+                while (cb.Items.Count > fixCount)
+                {
+                    cb.Items.RemoveAt(cb.Items.Count - 1);
+                }
+
+                // Neue dynamische Einträge anhängen
+                foreach (string eintrag in meineListe)
+                {
+                    cb.Items.Add(eintrag);
+                }
+
+                cb.EndUpdate();
+            }
+        }
+
+        private List<string> meineListe = new List<string>();
+
 
         private void button1_Click(object sender, EventArgs e)
         {   //zurück Button
@@ -537,7 +543,7 @@ namespace KNX_V2
 
                 if (combo.Text != "")
                 {
-                    int a = 2 * i - 9;
+                    int a = 2 * i - 11;
                     int b = a + 1;
                     var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
                     var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
@@ -564,11 +570,6 @@ namespace KNX_V2
 
 
             AllesLeeren();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
         
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
