@@ -13,12 +13,111 @@ namespace KNX_V2
 {
     public partial class Form2 : Form
     {
-        int index;        
+        int index;
+        public static Raum[] list;  // geändert #####
+
+        private List<ComboBox> alleComboBoxen;
+        Dictionary<ComboBox, int> comboBoxFixCount;
+
         public Form2()
         {
             InitializeComponent();
             SetBounds(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            comboBoxFixCount = new Dictionary<ComboBox, int>();
+                       
+            //Checkboxen werden erst angewählt und gleich wieder abgewählt um die Textboxen, labels, etc auszugrauen wenn Form2 aufgerufen wird!
+            checkBox1.Checked = true;
+            checkBox2.Checked = true;
+            checkBox3.Checked = true;
+            checkBox4.Checked = true;
+            checkBox5.Checked = true;
+
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+
+
+            // Alle ComboBoxen sammeln
+            alleComboBoxen = new List<ComboBox>
+        {
+            comboBox2,
+            comboBox3,
+            comboBox4,
+            comboBox5,
+            comboBox6,
+            comboBox7,
+            comboBox8,
+            comboBox9,
+            comboBox10,
+            comboBox11,
+            comboBox12,
+            comboBox13,
+            comboBox14,
+            comboBox15,
+            comboBox16,
+            comboBox17,
+            comboBox18,
+            comboBox19,
+            comboBox20,
+
+            comboBox22,
+            comboBox23,
+            comboBox24,
+            comboBox25,
+            comboBox26,
+            comboBox27,
+
+            comboBox29,
+            comboBox30,
+            comboBox31,
+            comboBox32,
+
+            comboBox34,
+            comboBox35,
+            comboBox36,
+            comboBox37,
+
+            comboBox39,
+            comboBox40,
+            comboBox41,
+            comboBox42,
+        };
+            // Fixe Einträge der Comboboxen zählen und speichern
+
+            foreach (ComboBox cb in alleComboBoxen)
+            {
+                comboBoxFixCount[cb] = cb.Items.Count;
+            }
         }
+
+        private void UpdateComboBoxenDynamisch()
+        {
+            foreach (ComboBox cb in alleComboBoxen)
+            {
+                int fixCount = comboBoxFixCount[cb];
+
+                cb.BeginUpdate();
+
+                // Dynamische Einträge entfernen
+                while (cb.Items.Count > fixCount)
+                {
+                    cb.Items.RemoveAt(cb.Items.Count - 1);
+                }
+
+                // Neue dynamische Einträge anhängen
+                foreach (string eintrag in meineListe)
+                {
+                    cb.Items.Add(eintrag);
+                }
+
+                cb.EndUpdate();
+            }
+        }
+
+        private List<string> meineListe = new List<string>();
 
         public Form2(int index) : this()
         {
@@ -69,6 +168,22 @@ namespace KNX_V2
                     }
                 }
             }            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {   //zurück Button
+            if (tabControl1.SelectedIndex > 0) 
+            {
+                tabControl1.SelectedIndex--;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {   //vor Button
+            if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
+            {
+                tabControl1.SelectedIndex++;
+            }
         }
 
         //gibt Index der ersten leeren Stelle im Funktionen-Array zurück
@@ -618,6 +733,241 @@ namespace KNX_V2
                     }
                 }
             }
+        }
+        
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox1.Checked;
+            label2.Enabled = aktiv;
+            label3.Enabled = aktiv;
+            label4.Enabled = aktiv;
+            comboBox2.Enabled = aktiv;
+            textBox1.Enabled = aktiv;
+            textBox2.Enabled = aktiv;
+
+            label5.Enabled = aktiv;
+            label6.Enabled = aktiv;
+            comboBox3.Enabled = aktiv;
+            textBox3.Enabled = aktiv;
+            textBox4.Enabled = aktiv;
+
+            label7.Enabled = aktiv;
+            label8.Enabled = aktiv;
+            comboBox4.Enabled = aktiv;
+            textBox5.Enabled = aktiv;
+            textBox6.Enabled = aktiv;
+
+            label9.Enabled = aktiv;
+            label10.Enabled = aktiv;
+            comboBox5.Enabled = aktiv;
+            textBox7.Enabled = aktiv;
+            textBox8.Enabled = aktiv;
+
+            label11.Enabled = aktiv;
+            label12.Enabled = aktiv;
+            comboBox6.Enabled = aktiv;
+            textBox9.Enabled = aktiv;
+            textBox10.Enabled = aktiv;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox2.Checked;
+            label13.Enabled = aktiv;
+            label14.Enabled = aktiv;
+            label15.Enabled = aktiv;
+            comboBox7.Enabled = aktiv;
+            textBox11.Enabled = aktiv;
+            textBox12.Enabled = aktiv;
+
+            label16.Enabled = aktiv;
+            label17.Enabled = aktiv;
+            comboBox8.Enabled = aktiv;
+            textBox13.Enabled = aktiv;
+            textBox14.Enabled = aktiv;
+
+            label18.Enabled = aktiv;
+            label19.Enabled = aktiv;
+            comboBox9.Enabled = aktiv;
+            textBox15.Enabled = aktiv;
+            textBox16.Enabled = aktiv;
+
+            label20.Enabled = aktiv;
+            label21.Enabled = aktiv;
+            comboBox10.Enabled = aktiv;
+            textBox17.Enabled = aktiv;
+            textBox18.Enabled = aktiv;
+
+            label22.Enabled = aktiv;
+            label23.Enabled = aktiv;
+            comboBox11.Enabled = aktiv;
+            textBox19.Enabled = aktiv;
+            textBox20.Enabled = aktiv;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox3.Checked;
+            label24.Enabled = aktiv;
+            label25.Enabled = aktiv;
+            label26.Enabled = aktiv;
+            comboBox12.Enabled = aktiv;
+            textBox21.Enabled = aktiv;
+            textBox22.Enabled = aktiv;
+
+            label27.Enabled = aktiv;
+            label28.Enabled = aktiv;
+            comboBox13.Enabled = aktiv;
+            textBox23.Enabled = aktiv;
+            textBox24.Enabled = aktiv;
+
+            label29.Enabled = aktiv;
+            label30.Enabled = aktiv;
+            comboBox14.Enabled = aktiv;
+            textBox25.Enabled = aktiv;
+            textBox26.Enabled = aktiv;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox4.Checked;
+            label31.Enabled = aktiv;
+            label32.Enabled = aktiv;
+            label33.Enabled = aktiv;
+            comboBox15.Enabled = aktiv;
+            textBox27.Enabled = aktiv;
+            textBox28.Enabled = aktiv;
+
+            label34.Enabled = aktiv;
+            label35.Enabled = aktiv;
+            comboBox16.Enabled = aktiv;
+            textBox29.Enabled = aktiv;
+            textBox30.Enabled = aktiv;
+
+            label36.Enabled = aktiv;
+            label37.Enabled = aktiv;
+            comboBox17.Enabled = aktiv;
+            textBox31.Enabled = aktiv;
+            textBox32.Enabled = aktiv;
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox5.Checked;
+            label38.Enabled = aktiv;
+            label39.Enabled = aktiv;
+            label40.Enabled = aktiv;
+            comboBox18.Enabled = aktiv;
+            textBox33.Enabled = aktiv;
+            textBox34.Enabled = aktiv;
+
+            label41.Enabled = aktiv;
+            label42.Enabled = aktiv;
+            comboBox19.Enabled = aktiv;
+            textBox35.Enabled = aktiv;
+            textBox36.Enabled = aktiv;
+
+            label43.Enabled = aktiv;
+            label44.Enabled = aktiv;
+            comboBox20.Enabled = aktiv;
+            textBox37.Enabled = aktiv;
+            textBox38.Enabled = aktiv;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            // Schaltstelle hinzufügen 
+
+          
+            string text = textBox76.Text.Trim();
+
+            if (text == "")
+                return; // nichts einfügen, wenn Text leer ist
+           
+            meineListe.Add(text);   // Text in die Liste schreiben
+            listView1.Items.Add(text);
+            UpdateComboBoxenDynamisch(); // neu
+            textBox76.Clear();    // Textbox leeren
+                      
+        }
+       
+
+
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+            // ListView Eintrag in TextBox laden für Änderung oder nur zum kopieren
+
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            ListViewItem item = listView1.SelectedItems[0];
+
+            // Text aus ListView in TextBox schreiben
+            textBox76.Text = item.Text;
+        }
+
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Ausgwählten Listview Eintrag löschen
+
+            // Prüfen ob ein Eintrag ausgewählt ist
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            // Optional: Sicherheitsabfrage
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+                       
+            int index = listView1.SelectedItems[0].Index;
+
+            meineListe.RemoveAt(index);
+            listView1.Items.RemoveAt(index);
+
+            UpdateComboBoxenDynamisch();
+            textBox76.Clear();
+        }
+              
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // Änderungen speichern
+
+            // Prüfen ob ein Eintrag ausgewählt ist
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            string neuerText = textBox76.Text.Trim();
+
+            if (neuerText == "")
+            {
+                MessageBox.Show("Text darf nicht leer sein.");
+                return;
+            }
+
+            int index = listView1.SelectedItems[0].Index;
+
+            meineListe[index] = neuerText;
+            listView1.Items[index].Text = neuerText;
+
+            // ComboBoxen updaten nach Änderung
+            UpdateComboBoxenDynamisch();
+
+            textBox76.Clear();
         }
 
         
