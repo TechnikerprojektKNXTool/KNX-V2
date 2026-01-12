@@ -169,11 +169,12 @@ namespace KNX_V2
             string path = ofd.FileName;
 
             StreamReader reader = new StreamReader(path);
+            int i = -1;
 
             while (reader.Peek() != -1)
             {
                 string[] einlesen = reader.ReadLine().Split('\t');
-                int i = Convert.ToInt32(einlesen[0]);
+                i = Convert.ToInt32(einlesen[0]);
 
                 if (liste[i] == null)
                 {
@@ -208,6 +209,8 @@ namespace KNX_V2
             }
 
             reader.Close();
+
+            index = i + 1;            
         }
 
         //Excel-Tabelle erstellen
