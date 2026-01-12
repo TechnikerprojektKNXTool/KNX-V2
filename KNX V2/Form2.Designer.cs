@@ -175,6 +175,7 @@
             this.label45 = new System.Windows.Forms.Label();
             this.comboBox21 = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.comboBox28 = new System.Windows.Forms.ComboBox();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox58 = new System.Windows.Forms.TextBox();
             this.textBox57 = new System.Windows.Forms.TextBox();
@@ -199,7 +200,6 @@
             this.comboBox29 = new System.Windows.Forms.ComboBox();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
-            this.comboBox28 = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox66 = new System.Windows.Forms.TextBox();
@@ -1530,6 +1530,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(270, 33);
             this.comboBox1.TabIndex = 34;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -1950,14 +1951,16 @@
             this.comboBox21.FormattingEnabled = true;
             this.comboBox21.Items.AddRange(new object[] {
             ""});
-            this.comboBox21.Location = new System.Drawing.Point(12, 50);
+            this.comboBox21.Location = new System.Drawing.Point(12, 49);
             this.comboBox21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox21.Name = "comboBox21";
             this.comboBox21.Size = new System.Drawing.Size(270, 33);
-            this.comboBox21.TabIndex = 36;
+            this.comboBox21.TabIndex = 284;
+            this.comboBox21.SelectedIndexChanged += new System.EventHandler(this.comboBox21_SelectedIndexChanged_1);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.comboBox28);
             this.tabPage3.Controls.Add(this.button6);
             this.tabPage3.Controls.Add(this.textBox58);
             this.tabPage3.Controls.Add(this.textBox57);
@@ -1982,7 +1985,6 @@
             this.tabPage3.Controls.Add(this.comboBox29);
             this.tabPage3.Controls.Add(this.label63);
             this.tabPage3.Controls.Add(this.label64);
-            this.tabPage3.Controls.Add(this.comboBox28);
             this.tabPage3.Location = new System.Drawing.Point(8, 39);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
@@ -1991,6 +1993,18 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Oberlichtgruppe";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // comboBox28
+            // 
+            this.comboBox28.FormattingEnabled = true;
+            this.comboBox28.Items.AddRange(new object[] {
+            ""});
+            this.comboBox28.Location = new System.Drawing.Point(12, 50);
+            this.comboBox28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox28.Name = "comboBox28";
+            this.comboBox28.Size = new System.Drawing.Size(270, 33);
+            this.comboBox28.TabIndex = 285;
+            this.comboBox28.SelectedIndexChanged += new System.EventHandler(this.comboBox28_SelectedIndexChanged_1);
             // 
             // button6
             // 
@@ -2243,17 +2257,6 @@
             this.label64.Size = new System.Drawing.Size(165, 25);
             this.label64.TabIndex = 246;
             this.label64.Text = "Oberlichtgruppe";
-            // 
-            // comboBox28
-            // 
-            this.comboBox28.FormattingEnabled = true;
-            this.comboBox28.Items.AddRange(new object[] {
-            ""});
-            this.comboBox28.Location = new System.Drawing.Point(12, 50);
-            this.comboBox28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox28.Name = "comboBox28";
-            this.comboBox28.Size = new System.Drawing.Size(270, 33);
-            this.comboBox28.TabIndex = 245;
             // 
             // tabPage4
             // 
@@ -2536,6 +2539,7 @@
             this.comboBox33.Name = "comboBox33";
             this.comboBox33.Size = new System.Drawing.Size(270, 33);
             this.comboBox33.TabIndex = 247;
+            this.comboBox33.SelectedIndexChanged += new System.EventHandler(this.comboBox33_SelectedIndexChanged);
             // 
             // tabPage5
             // 
@@ -2818,6 +2822,7 @@
             this.comboBox38.Name = "comboBox38";
             this.comboBox38.Size = new System.Drawing.Size(270, 33);
             this.comboBox38.TabIndex = 249;
+            this.comboBox38.SelectedIndexChanged += new System.EventHandler(this.comboBox38_SelectedIndexChanged);
             // 
             // tabPage6
             // 
@@ -3009,7 +3014,6 @@
         private System.Windows.Forms.ComboBox comboBox18;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.ComboBox comboBox21;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.TextBox textBox46;
         private System.Windows.Forms.TextBox textBox45;
@@ -3051,7 +3055,6 @@
         private System.Windows.Forms.ComboBox comboBox29;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.ComboBox comboBox28;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox58;
         private System.Windows.Forms.TextBox textBox57;
@@ -3116,5 +3119,7 @@
         private System.Windows.Forms.ComboBox comboBox39;
         private System.Windows.Forms.Label label81;
         private System.Windows.Forms.ComboBox comboBox38;
+        private System.Windows.Forms.ComboBox comboBox21;
+        private System.Windows.Forms.ComboBox comboBox28;
     }
 }
