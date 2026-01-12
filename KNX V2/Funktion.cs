@@ -17,6 +17,7 @@ namespace KNX_V2
         bool dimmen;
         bool jalousie;
         int art;
+        int comboNr;
 
 
         public string Name { get { return name; } set { name = value; } }
@@ -27,7 +28,8 @@ namespace KNX_V2
         public bool Schalten { get { return schalten; } set { schalten = value; } }
         public bool Dimmen { get { return dimmen; } set { dimmen = value; } }
         public bool Jalousie { get { return jalousie; } set { jalousie = value; } }
-        public int Art { get { return art; } set { art = value; } }       
+        public int Art { get { return art; } set { art = value; } }
+        public int ComboNr { get { return comboNr; } set { comboNr = value; } }
 
 
         public Funktion()

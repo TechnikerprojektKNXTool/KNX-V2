@@ -140,14 +140,14 @@ namespace KNX_V2
                     {
                         if (funktion != null)
                         {
-                            string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar + "\t" + funktion.Art.ToString();
+                            string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar + "\t" + funktion.Art.ToString() + "\t" + funktion.ComboNr.ToString();
                             writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t" + fkt);
                             leer = false;
                         }
                     }
                     if (leer)
                     {
-                        writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t ");
+                        writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t \t ");
                     }
 
                     i++;
@@ -201,6 +201,7 @@ namespace KNX_V2
                     fkt.Jalousie = Convert.ToBoolean(einlesen[9]);
                     fkt.Kommentar = einlesen[10];
                     fkt.Art = Convert.ToInt32(einlesen[11]);
+                    fkt.ComboNr = Convert.ToInt32(einlesen[12]);
                     liste[i].Funktionen[j] = fkt;
                     j++;
                 }
