@@ -92,31 +92,7 @@ namespace KNX_V2
             }
         }
 
-        private void UpdateComboBoxenDynamisch()
-        {
-            foreach (ComboBox cb in alleComboBoxen)
-            {
-                int fixCount = comboBoxFixCount[cb];
-
-                cb.BeginUpdate();
-
-                // Dynamische Einträge entfernen
-                while (cb.Items.Count > fixCount)
-                {
-                    cb.Items.RemoveAt(cb.Items.Count - 1);
-                }
-
-                // Neue dynamische Einträge anhängen
-                foreach (string eintrag in meineListe)
-                {
-                    cb.Items.Add(eintrag);
-                }
-
-                cb.EndUpdate();
-            }
-        }
-
-        private List<string> meineListe = new List<string>();
+        
 
         public Form2(int index) : this()
         {
@@ -124,6 +100,8 @@ namespace KNX_V2
             
             Raum raum = new Raum();
             raum = Form1.liste[index];
+            label92.Text = "Raum: " + raum.Name;
+            label93.Text = "Typ: " + raum.Typ;
             foreach (Funktion fkt in raum.Funktionen)
             {
                 if (fkt != null)
@@ -167,6 +145,34 @@ namespace KNX_V2
             }            
         }
 
+
+        private void UpdateComboBoxenDynamisch()
+        {
+            foreach (ComboBox cb in alleComboBoxen)
+            {
+                int fixCount = comboBoxFixCount[cb];
+
+                cb.BeginUpdate();
+
+                // Dynamische Einträge entfernen
+                while (cb.Items.Count > fixCount)
+                {
+                    cb.Items.RemoveAt(cb.Items.Count - 1);
+                }
+
+                // Neue dynamische Einträge anhängen
+                foreach (string eintrag in meineListe)
+                {
+                    cb.Items.Add(eintrag);
+                }
+
+                cb.EndUpdate();
+            }
+        }
+
+        private List<string> meineListe = new List<string>();
+
+
         private void button1_Click(object sender, EventArgs e)
         {   //zurück Button
             if (tabControl1.SelectedIndex > 0) 
@@ -194,345 +200,140 @@ namespace KNX_V2
             return i;
         }
 
+        // gibt die Stelle der Schaltungsgruppe im Funktionen-Array zurück, wenn es die Schaltungsgruppe noch nicht gibt, gibt die Funktion 999 zurück
+        private int StelleInFunktionen(string Schaltungsgruppe)
+        {
+            int j = 999;
+            bool check = false;
+            int i = 0;
+            while (check == false && i < Form1.liste[index].Funktionen.Length)
+            {
+                if (Form1.liste[index].Funktionen[i] != null && Form1.liste[index].Funktionen[i].Verbraucher == Schaltungsgruppe)
+                {
+                    j = i;
+                    check = true;
+                }
+                i++;
+            }
+            return j;
+        }
+
+        // leert alle Text- und Comboboxen
+        private void AllesLeeren()
+        {
+            for (int i = 1; i < 44; i++)
+            {
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
+                if (combo != null)
+                {
+                    combo.Text = "";
+                }
+            }
+            for (int i = 1; i < 75; i++)
+            {
+                var textbox = Controls.Find("textBox" + i, true).FirstOrDefault();
+                if (textbox != null)
+                {
+                    textbox.Text = "";
+                }
+            }
+        }
+
+        private void ComboLeerenVonBis(int a, int b)
+        {
+            for (int i = a; i < (b + 1); i++)
+            {
+                var combobox = Controls.Find("comboBox" + i, true).FirstOrDefault();
+                if (combobox != null) { combobox.Text = ""; }
+            }
+
+        }
+
+        private void TextLeerenVonBis(int a, int b)
+        {
+            for (int i = a; i < (b + 1); i++)
+            {
+                var textbox = Controls.Find("textBox" + i, true).FirstOrDefault();
+                if (textbox != null) { textbox.Text = ""; }
+            }
+        }
+
+
         //Lichtgruppe speichern
         private void button4_Click(object sender, EventArgs e)
         {
-            
-            if (comboBox2.Text != "" )
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox2.Text;
-                fkt.Sollwert = textBox1.Text;
-                fkt.Kommentar = textBox2.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Licht Ein/Aus";
-                fkt.Art = 1;
 
-                Form1.liste[index].Funktionen[i] = fkt;
+            int stelle = StelleInFunktionen(comboBox1.Text);
+            bool neu = false;
+            bool check = false;
+
+            if (stelle == 999)
+            {
+                neu = true;
+            }
+            else
+            {
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox1.Text);
+                }
             }
 
-            if (comboBox3.Text != "")
+            // speichert die Funktionen der Schaltgruppe neu ab
+            for (int i = 2; i < 21; i++)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox3.Text;
-                fkt.Sollwert = textBox3.Text;
-                fkt.Kommentar = textBox4.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Licht Ein/Aus";
-                fkt.Art = 1;
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
+                int a = 2 * (i - 2) + 1;
+                int b = a + 1;
+                var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
+                var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                if (combo.Text != "")
+                {
+                    int x = Index();
+                    Funktion fkt = new Funktion();
+                    fkt.Verbraucher = comboBox1.Text;
+                    fkt.Bedienelement = combo.Text;
+                    fkt.Sollwert = textbox1.Text;
+                    fkt.Kommentar = textbox2.Text;
+                    if (i <= 6)
+                    {
+                        fkt.Schalten = true;
+                        fkt.Name = "Licht Ein/Aus";
+                    }
+                    else if (i <= 11)
+                    {
+                        fkt.Dimmen = true;
+                        fkt.Name = "Licht Dimmen";
+                    }
+                    else if (i <= 14)
+                    {
+                        fkt.Name = "Farbtemperatur Einstellen";
+                    }
+                    else if (i <= 17)
+                    {
+                        fkt.Name = "RGB";
+                    }
+                    else
+                    {
+                        fkt.Name = "Direkt / Indirekt";
+                    }
+                    fkt.Art = 1;
+                    fkt.ComboNr = i;
 
-                Form1.liste[index].Funktionen[i] = fkt;
+                    Form1.liste[index].Funktionen[x] = fkt;
+                    check = true;
+                }
             }
 
-            if (comboBox4.Text != "")
+            if (neu && check)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox4.Text;
-                fkt.Sollwert = textBox5.Text;
-                fkt.Kommentar = textBox6.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Licht Ein/Aus";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
+                comboBox1.Items.Add(comboBox1.Text);
             }
 
-            if (comboBox5.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox5.Text;
-                fkt.Sollwert = textBox7.Text;
-                fkt.Kommentar = textBox8.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Licht Ein/Aus";
-                fkt.Art = 1;
 
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox6.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox6.Text;
-                fkt.Sollwert = textBox9.Text;
-                fkt.Kommentar = textBox10.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Licht Ein/Aus";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox7.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox7.Text;
-                fkt.Sollwert = textBox11.Text;
-                fkt.Kommentar = textBox12.Text;
-                fkt.Dimmen = true;
-                fkt.Name = "Licht Dimmen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox8.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox8.Text;
-                fkt.Sollwert = textBox13.Text;
-                fkt.Kommentar = textBox14.Text;
-                fkt.Dimmen = true;
-                fkt.Name = "Licht Dimmen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox9.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox9.Text;
-                fkt.Sollwert = textBox15.Text;
-                fkt.Kommentar = textBox16.Text;
-                fkt.Dimmen = true;
-                fkt.Name = "Licht Dimmen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox10.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox10.Text;
-                fkt.Sollwert = textBox17.Text;
-                fkt.Kommentar = textBox18.Text;
-                fkt.Dimmen = true;
-                fkt.Name = "Licht Dimmen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox11.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox11.Text;
-                fkt.Sollwert = textBox19.Text;
-                fkt.Kommentar = textBox20.Text;
-                fkt.Dimmen = true;
-                fkt.Name = "Licht Dimmen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox12.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox12.Text;
-                fkt.Sollwert = textBox21.Text;
-                fkt.Kommentar = textBox22.Text;
-                fkt.Name = "Farbtemperatur Einstellen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox13.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox13.Text;
-                fkt.Sollwert = textBox23.Text;
-                fkt.Kommentar = textBox24.Text;
-                fkt.Name = "Farbtemperatur Einstellen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox14.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox14.Text;
-                fkt.Sollwert = textBox25.Text;
-                fkt.Kommentar = textBox26.Text;
-                fkt.Name = "Farbtemperatur Einstellen";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox15.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox15.Text;
-                fkt.Sollwert = textBox27.Text;
-                fkt.Kommentar = textBox28.Text;
-                fkt.Name = "RGB";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox16.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox16.Text;
-                fkt.Sollwert = textBox29.Text;
-                fkt.Kommentar = textBox30.Text;
-                fkt.Name = "RGB";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox17.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox17.Text;
-                fkt.Sollwert = textBox31.Text;
-                fkt.Kommentar = textBox32.Text;
-                fkt.Name = "RGB";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox18.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox18.Text;
-                fkt.Sollwert = textBox33.Text;
-                fkt.Kommentar = textBox34.Text;
-                fkt.Name = "Direkt / Indirekt";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox19.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox19.Text;
-                fkt.Sollwert = textBox35.Text;
-                fkt.Kommentar = textBox36.Text;
-                fkt.Name = "Direkt / Indirekt";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox20.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox1.Text;
-                fkt.Bedienelement = comboBox20.Text;
-                fkt.Sollwert = textBox37.Text;
-                fkt.Kommentar = textBox38.Text;
-                fkt.Name = "Direkt / Indirekt";
-                fkt.Art = 1;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
-            textBox6.Clear();
-            textBox7.Clear();
-            textBox8.Clear();
-            textBox9.Clear();
-            textBox10.Clear();
-            textBox11.Clear();
-            textBox12.Clear();
-            textBox13.Clear();
-            textBox14.Clear();
-            textBox15.Clear();
-            textBox16.Clear();
-            textBox17.Clear();
-            textBox18.Clear();
-            textBox19.Clear();
-            textBox20.Clear();
-            textBox21.Clear();
-            textBox22.Clear();
-            textBox23.Clear();
-            textBox24.Clear();
-            textBox25.Clear();
-            textBox26.Clear();
-            textBox27.Clear();
-            textBox28.Clear();
-            textBox29.Clear();
-            textBox30.Clear();
-            textBox31.Clear();
-            textBox32.Clear();
-            textBox33.Clear();
-            textBox34.Clear();
-            textBox35.Clear();
-            textBox36.Clear();
-            textBox37.Clear();
-            textBox38.Clear();
-
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0;
-            comboBox5.SelectedIndex = 0;
-            comboBox6.SelectedIndex = 0;
-            comboBox7.SelectedIndex = 0;
-            comboBox8.SelectedIndex = 0;
-            comboBox9.SelectedIndex = 0;
-            comboBox10.SelectedIndex = 0;
-            comboBox11.SelectedIndex = 0;
-            comboBox12.SelectedIndex = 0;
-            comboBox13.SelectedIndex = 0;
-            comboBox14.SelectedIndex = 0;
-            comboBox15.SelectedIndex = 0;
-            comboBox16.SelectedIndex = 0;
-            comboBox17.SelectedIndex = 0;
-            comboBox18.SelectedIndex = 0;
-            comboBox19.SelectedIndex = 0;
-            comboBox20.SelectedIndex = 0;
+            AllesLeeren();
 
             checkBox1.Checked = false;
             checkBox2.Checked = false;
@@ -546,192 +347,116 @@ namespace KNX_V2
         //Verdunkelung
         private void button5_Click(object sender, EventArgs e)
         {
-            if (comboBox22.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox21.Text;
-                fkt.Bedienelement = comboBox22.Text;
-                fkt.Sollwert = textBox39.Text;
-                fkt.Kommentar = textBox40.Text;
-                fkt.Jalousie = true;
-                fkt.Name = comboBox21.Text;
-                fkt.Art = 2;
+            int stelle = StelleInFunktionen(comboBox21.Text);
+            bool neu = false;
+            bool check = false;
 
-                Form1.liste[index].Funktionen[i] = fkt;
+            if (stelle == 999)
+            {
+                neu = true;
+            }
+            else
+            {
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox21.Text);
+                }
             }
 
-            if (comboBox23.Text != "")
+            for (int i = 22; i < 28; i++)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox21.Text;
-                fkt.Bedienelement = comboBox23.Text;
-                fkt.Sollwert = textBox41.Text;
-                fkt.Kommentar = textBox42.Text;
-                fkt.Jalousie = true;
-                fkt.Name = comboBox21.Text;
-                fkt.Art = 2;
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
 
-                Form1.liste[index].Funktionen[i] = fkt;
+                if (combo.Text != "")
+                {
+                    int a = 2 * (i - 2) - 1;
+                    int b = a + 1;
+                    var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
+                    var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                    int x = Index();
+                    Funktion fkt = new Funktion();
+                    fkt.Verbraucher = comboBox21.Text;
+                    fkt.Bedienelement = combo.Text;
+                    fkt.Sollwert = textbox1.Text;
+                    fkt.Kommentar = textbox2.Text;
+                    fkt.Jalousie = true;
+                    fkt.Name = comboBox21.Text;
+                    fkt.Art = 2;
+                    fkt.ComboNr = i;
+
+                    Form1.liste[index].Funktionen[x] = fkt;
+                    check = true;
+                }
             }
 
-            if (comboBox24.Text != "")
+            if (neu && check)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox21.Text;
-                fkt.Bedienelement = comboBox24.Text;
-                fkt.Sollwert = textBox43.Text;
-                fkt.Kommentar = textBox44.Text;
-                fkt.Jalousie = true;
-                fkt.Name = comboBox21.Text;
-                fkt.Art = 2;
-
-                Form1.liste[index].Funktionen[i] = fkt;
+                comboBox21.Items.Add(comboBox21.Text);
             }
 
-            if (comboBox25.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox21.Text;
-                fkt.Bedienelement = comboBox25.Text;
-                fkt.Sollwert = textBox45.Text;
-                fkt.Kommentar = textBox46.Text;
-                fkt.Jalousie = true;
-                fkt.Name = comboBox21.Text;
-                fkt.Art = 2;
 
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox26.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox21.Text;
-                fkt.Bedienelement = comboBox26.Text;
-                fkt.Sollwert = textBox47.Text;
-                fkt.Kommentar = textBox48.Text;
-                fkt.Jalousie = true;
-                fkt.Name = comboBox21.Text;
-                fkt.Art = 2;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            if (comboBox27.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox21.Text;
-                fkt.Bedienelement = comboBox27.Text;
-                fkt.Sollwert = textBox49.Text;
-                fkt.Kommentar = textBox50.Text;
-                fkt.Jalousie = true;
-                fkt.Name = comboBox21.Text;
-                fkt.Art = 2;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            textBox39.Clear();
-            textBox40.Clear();
-            textBox41.Clear();
-            textBox42.Clear();
-            textBox43.Clear();
-            textBox44.Clear();
-            textBox45.Clear();
-            textBox46.Clear();
-            textBox47.Clear();
-            textBox48.Clear();
-            textBox49.Clear();
-            textBox50.Clear();
-
-            comboBox21.SelectedIndex = 0;
-            comboBox22.SelectedIndex = 0;
-            comboBox23.SelectedIndex = 0;
-            comboBox24.SelectedIndex = 0;
-            comboBox25.SelectedIndex = 0;
-            comboBox26.SelectedIndex = 0;
-            comboBox27.SelectedIndex = 0;
+            AllesLeeren();
         }
 
 
         //Oberlichter
         private void button6_Click(object sender, EventArgs e)
         {
-            if (comboBox29.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox28.Text;
-                fkt.Bedienelement = comboBox29.Text;
-                fkt.Sollwert = textBox51.Text;
-                fkt.Kommentar = textBox52.Text;                
-                fkt.Name = "Oberlicht";
-                fkt.Art = 3;
+            int stelle = StelleInFunktionen(comboBox28.Text);
+            bool neu = false;
+            bool check = false;
 
-                Form1.liste[index].Funktionen[i] = fkt;
+            // Verbraucher gibt es noch nicht
+            if (stelle == 999)
+            {
+                neu = true;
+            }
+            // Verbraucher gibt es schon / es wurde schon Funktionen für diesen Verbraucher gespeichert
+            else
+            {
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox28.Text);
+                }
             }
 
-            if (comboBox30.Text != "")
+            // speichert eingegebene Funktionen im Funktionenarray des Raums ab
+            for (int i = 29; i < 33; i++)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox28.Text;
-                fkt.Bedienelement = comboBox30.Text;
-                fkt.Sollwert = textBox53.Text;
-                fkt.Kommentar = textBox54.Text;
-                fkt.Name = "Oberlicht";
-                fkt.Art = 3;
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
 
-                Form1.liste[index].Funktionen[i] = fkt;
+                if (combo.Text != "")
+                {
+                    int a = 2 * i - 7;
+                    int b = a + 1;
+                    var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
+                    var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                    int x = Index();
+                    Funktion fkt = new Funktion();
+                    fkt.Verbraucher = comboBox28.Text;
+                    fkt.Bedienelement = combo.Text;
+                    fkt.Sollwert = textbox1.Text;
+                    fkt.Kommentar = textbox2.Text;
+                    fkt.Name = "Oberlicht";
+                    fkt.Art = 3;
+                    fkt.ComboNr = i;
+
+                    Form1.liste[index].Funktionen[x] = fkt;
+                    check = true;
+                }
             }
 
-            if (comboBox31.Text != "")
+            //fügt Verbraucher zum DropDownMenü hinzu, wenn es ihn noch nicht gibt und mind. 1 Funktion abgespeichert wird
+            if (neu && check)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox28.Text;
-                fkt.Bedienelement = comboBox31.Text;
-                fkt.Sollwert = textBox55.Text;
-                fkt.Kommentar = textBox56.Text;
-                fkt.Name = "Oberlicht";
-                fkt.Art = 3;
-
-                Form1.liste[index].Funktionen[i] = fkt;
+                comboBox28.Items.Add(comboBox28.Text);
             }
 
-            if (comboBox32.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox28.Text;
-                fkt.Bedienelement = comboBox32.Text;
-                fkt.Sollwert = textBox57.Text;
-                fkt.Kommentar = textBox58.Text;
-                fkt.Name = "Oberlicht";
-                fkt.Art = 3;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            textBox51.Clear();
-            textBox52.Clear();
-            textBox53.Clear();
-            textBox54.Clear();
-            textBox55.Clear();
-            textBox56.Clear();
-            textBox57.Clear();
-            textBox58.Clear();
-
-            comboBox28.SelectedIndex = 0;
-            comboBox29.SelectedIndex = 0;
-            comboBox30.SelectedIndex = 0;
-            comboBox31.SelectedIndex = 0;
-            comboBox32.SelectedIndex = 0;            
+            AllesLeeren();
 
         }
 
@@ -739,161 +464,112 @@ namespace KNX_V2
         //Heizgruppen
         private void button7_Click(object sender, EventArgs e)
         {
-            if (comboBox34.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox33.Text;
-                fkt.Bedienelement = comboBox34.Text;
-                fkt.Sollwert = textBox59.Text;
-                fkt.Kommentar = textBox60.Text;
-                fkt.Name = "Heizen";
-                fkt.Art = 4;
+            int stelle = StelleInFunktionen(comboBox33.Text);
+            bool neu = false;
+            bool check = false;
 
-                Form1.liste[index].Funktionen[i] = fkt;
+            if (stelle == 999)
+            {
+                neu = true;
+            }
+            else
+            {
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox33.Text);
+                }
             }
 
-            if (comboBox35.Text != "")
+            for (int i = 34; i < 38; i++)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox33.Text;
-                fkt.Bedienelement = comboBox35.Text;
-                fkt.Sollwert = textBox61.Text;
-                fkt.Kommentar = textBox62.Text;
-                fkt.Name = "Heizen";
-                fkt.Art = 4;
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
 
-                Form1.liste[index].Funktionen[i] = fkt;
+                if (combo.Text != "")
+                {
+                    int a = 2 * i - 9;
+                    int b = a + 1;
+                    var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
+                    var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                    int x = Index();
+                    Funktion fkt = new Funktion();
+                    fkt.Verbraucher = comboBox33.Text;
+                    fkt.Bedienelement = combo.Text;
+                    fkt.Sollwert = textbox1.Text;
+                    fkt.Kommentar = textbox2.Text;
+                    fkt.Name = "Heizen";
+                    fkt.Art = 4;
+                    fkt.ComboNr = i;
+
+                    Form1.liste[index].Funktionen[x] = fkt;
+                    check = true;
+                }
             }
 
-            if (comboBox36.Text != "")
+            if (neu && check)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox33.Text;
-                fkt.Bedienelement = comboBox36.Text;
-                fkt.Sollwert = textBox63.Text;
-                fkt.Kommentar = textBox64.Text;
-                fkt.Name = "Heizen";
-                fkt.Art = 4;
-
-                Form1.liste[index].Funktionen[i] = fkt;
+                comboBox33.Items.Add(comboBox33.Text);
             }
 
-            if (comboBox37.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox33.Text;
-                fkt.Bedienelement = comboBox37.Text;
-                fkt.Sollwert = textBox65.Text;
-                fkt.Kommentar = textBox66.Text;
-                fkt.Name = "Heizen";
-                fkt.Art = 4;
-
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
-
-            textBox59.Clear();
-            textBox60.Clear();
-            textBox61.Clear();
-            textBox62.Clear();
-            textBox63.Clear();
-            textBox64.Clear();
-            textBox65.Clear();
-            textBox66.Clear();
-
-            comboBox33.SelectedIndex = 0;
-            comboBox34.SelectedIndex = 0;
-            comboBox35.SelectedIndex = 0;
-            comboBox36.SelectedIndex = 0;
-            comboBox37.SelectedIndex = 0;
+            AllesLeeren();
         }
 
 
-        //Steckdosen
+        //Steckdosen 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (comboBox39.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox38.Text;
-                fkt.Bedienelement = comboBox39.Text;
-                fkt.Sollwert = textBox67.Text;
-                fkt.Kommentar = textBox68.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Steckdosen Schalten";
-                fkt.Art = 5;
+            int stelle = StelleInFunktionen(comboBox38.Text);
+            bool neu = false;
+            bool check = false;
 
-                Form1.liste[index].Funktionen[i] = fkt;
+            if (stelle == 999)
+            {
+                neu = true;
+            }
+            else
+            {
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox38.Text);
+                }
             }
 
-            if (comboBox40.Text != "")
+            for (int i = 39; i < 43; i++)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox38.Text;
-                fkt.Bedienelement = comboBox40.Text;
-                fkt.Sollwert = textBox69.Text;
-                fkt.Kommentar = textBox70.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Steckdosen Schalten";
-                fkt.Art = 5;
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
 
-                Form1.liste[index].Funktionen[i] = fkt;
+                if (combo.Text != "")
+                {
+                    int a = 2 * i - 11;
+                    int b = a + 1;
+                    var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
+                    var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                    int x = Index();
+                    Funktion fkt = new Funktion();
+                    fkt.Verbraucher = comboBox38.Text;
+                    fkt.Bedienelement = combo.Text;
+                    fkt.Sollwert = textbox1.Text;
+                    fkt.Kommentar = textbox2.Text;
+                    fkt.Name = "Steckdosen Schalten";
+                    fkt.Art = 5;
+                    fkt.ComboNr = i;
+
+                    Form1.liste[index].Funktionen[x] = fkt;
+                    check = true;
+                }
             }
 
-            if (comboBox41.Text != "")
+            if (neu && check)
             {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox38.Text;
-                fkt.Bedienelement = comboBox41.Text;
-                fkt.Sollwert = textBox71.Text;
-                fkt.Kommentar = textBox72.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Steckdosen Schalten";
-                fkt.Art = 5;
-
-                Form1.liste[index].Funktionen[i] = fkt;
+                comboBox38.Items.Add(comboBox38.Text);
             }
 
-            if (comboBox42.Text != "")
-            {
-                int i = Index();
-                Funktion fkt = new Funktion();
-                fkt.Verbraucher = comboBox38.Text;
-                fkt.Bedienelement = comboBox42.Text;
-                fkt.Sollwert = textBox73.Text;
-                fkt.Kommentar = textBox74.Text;
-                fkt.Schalten = true;
-                fkt.Name = "Steckdosen Schalten";
-                fkt.Art = 5;
 
-                Form1.liste[index].Funktionen[i] = fkt;
-            }
 
-            textBox67.Clear();
-            textBox68.Clear();
-            textBox69.Clear();
-            textBox70.Clear();
-            textBox71.Clear();
-            textBox72.Clear();
-            textBox73.Clear();
-            textBox74.Clear();
-
-            comboBox38.SelectedIndex = 0;
-            comboBox39.SelectedIndex = 0;
-            comboBox40.SelectedIndex = 0;
-            comboBox41.SelectedIndex = 0;
-            comboBox42.SelectedIndex = 0;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            AllesLeeren();
         }
         
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -1131,6 +807,176 @@ namespace KNX_V2
             textBox76.Clear();
         }
 
-        
+
+
+
+
+
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //Lichtgruppen, comboBox Auswahl oben
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboLeerenVonBis(2, 20);
+            TextLeerenVonBis(1, 38);
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+
+            int stelle = StelleInFunktionen(comboBox1.Text);
+            if (stelle != 999)
+            {
+                foreach (Funktion fkt in Form1.liste[index].Funktionen)
+                {
+                    if (fkt != null && fkt.Art == 1 && fkt.Verbraucher == comboBox1.Text)
+                    {
+                        var combobox = Controls.Find("comboBox" + fkt.ComboNr, true).FirstOrDefault();
+                        if (combobox != null) { combobox.Text = fkt.Bedienelement; }
+
+                        int a = 2 * (fkt.ComboNr - 2) + 1;
+                        int b = a + 1;
+                        var textbox = Controls.Find("textBox" + a, true).FirstOrDefault();
+                        if (textbox != null) { textbox.Text = fkt.Sollwert; }
+                        var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                        if (textbox2 != null) { textbox2.Text = fkt.Kommentar; }
+
+                        if (fkt.ComboNr <= 6)
+                        {
+                            checkBox1.Checked = true;
+                        }
+                        else if (fkt.ComboNr <= 11)
+                        {
+                            checkBox2.Checked = true;
+                        }
+                        else if (fkt.ComboNr <= 14)
+                        {
+                            checkBox3.Checked = true;
+                        }
+                        else if (fkt.ComboNr <= 17)
+                        {
+                            checkBox4.Checked = true;
+                        }
+                        else if (fkt.ComboNr <= 20)
+                        {
+                            checkBox5.Checked = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        //Verdunkelung: Schaltgruppe in oberer ComboBox auswählen
+        private void comboBox21_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboLeerenVonBis(22, 27);
+            TextLeerenVonBis(39, 50);
+
+            int stelle = StelleInFunktionen(comboBox21.Text);
+            if (stelle != 999)
+            {
+                foreach (Funktion fkt in Form1.liste[index].Funktionen)
+                {
+                    if (fkt != null && fkt.Verbraucher == comboBox21.Text)
+                    {
+                        var combobox = Controls.Find("comboBox" + fkt.ComboNr, true).FirstOrDefault();
+                        if (combobox != null) { combobox.Text = fkt.Bedienelement; }
+
+                        int a = 2 * (fkt.ComboNr - 2) - 1;
+                        int b = a + 1;
+                        var textbox = Controls.Find("textBox" + a, true).FirstOrDefault();
+                        if (textbox != null) { textbox.Text = fkt.Sollwert; }
+                        var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                        if (textbox2 != null) { textbox2.Text = fkt.Kommentar; }
+                    }
+                }
+            }
+        }
+
+        //Oberlicht: Schaltgruppe in oberer ComboBox auswählen
+        private void comboBox28_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboLeerenVonBis(29, 32);
+            TextLeerenVonBis(51, 58);
+
+            int stelle = StelleInFunktionen(comboBox28.Text);
+            if (stelle != 999)
+            {
+                foreach (Funktion fkt in Form1.liste[index].Funktionen)
+                {
+                    if (fkt != null && fkt.Verbraucher == comboBox28.Text)
+                    {
+                        var combobox = Controls.Find("comboBox" + fkt.ComboNr, true).FirstOrDefault();
+                        if (combobox != null) { combobox.Text = fkt.Bedienelement; }
+
+                        int a = 2 * fkt.ComboNr - 7;
+                        int b = a + 1;
+                        var textbox = Controls.Find("textBox" + a, true).FirstOrDefault();
+                        if (textbox != null) { textbox.Text = fkt.Sollwert; }
+                        var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                        if (textbox2 != null) { textbox2.Text = fkt.Kommentar; }
+                    }
+                }
+            }
+        }
+
+        //Heizung: Schaltgruppe in oberer ComboBox auswählen
+        private void comboBox33_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboLeerenVonBis(34, 37);
+            TextLeerenVonBis(59, 66);
+
+            int stelle = StelleInFunktionen(comboBox33.Text);
+            if (stelle != 999)
+            {
+                foreach (Funktion fkt in Form1.liste[index].Funktionen)
+                {
+                    if (fkt != null && fkt.Verbraucher == comboBox33.Text)
+                    {
+                        var combobox = Controls.Find("comboBox" + fkt.ComboNr, true).FirstOrDefault();
+                        if (combobox != null) { combobox.Text = fkt.Bedienelement; }
+
+                        int a = 2 * fkt.ComboNr - 9;
+                        int b = a + 1;
+                        var textbox = Controls.Find("textBox" + a, true).FirstOrDefault();
+                        if (textbox != null) { textbox.Text = fkt.Sollwert; }
+                        var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                        if (textbox2 != null) { textbox2.Text = fkt.Kommentar; }
+                    }
+                }
+            }
+        }
+
+        //Steckdose: Schaltgruppe in oberer ComboBox auswählen
+        private void comboBox38_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboLeerenVonBis(39, 42);
+            TextLeerenVonBis(67, 74);
+
+            int stelle = StelleInFunktionen(comboBox38.Text);
+            if (stelle != 999)
+            {
+                foreach (Funktion fkt in Form1.liste[index].Funktionen)
+                {
+                    if (fkt != null && fkt.Verbraucher == comboBox38.Text)
+                    {
+                        var combobox = Controls.Find("comboBox" + fkt.ComboNr, true).FirstOrDefault();
+                        if (combobox != null) { combobox.Text = fkt.Bedienelement; }
+
+                        int a = 2 * fkt.ComboNr - 11;
+                        int b = a + 1;
+                        var textbox = Controls.Find("textBox" + a, true).FirstOrDefault();
+                        if (textbox != null) { textbox.Text = fkt.Sollwert; }
+                        var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                        if (textbox2 != null) { textbox2.Text = fkt.Kommentar; }
+                    }
+                }
+            }
+        }
     }
 }

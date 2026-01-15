@@ -68,7 +68,7 @@
             this.button2.Location = new System.Drawing.Point(618, 78);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(256, 36);
+            this.button2.Size = new System.Drawing.Size(368, 36);
             this.button2.TabIndex = 32;
             this.button2.Text = "ausgew. Raum kopieren";
             this.button2.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             this.button1.Location = new System.Drawing.Point(618, 33);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(256, 36);
+            this.button1.Size = new System.Drawing.Size(368, 36);
             this.button1.TabIndex = 31;
             this.button1.Text = "neuen Raum hinzufügen";
             this.button1.UseVisualStyleBackColor = true;
@@ -125,7 +125,7 @@
             this.button3.Location = new System.Drawing.Point(618, 184);
             this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(256, 36);
+            this.button3.Size = new System.Drawing.Size(368, 36);
             this.button3.TabIndex = 34;
             this.button3.Text = "Raum konfigurieren";
             this.button3.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             this.button4.Location = new System.Drawing.Point(618, 230);
             this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(256, 36);
+            this.button4.Size = new System.Drawing.Size(368, 36);
             this.button4.TabIndex = 35;
             this.button4.Text = "Eintrag bearbeiten";
             this.button4.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             this.button5.Location = new System.Drawing.Point(618, 275);
             this.button5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(256, 36);
+            this.button5.Size = new System.Drawing.Size(368, 36);
             this.button5.TabIndex = 36;
             this.button5.Text = "Eintrag löschen";
             this.button5.UseVisualStyleBackColor = true;
@@ -198,7 +198,7 @@
             this.button8.Location = new System.Drawing.Point(598, 545);
             this.button8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(276, 36);
+            this.button8.Size = new System.Drawing.Size(388, 36);
             this.button8.TabIndex = 41;
             this.button8.Text = "Projekt Öffnen";
             this.button8.UseVisualStyleBackColor = true;
@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 703);
+            this.ClientSize = new System.Drawing.Size(1854, 1277);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
