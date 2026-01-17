@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KNX_V2
 {
@@ -17,6 +18,7 @@ namespace KNX_V2
 
         private List<ComboBox> alleComboBoxen;
         Dictionary<ComboBox, int> comboBoxFixCount;
+        private List<string> meineListe = new List<string>();
 
         public Form2()
         {
@@ -100,8 +102,17 @@ namespace KNX_V2
             
             Raum raum = new Raum();
             raum = Form1.liste[index];
+
+            meineListe = raum.Schaltstellen;
+            foreach (string item in meineListe)
+            {
+                listView1.Items.Add(item);
+            }
+            UpdateComboBoxenDynamisch();
+
             label92.Text = "Raum: " + raum.Name;
             label93.Text = "Typ: " + raum.Typ;
+
             foreach (Funktion fkt in raum.Funktionen)
             {
                 if (fkt != null)
@@ -168,9 +179,7 @@ namespace KNX_V2
 
                 cb.EndUpdate();
             }
-        }
-
-        private List<string> meineListe = new List<string>();
+        }        
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -978,5 +987,6 @@ namespace KNX_V2
                 }
             }
         }
+        
     }
 }

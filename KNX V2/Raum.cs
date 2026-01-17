@@ -11,6 +11,8 @@ namespace KNX_V2
         string name;
         string typ;
         Funktion[] funktionen;
+        //string[] schaltstellen;
+        List<string> schaltstellen;
 
         public string Name
         {
@@ -30,10 +32,17 @@ namespace KNX_V2
             set { funktionen = value; }
         }
 
+        public List<string> Schaltstellen
+        {
+            get { return schaltstellen; }
+            set { schaltstellen = value; }
+        }
+
 
         public Raum()
         {
             funktionen = new Funktion[50];
+            schaltstellen = new List<string>();
         }
     }
 }
