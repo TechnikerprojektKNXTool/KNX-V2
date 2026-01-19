@@ -65,7 +65,6 @@ namespace KNX_V2
             liste[index].Funktionen = liste[i].Funktionen;           
             liste[index].Typ = textBox1.Text;
             liste[index].Name = textBox2.Text;
-            //liste[index].Schaltstellen = liste[i].Schaltstellen;
             foreach (string item in liste[i].Schaltstellen) 
             {
                 liste[index].Schaltstellen.Add(item);
@@ -271,7 +270,7 @@ namespace KNX_V2
             
             foreach (Raum raum in liste)
             {
-                if (raum != null && raum.Typ != "invalid")
+                if (raum != null && raum.Typ != "invalid" && raum.Funktionen[0] != null)
                 {
                     // Wenn neuer Raumtyp, dann leere Zeile (ist noch nicht schön so)
                     string typNeu = raum.Typ;
@@ -309,7 +308,9 @@ namespace KNX_V2
 
                             i++;                  
                         }
-                    }                   
+                    }
+
+                    i++;
                     
                 }
             }
@@ -361,8 +362,9 @@ namespace KNX_V2
             int l = 0;
             for (int i = 0; i < liste.Length; i++)
             {
-                if (liste[i] != null)
+                if (liste[i] != null && liste[i].Funktionen[0] != null)
                 {
+                    l++;
                     foreach (Funktion funktion in liste[i].Funktionen)
                     {
                         if (funktion != null)
