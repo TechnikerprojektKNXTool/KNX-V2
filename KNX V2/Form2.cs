@@ -102,6 +102,7 @@ namespace KNX_V2
             
             Raum raum = new Raum();
             raum = Form1.liste[index];
+            label92.Text = "Raum: " + raum.Name + "\n" + "Typ: " + raum.Typ;
 
             meineListe = raum.Schaltstellen;
             foreach (string item in meineListe)
@@ -153,12 +154,20 @@ namespace KNX_V2
             }            
         }
 
-
-        private void UpdateComboBoxenDynamisch()
+               
+        private void UpdateComboBoxenDynamisch(int? deletedDynamicIndex = null)
         {
             foreach (ComboBox cb in alleComboBoxen)
             {
                 int fixCount = comboBoxFixCount[cb];
+
+                int selectedIndex = cb.SelectedIndex;
+                bool hadDynamicSelection = selectedIndex >= fixCount;
+
+                // Dynamischer Index der Auswahl (0-basiert)
+                int selectedDynamicIndex = hadDynamicSelection
+                    ? selectedIndex - fixCount
+                    : -1;
 
                 cb.BeginUpdate();
 
@@ -168,13 +177,36 @@ namespace KNX_V2
                     cb.Items.RemoveAt(cb.Items.Count - 1);
                 }
 
-                // Neue dynamische Einträge anhängen
+                // Dynamische Einträge neu hinzufügen
                 foreach (string eintrag in meineListe)
                 {
                     cb.Items.Add(eintrag);
                 }
 
                 cb.EndUpdate();
+
+                // FALL 1: Gelöschter Eintrag war ausgewählt → Auswahl aufheben
+                if (deletedDynamicIndex.HasValue &&
+                    selectedDynamicIndex == deletedDynamicIndex.Value)
+                {
+                    cb.SelectedIndex = -1; // NICHTS auswählen
+                    continue;
+                }
+
+                // FALL 2: Auswahl war ein anderer dynamischer Eintrag → wiederherstellen
+                if (hadDynamicSelection)
+                {
+                    int newIndex = fixCount + selectedDynamicIndex;
+
+                    if (newIndex >= fixCount && newIndex < cb.Items.Count)
+                    {
+                        cb.SelectedIndex = newIndex;
+                    }
+                    else
+                    {
+                        cb.SelectedIndex = -1;
+                    }
+                }
             }
         }        
 
@@ -763,8 +795,8 @@ namespace KNX_V2
                 MessageBox.Show("Bitte einen Eintrag auswählen.");
                 return;
             }
-
-            // Optional: Sicherheitsabfrage
+            //test für merge test2
+            // Sicherheitsabfrage
             DialogResult result = MessageBox.Show(
                 "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
                 "Eintrag löschen",
@@ -779,7 +811,7 @@ namespace KNX_V2
             meineListe.RemoveAt(index);
             listView1.Items.RemoveAt(index);
 
-            UpdateComboBoxenDynamisch();
+            UpdateComboBoxenDynamisch(index);
             textBox76.Clear();
         }
               
@@ -813,7 +845,7 @@ namespace KNX_V2
             textBox76.Clear();
         }
 
-
+        
 
 
 
