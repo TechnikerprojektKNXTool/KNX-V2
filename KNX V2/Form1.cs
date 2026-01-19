@@ -65,6 +65,11 @@ namespace KNX_V2
             liste[index].Funktionen = liste[i].Funktionen;           
             liste[index].Typ = textBox1.Text;
             liste[index].Name = textBox2.Text;
+            //liste[index].Schaltstellen = liste[i].Schaltstellen;
+            foreach (string item in liste[i].Schaltstellen) 
+            {
+                liste[index].Schaltstellen.Add(item);
+            }
 
             //anzeigen in ListView
             ListViewItem listItem = new ListViewItem();
@@ -134,7 +139,8 @@ namespace KNX_V2
             foreach (Raum raum in liste)
             {
                 if (raum != null && raum.Typ != "invalid")
-                {                   
+                {
+                    writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\tSchaltstellenliste\t " + string.Join("\t", raum.Schaltstellen));
                     bool leer = true;
                     foreach (Funktion funktion in raum.Funktionen)
                     {
@@ -147,7 +153,7 @@ namespace KNX_V2
                     }
                     if (leer)
                     {
-                        writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t \t ");
+                        //writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t \t ");
                     }
 
                     i++;
@@ -169,28 +175,39 @@ namespace KNX_V2
             string path = ofd.FileName;
 
             StreamReader reader = new StreamReader(path);
-            int i = -1;
+            int indx = -1;
 
             while (reader.Peek() != -1)
             {
                 string[] einlesen = reader.ReadLine().Split('\t');
-                i = Convert.ToInt32(einlesen[0]);
+                indx = Convert.ToInt32(einlesen[0]);
 
-                if (liste[i] == null)
+                if (liste[indx] == null)
                 {
-                    liste[i] = new Raum();
-                    liste[i].Typ = einlesen[1];
-                    liste[i].Name = einlesen[2];
+                    liste[indx] = new Raum();
+                    liste[indx].Typ = einlesen[1];
+                    liste[indx].Name = einlesen[2];
 
                     ListViewItem listitem = new ListViewItem();
                     listitem.SubItems.Add(einlesen[1]);
                     listitem.SubItems.Add(einlesen[2]);
-                    listitem.SubItems.Add(i.ToString());
-                    listView1.Items.Add(listitem);
+                    listitem.SubItems.Add(indx.ToString());
+                    listView1.Items.Add(listitem);                   
 
                     j = 0;
                 }
-                if (einlesen[4] != "leer")
+
+                //Schaltstellenlsite einlesen
+                if (einlesen[3] == "Schaltstellenliste" && einlesen[4] != null)
+                {
+                    for (int i = 4; i < einlesen.Length; i++)
+                    {
+                        liste[indx].Schaltstellen.Add(einlesen[i]);
+                    }
+                }
+
+                //if (einlesen[4] != "leer")
+                if (einlesen[3] != "Schaltstellenliste")
                 {
                     Funktion fkt = new Funktion();
                     fkt.Name = einlesen[3];
@@ -203,14 +220,14 @@ namespace KNX_V2
                     fkt.Kommentar = einlesen[10];
                     fkt.Art = Convert.ToInt32(einlesen[11]);
                     fkt.ComboNr = Convert.ToInt32(einlesen[12]);
-                    liste[i].Funktionen[j] = fkt;
+                    liste[indx].Funktionen[j] = fkt;
                     j++;
                 }
             }
 
             reader.Close();
 
-            index = i + 1;            
+            index = indx + 1;            
         }
 
         //Excel-Tabelle erstellen

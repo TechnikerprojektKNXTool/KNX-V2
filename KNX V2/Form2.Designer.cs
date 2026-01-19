@@ -2858,7 +2858,8 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(252, 627);
+            this.button11.Location = new System.Drawing.Point(504, 1206);
+            this.button11.Margin = new System.Windows.Forms.Padding(6);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(92, 23);
             this.button11.TabIndex = 189;
@@ -2868,7 +2869,8 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(6, 627);
+            this.button10.Location = new System.Drawing.Point(12, 1206);
+            this.button10.Margin = new System.Windows.Forms.Padding(6);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(132, 23);
             this.button10.TabIndex = 188;
@@ -2879,7 +2881,8 @@
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 83);
+            this.listView1.Location = new System.Drawing.Point(12, 160);
+            this.listView1.Margin = new System.Windows.Forms.Padding(6);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(338, 538);
             this.listView1.TabIndex = 187;
@@ -2889,14 +2892,16 @@
             // 
             // textBox76
             // 
-            this.textBox76.Location = new System.Drawing.Point(6, 26);
+            this.textBox76.Location = new System.Drawing.Point(12, 50);
+            this.textBox76.Margin = new System.Windows.Forms.Padding(6);
             this.textBox76.Name = "textBox76";
             this.textBox76.Size = new System.Drawing.Size(137, 20);
             this.textBox76.TabIndex = 186;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(149, 26);
+            this.button9.Location = new System.Drawing.Point(298, 50);
+            this.button9.Margin = new System.Windows.Forms.Padding(6);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(97, 23);
             this.button9.TabIndex = 182;
@@ -2952,7 +2957,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
