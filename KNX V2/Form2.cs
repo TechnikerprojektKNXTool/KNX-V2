@@ -788,7 +788,7 @@ namespace KNX_V2
                 MessageBox.Show("Bitte einen Eintrag auswählen.");
                 return;
             }
-
+            //test für merge
             // Sicherheitsabfrage
             DialogResult result = MessageBox.Show(
                 "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
