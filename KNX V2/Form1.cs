@@ -65,7 +65,11 @@ namespace KNX_V2
             liste[index].Funktionen = liste[i].Funktionen;           
             liste[index].Typ = textBox1.Text;
             liste[index].Name = textBox2.Text;
-            liste[index].Schaltstellen = liste[i].Schaltstellen;
+            //liste[index].Schaltstellen = liste[i].Schaltstellen;
+            foreach (string item in liste[i].Schaltstellen) 
+            {
+                liste[index].Schaltstellen.Add(item);
+            }
 
             //anzeigen in ListView
             ListViewItem listItem = new ListViewItem();
