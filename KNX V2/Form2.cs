@@ -109,10 +109,7 @@ namespace KNX_V2
                 listView1.Items.Add(item);
             }
             UpdateComboBoxenDynamisch();
-
-            label92.Text = "Raum: " + raum.Name;
-            label93.Text = "Typ: " + raum.Typ;
-
+           
             foreach (Funktion fkt in raum.Funktionen)
             {
                 if (fkt != null)

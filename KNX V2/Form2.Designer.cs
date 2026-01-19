@@ -261,8 +261,6 @@
             this.textBox76 = new System.Windows.Forms.TextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.label91 = new System.Windows.Forms.Label();
-            this.label92 = new System.Windows.Forms.Label();
-            this.label93 = new System.Windows.Forms.Label();
             this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -2921,33 +2919,11 @@
             this.label91.TabIndex = 180;
             this.label91.Text = "Neue Schalter/-stelle erstellen ";
             // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label92.Location = new System.Drawing.Point(1380, 1445);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(121, 42);
-            this.label92.TabIndex = 41;
-            this.label92.Text = "Raum";
-            // 
-            // label93
-            // 
-            this.label93.AutoSize = true;
-            this.label93.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label93.Location = new System.Drawing.Point(1398, 1495);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(75, 39);
-            this.label93.TabIndex = 42;
-            this.label93.Text = "Typ";
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2884, 1571);
-            this.Controls.Add(this.label93);
-            this.Controls.Add(this.label92);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
@@ -2968,7 +2944,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -3206,7 +3181,5 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Label label92;
-        private System.Windows.Forms.Label label93;
     }
 }
