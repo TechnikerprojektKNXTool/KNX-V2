@@ -262,6 +262,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.label91 = new System.Windows.Forms.Label();
             this.label92 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage6.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -269,6 +270,7 @@
             this.tabPage2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -1711,7 +1713,7 @@
             // 
             // textBox32
             // 
-            this.textBox32.Location = new System.Drawing.Point(227, 753);
+            this.textBox32.Location = new System.Drawing.Point(227, 746);
             this.textBox32.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox32.Name = "textBox32";
             this.textBox32.Size = new System.Drawing.Size(333, 22);
@@ -1727,7 +1729,7 @@
             // 
             // textBox30
             // 
-            this.textBox30.Location = new System.Drawing.Point(227, 673);
+            this.textBox30.Location = new System.Drawing.Point(227, 670);
             this.textBox30.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox30.Name = "textBox30";
             this.textBox30.Size = new System.Drawing.Size(333, 22);
@@ -1807,7 +1809,7 @@
             // 
             // textBox20
             // 
-            this.textBox20.Location = new System.Drawing.Point(793, 450);
+            this.textBox20.Location = new System.Drawing.Point(793, 448);
             this.textBox20.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(333, 22);
@@ -1823,7 +1825,7 @@
             // 
             // textBox18
             // 
-            this.textBox18.Location = new System.Drawing.Point(793, 372);
+            this.textBox18.Location = new System.Drawing.Point(793, 374);
             this.textBox18.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox18.Name = "textBox18";
             this.textBox18.Size = new System.Drawing.Size(333, 22);
@@ -2758,7 +2760,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(336, 32);
+            this.button12.Location = new System.Drawing.Point(582, 109);
             this.button12.Margin = new System.Windows.Forms.Padding(4);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(123, 42);
@@ -2769,10 +2771,11 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(336, 772);
+            this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button11.Location = new System.Drawing.Point(394, 135);
             this.button11.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(123, 28);
+            this.button11.Size = new System.Drawing.Size(120, 30);
             this.button11.TabIndex = 189;
             this.button11.Text = "Löschen";
             this.button11.UseVisualStyleBackColor = true;
@@ -2780,22 +2783,23 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(8, 772);
+            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.Location = new System.Drawing.Point(394, 91);
             this.button10.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(176, 28);
+            this.button10.Size = new System.Drawing.Size(120, 30);
             this.button10.TabIndex = 188;
-            this.button10.Text = "Ausgwälte Zeile ändern";
+            this.button10.Text = "Umbenennen";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click_1);
             // 
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(8, 102);
+            this.listView1.Location = new System.Drawing.Point(8, 68);
             this.listView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(449, 661);
+            this.listView1.Size = new System.Drawing.Size(370, 628);
             this.listView1.TabIndex = 187;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -2803,18 +2807,20 @@
             // 
             // textBox76
             // 
+            this.textBox76.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox76.Location = new System.Drawing.Point(8, 32);
             this.textBox76.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBox76.Name = "textBox76";
-            this.textBox76.Size = new System.Drawing.Size(181, 22);
+            this.textBox76.Size = new System.Drawing.Size(370, 22);
             this.textBox76.TabIndex = 186;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(199, 32);
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.Location = new System.Drawing.Point(394, 27);
             this.button9.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(129, 28);
+            this.button9.Size = new System.Drawing.Size(120, 30);
             this.button9.TabIndex = 182;
             this.button9.Text = "Hinzufügen";
             this.button9.UseVisualStyleBackColor = true;
@@ -2825,9 +2831,9 @@
             this.label91.AutoSize = true;
             this.label91.Location = new System.Drawing.Point(8, 12);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(189, 16);
+            this.label91.Size = new System.Drawing.Size(76, 16);
             this.label91.TabIndex = 180;
-            this.label91.Text = "Neue Schalter/-stelle erstellen ";
+            this.label91.Text = "Schaltstelle";
             // 
             // label92
             // 
@@ -2840,11 +2846,22 @@
             this.label92.Text = "Raum";
             this.label92.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KNX_V2.Properties.Resources.viereckiges_Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(1833, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(78, 76);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 193;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1923, 1023);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label92);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
@@ -2865,6 +2882,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3105,5 +3123,6 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
