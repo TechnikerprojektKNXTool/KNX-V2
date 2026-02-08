@@ -1016,6 +1016,39 @@ namespace KNX_V2
                 }
             }
         }
-        
+
+        //Schaltgruppe löschen
+        private void button13_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Beleuchtungsgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox1.Text);
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox1.Text);
+                }
+            
+            comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
+
+            AllesLeeren();
+
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+
+            
+
+        }
     }
 }
