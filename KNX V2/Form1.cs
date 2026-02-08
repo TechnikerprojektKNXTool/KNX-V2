@@ -417,5 +417,82 @@ namespace KNX_V2
             }
             
         }
+
+        //Raumliste sortieren
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            int Spalte = e.Column;
+            switch (Spalte)
+            {
+                case 1:
+
+                    for (int j = 0; j < (liste.Length - 1); j++)
+                    {
+                        for (int i = 0; i < (liste.Length - 1); i++)
+                        {
+                            if (liste[i] != null && liste[i + 1] != null)
+                            {
+                                if (string.Compare(liste[i].Typ, liste[i + 1].Typ) > 0)
+                                {
+                                    Raum temp = liste[i];
+                                    liste[i] = liste[i + 1];
+                                    liste[i + 1] = temp;
+                                }
+                            }
+                        }
+                    }
+
+                    listView1.Items.Clear();
+                    
+                    for (int i = 0; i < liste.Length; i++)
+                    {
+                        if (liste[i] != null)
+                        {
+                            ListViewItem lvi = new ListViewItem();
+                            lvi.SubItems.Add(liste[i].Typ);
+                            lvi.SubItems.Add(liste[i].Name);
+                            lvi.SubItems.Add(i.ToString());
+                            listView1.Items.Add(lvi);
+                        }
+                    }
+
+                    break;
+
+                case 2:
+                    for (int j = 0; j < (liste.Length-1); j++)
+                    {
+                        for (int i = 0; i < (liste.Length-1); i++)
+                        {
+                            if (liste[i] != null && liste[i + 1] != null)
+                            {
+                                if (string.Compare(liste[i].Name, liste[i + 1].Name) > 0)
+                                {
+                                    Raum temp = liste[i];
+                                    liste[i] = liste[i + 1];
+                                    liste[i + 1] = temp;
+                                }
+                            }
+                        }
+                    }
+                   
+                    listView1.Items.Clear();
+
+                    for (int i = 0; i < liste.Length; i++)
+                    {
+                        if (liste[i] != null)
+                        {
+                            ListViewItem lvi = new ListViewItem();
+                            lvi.SubItems.Add(liste[i].Typ);
+                            lvi.SubItems.Add(liste[i].Name);
+                            lvi.SubItems.Add(i.ToString());
+                            listView1.Items.Add(lvi);
+                        }
+                    }
+
+                    break;
+              
+            }
+
+        }
     }
 }
