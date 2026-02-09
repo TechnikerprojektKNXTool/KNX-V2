@@ -19,6 +19,7 @@ namespace KNX_V2
         private List<ComboBox> alleComboBoxen;
         Dictionary<ComboBox, int> comboBoxFixCount;
         private List<string> meineListe = new List<string>();
+        private ListViewItem editingItem = null;
 
         public Form2()
         {
@@ -378,6 +379,18 @@ namespace KNX_V2
             checkBox3.Checked = false;
             checkBox4.Checked = false;
             checkBox5.Checked = false;
+
+        }
+
+        //Lichtgruppe bearbeiten
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Lichtgruppe löschen
+        private void button13_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -765,23 +778,35 @@ namespace KNX_V2
             textBox76.Clear();    // Textbox leeren
                       
         }
-       
 
 
         private void button10_Click_1(object sender, EventArgs e)
         {
-            // ListView Eintrag in TextBox laden für Änderung oder nur zum kopieren
-
-            if (listView1.SelectedItems.Count == 0)
+            // Wenn noch kein Edit-Modus → Text laden
+            if (editingItem == null)
             {
-                MessageBox.Show("Bitte einen Eintrag auswählen.");
-                return;
+                if (listView1.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Bitte einen Eintrag auswählen.");
+                    return;
+                }
+
+                editingItem = listView1.SelectedItems[0];
+                textBox76.Text = editingItem.Text;
+                textBox76.Focus();
             }
+            // Wenn Edit-Modus aktiv → Text speichern
+            else
+            {
+                if (string.IsNullOrWhiteSpace(textBox76.Text))
+                {
+                    MessageBox.Show("Text darf nicht leer sein.");
+                    return;
+                }
 
-            ListViewItem item = listView1.SelectedItems[0];
-
-            // Text aus ListView in TextBox schreiben
-            textBox76.Text = item.Text;
+                editingItem.Text = textBox76.Text;
+                editingItem = null;
+            }
         }
 
 
@@ -814,43 +839,7 @@ namespace KNX_V2
             UpdateComboBoxenDynamisch(index);
             textBox76.Clear();
         }
-              
-        private void button12_Click(object sender, EventArgs e)
-        {
-            // Änderungen speichern
-
-            // Prüfen ob ein Eintrag ausgewählt ist
-            if (listView1.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Bitte einen Eintrag auswählen.");
-                return;
-            }
-
-            string neuerText = textBox76.Text.Trim();
-
-            if (neuerText == "")
-            {
-                MessageBox.Show("Text darf nicht leer sein.");
-                return;
-            }
-
-            int index = listView1.SelectedItems[0].Index;
-
-            meineListe[index] = neuerText;
-            listView1.Items[index].Text = neuerText;
-
-            // ComboBoxen updaten nach Änderung
-            UpdateComboBoxenDynamisch();
-
-            textBox76.Clear();
-        }
-
-        
-
-
-
-
-
+      
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -1016,6 +1005,7 @@ namespace KNX_V2
                 }
             }
         }
-        
+
+       
     }
 }
