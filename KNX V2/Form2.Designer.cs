@@ -356,18 +356,19 @@
             // button21
             // 
             this.button21.Location = new System.Drawing.Point(798, 50);
-            this.button21.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button21.Margin = new System.Windows.Forms.Padding(6);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(240, 40);
             this.button21.TabIndex = 288;
             this.button21.Text = "Löschen";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button22
             // 
             this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button22.Location = new System.Drawing.Point(546, 50);
-            this.button22.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button22.Margin = new System.Windows.Forms.Padding(6);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(240, 40);
             this.button22.TabIndex = 287;
@@ -610,6 +611,8 @@
             // comboBox38
             // 
             this.comboBox38.FormattingEnabled = true;
+            this.comboBox38.Items.AddRange(new object[] {
+            ""});
             this.comboBox38.Location = new System.Drawing.Point(12, 50);
             this.comboBox38.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.comboBox38.Name = "comboBox38";
@@ -657,18 +660,19 @@
             // button19
             // 
             this.button19.Location = new System.Drawing.Point(798, 50);
-            this.button19.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button19.Margin = new System.Windows.Forms.Padding(6);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(240, 40);
             this.button19.TabIndex = 288;
             this.button19.Text = "Löschen";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button20.Location = new System.Drawing.Point(546, 50);
-            this.button20.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button20.Margin = new System.Windows.Forms.Padding(6);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(240, 40);
             this.button20.TabIndex = 287;
@@ -915,6 +919,8 @@
             // comboBox33
             // 
             this.comboBox33.FormattingEnabled = true;
+            this.comboBox33.Items.AddRange(new object[] {
+            ""});
             this.comboBox33.Location = new System.Drawing.Point(12, 50);
             this.comboBox33.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.comboBox33.Name = "comboBox33";
@@ -963,18 +969,19 @@
             // button17
             // 
             this.button17.Location = new System.Drawing.Point(798, 50);
-            this.button17.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button17.Margin = new System.Windows.Forms.Padding(6);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(240, 40);
             this.button17.TabIndex = 288;
             this.button17.Text = "Löschen";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
             this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button18.Location = new System.Drawing.Point(546, 50);
-            this.button18.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button18.Margin = new System.Windows.Forms.Padding(6);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(240, 40);
             this.button18.TabIndex = 287;
@@ -1233,6 +1240,8 @@
             // comboBox28
             // 
             this.comboBox28.FormattingEnabled = true;
+            this.comboBox28.Items.AddRange(new object[] {
+            ""});
             this.comboBox28.Location = new System.Drawing.Point(12, 50);
             this.comboBox28.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.comboBox28.Name = "comboBox28";
@@ -1291,18 +1300,19 @@
             // button15
             // 
             this.button15.Location = new System.Drawing.Point(798, 50);
-            this.button15.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button15.Margin = new System.Windows.Forms.Padding(6);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(240, 40);
             this.button15.TabIndex = 288;
             this.button15.Text = "Löschen";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 
             this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button16.Location = new System.Drawing.Point(546, 50);
-            this.button16.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button16.Margin = new System.Windows.Forms.Padding(6);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(240, 40);
             this.button16.TabIndex = 287;
@@ -1808,7 +1818,7 @@
             // button13
             // 
             this.button13.Location = new System.Drawing.Point(798, 50);
-            this.button13.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button13.Margin = new System.Windows.Forms.Padding(6);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(240, 40);
             this.button13.TabIndex = 286;
@@ -1820,7 +1830,7 @@
             // 
             this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button14.Location = new System.Drawing.Point(546, 50);
-            this.button14.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button14.Margin = new System.Windows.Forms.Padding(6);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(240, 40);
             this.button14.TabIndex = 284;
@@ -2971,9 +2981,9 @@
             this.tabPage1.Controls.Add(this.button9);
             this.tabPage1.Controls.Add(this.label91);
             this.tabPage1.Location = new System.Drawing.Point(8, 39);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(2686, 1368);
             this.tabPage1.TabIndex = 7;
             this.tabPage1.Text = "Schaltstellen";
@@ -2982,7 +2992,7 @@
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(872, 171);
-            this.button12.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button12.Margin = new System.Windows.Forms.Padding(6);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(184, 65);
             this.button12.TabIndex = 190;
@@ -2994,7 +3004,7 @@
             // 
             this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button11.Location = new System.Drawing.Point(592, 212);
-            this.button11.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.button11.Margin = new System.Windows.Forms.Padding(12);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 46);
             this.button11.TabIndex = 189;
@@ -3006,7 +3016,7 @@
             // 
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button10.Location = new System.Drawing.Point(592, 142);
-            this.button10.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.button10.Margin = new System.Windows.Forms.Padding(12);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 46);
             this.button10.TabIndex = 188;
@@ -3018,7 +3028,7 @@
             // 
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(12, 106);
-            this.listView1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.listView1.Margin = new System.Windows.Forms.Padding(12);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(552, 979);
             this.listView1.TabIndex = 187;
@@ -3030,7 +3040,7 @@
             // 
             this.textBox76.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox76.Location = new System.Drawing.Point(12, 50);
-            this.textBox76.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.textBox76.Margin = new System.Windows.Forms.Padding(12);
             this.textBox76.Name = "textBox76";
             this.textBox76.Size = new System.Drawing.Size(552, 31);
             this.textBox76.TabIndex = 186;
@@ -3039,7 +3049,7 @@
             // 
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.Location = new System.Drawing.Point(592, 42);
-            this.button9.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.button9.Margin = new System.Windows.Forms.Padding(12);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 46);
             this.button9.TabIndex = 182;
@@ -3072,8 +3082,8 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::KNX_V2.Properties.Resources.viereckiges_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(2750, 19);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(2702, 39);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(78, 76);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
