@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.VisualBasic;
+
 
 
 namespace KNX_V2
@@ -95,17 +97,29 @@ namespace KNX_V2
         //Eintrag bearbeiten
         private void button4_Click(object sender, EventArgs e)
         {
-            //Array-Index des ausgewählten Raums auslesen
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Raum auswählen.");
+                return;
+            }
+
+            // Ausgewähltes ListViewItem holen
             ListViewItem lvi = listView1.SelectedItems[0];
+
+            // Index aus SubItem lesen
             int i = Convert.ToInt32(lvi.SubItems[3].Text);
 
-            //Namen im Array ändern
-            liste[i].Typ = textBox1.Text;
-            liste[i].Name = textBox2.Text;
+            using (var dlg = new RaumDialog(liste[i].Typ, liste[i].Name))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    liste[i].Typ = dlg.RaumTyp;
+                    liste[i].Name = dlg.RaumName;
 
-            //Namen in ListView ändern
-            lvi.SubItems[1].Text = textBox1.Text;
-            lvi.SubItems[2].Text = textBox2.Text;
+                    lvi.SubItems[1].Text = dlg.RaumTyp;
+                    lvi.SubItems[2].Text = dlg.RaumName;
+                }
+            }
         }
 
         //Eintrag löschen

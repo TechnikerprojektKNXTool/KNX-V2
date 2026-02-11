@@ -3061,7 +3061,7 @@
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;       //hier wurde autoscale von Font auf None geändert!!!!****************************************************************************
             this.ClientSize = new System.Drawing.Size(2884, 1598);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label92);
