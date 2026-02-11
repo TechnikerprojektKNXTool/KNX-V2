@@ -155,105 +155,113 @@ namespace KNX_V2
         //Textdatei speichern
         private void button6_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();
-            string path = ofd.FileName;
-
-            StreamWriter writer = new StreamWriter(path);
-
-            int i = 0;
-            foreach (Raum raum in liste)
+            try
             {
-                if (raum != null && raum.Typ != "invalid")
-                {
-                    writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\tSchaltstellenliste\t " + string.Join("\t", raum.Schaltstellen));
-                    bool leer = true;
-                    foreach (Funktion funktion in raum.Funktionen)
-                    {
-                        if (funktion != null)
-                        {
-                            string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar + "\t" + funktion.Art.ToString() + "\t" + funktion.ComboNr.ToString();
-                            writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t" + fkt);
-                            leer = false;
-                        }
-                    }
-                    if (leer)
-                    {
-                        //writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t \t ");
-                    }
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.ShowDialog();
+                string path = ofd.FileName;
 
-                    i++;
+                StreamWriter writer = new StreamWriter(path);
+
+                int i = 0;
+                foreach (Raum raum in liste)
+                {
+                    if (raum != null && raum.Typ != "invalid")
+                    {
+                        writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\tSchaltstellenliste\t " + string.Join("\t", raum.Schaltstellen));
+                        bool leer = true;
+                        foreach (Funktion funktion in raum.Funktionen)
+                        {
+                            if (funktion != null)
+                            {
+                                string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar + "\t" + funktion.Art.ToString() + "\t" + funktion.ComboNr.ToString();
+                                writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t" + fkt);
+                                leer = false;
+                            }
+                        }
+                        if (leer)
+                        {
+                            //writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t \t ");
+                        }
+
+                        i++;
+                    }
                 }
+                writer.Close();
             }
-            writer.Close();
+            catch { }
         }
 
         //Textdatei einlesen
         private void button8_Click(object sender, EventArgs e)
         {
-            Array.Clear(liste, 0, 1000);
-            listView1.Items.Clear();
-
-            int j = 0;
-
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();
-            string path = ofd.FileName;
-
-            StreamReader reader = new StreamReader(path);
-            int indx = -1;
-
-            while (reader.Peek() != -1)
+            try
             {
-                string[] einlesen = reader.ReadLine().Split('\t');
-                indx = Convert.ToInt32(einlesen[0]);
+                int j = 0;
+                int indx = -1;
 
-                if (liste[indx] == null)
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.ShowDialog();
+                string path = ofd.FileName;
+
+                StreamReader reader = new StreamReader(path);                
+
+                Array.Clear(liste, 0, 1000);
+                listView1.Items.Clear();
+
+                while (reader.Peek() != -1)
                 {
-                    liste[indx] = new Raum();
-                    liste[indx].Typ = einlesen[1];
-                    liste[indx].Name = einlesen[2];
+                    string[] einlesen = reader.ReadLine().Split('\t');
+                    indx = Convert.ToInt32(einlesen[0]);
 
-                    ListViewItem listitem = new ListViewItem();
-                    listitem.SubItems.Add(einlesen[1]);
-                    listitem.SubItems.Add(einlesen[2]);
-                    listitem.SubItems.Add(indx.ToString());
-                    listView1.Items.Add(listitem);                   
-
-                    j = 0;
-                }
-
-                //Schaltstellenlsite einlesen
-                if (einlesen[3] == "Schaltstellenliste" && einlesen[4] != null)
-                {
-                    for (int i = 4; i < einlesen.Length; i++)
+                    if (liste[indx] == null)
                     {
-                        liste[indx].Schaltstellen.Add(einlesen[i]);
+                        liste[indx] = new Raum();
+                        liste[indx].Typ = einlesen[1];
+                        liste[indx].Name = einlesen[2];
+
+                        ListViewItem listitem = new ListViewItem();
+                        listitem.SubItems.Add(einlesen[1]);
+                        listitem.SubItems.Add(einlesen[2]);
+                        listitem.SubItems.Add(indx.ToString());
+                        listView1.Items.Add(listitem);
+
+                        j = 0;
+                    }
+
+                    //Schaltstellenlsite einlesen
+                    if (einlesen[3] == "Schaltstellenliste" && einlesen[4] != null)
+                    {
+                        for (int i = 4; i < einlesen.Length; i++)
+                        {
+                            liste[indx].Schaltstellen.Add(einlesen[i]);
+                        }
+                    }
+
+                    //if (einlesen[4] != "leer")
+                    if (einlesen[3] != "Schaltstellenliste")
+                    {
+                        Funktion fkt = new Funktion();
+                        fkt.Name = einlesen[3];
+                        fkt.Bedienelement = einlesen[4];
+                        fkt.Verbraucher = einlesen[5];
+                        fkt.Sollwert = einlesen[6];
+                        fkt.Schalten = Convert.ToBoolean(einlesen[7]);
+                        fkt.Dimmen = Convert.ToBoolean(einlesen[8]);
+                        fkt.Jalousie = Convert.ToBoolean(einlesen[9]);
+                        fkt.Kommentar = einlesen[10];
+                        fkt.Art = Convert.ToInt32(einlesen[11]);
+                        fkt.ComboNr = Convert.ToInt32(einlesen[12]);
+                        liste[indx].Funktionen[j] = fkt;
+                        j++;
                     }
                 }
 
-                //if (einlesen[4] != "leer")
-                if (einlesen[3] != "Schaltstellenliste")
-                {
-                    Funktion fkt = new Funktion();
-                    fkt.Name = einlesen[3];
-                    fkt.Bedienelement = einlesen[4];
-                    fkt.Verbraucher = einlesen[5];
-                    fkt.Sollwert = einlesen[6];
-                    fkt.Schalten = Convert.ToBoolean(einlesen[7]);
-                    fkt.Dimmen = Convert.ToBoolean(einlesen[8]);
-                    fkt.Jalousie = Convert.ToBoolean(einlesen[9]);
-                    fkt.Kommentar = einlesen[10];
-                    fkt.Art = Convert.ToInt32(einlesen[11]);
-                    fkt.ComboNr = Convert.ToInt32(einlesen[12]);
-                    liste[indx].Funktionen[j] = fkt;
-                    j++;
-                }
+                reader.Close();
+
+                index = indx + 1;
             }
-
-            reader.Close();
-
-            index = indx + 1;            
+            catch { }
         }
 
         //Excel-Tabelle erstellen
@@ -275,9 +283,9 @@ namespace KNX_V2
             //Add table headers going cell by cell.
             oSheet.Cells[1, 1] = "Raumtyp";
             oSheet.Cells[1, 2] = "Raumname";
-            oSheet.Cells[1, 3] = "Funktion";
-            oSheet.Cells[1, 4] = "Bedienelement";
-            oSheet.Cells[1, 5] = "Verbraucher";
+            oSheet.Cells[1, 3] = "Verbraucher";
+            oSheet.Cells[1, 4] = "Funktion";
+            oSheet.Cells[1, 5] = "Bedienelement";
             oSheet.Cells[1, 6] = "Sollwert";
             oSheet.Cells[1, 7] = "Schalten";
             oSheet.Cells[1, 8] = "Dimmen";
@@ -312,9 +320,9 @@ namespace KNX_V2
                         {
                             xclAusgabe[i, 0] = raum.Typ;
                             xclAusgabe[i, 1] = raum.Name;
-                            xclAusgabe[i, 2] = funktion.Name;
-                            xclAusgabe[i, 3] = funktion.Bedienelement;
-                            xclAusgabe[i, 4] = funktion.Verbraucher;
+                            xclAusgabe[i, 2] = funktion.Verbraucher;
+                            xclAusgabe[i, 3] = funktion.Name;
+                            xclAusgabe[i, 4] = funktion.Bedienelement;
                             xclAusgabe[i, 5] = funktion.Sollwert;
                             if (funktion.Schalten)
                             {
@@ -407,6 +415,111 @@ namespace KNX_V2
             }
 
             return l;
+        }
+
+        //Funktionen-Vorschau anzeigen, wenn eine Raum ausgewählt wird
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                return;
+            }
+           
+            ListViewItem lvi = listView1.SelectedItems[0];
+           
+            int j = Convert.ToInt32(lvi.SubItems[3].Text);
+            listView2.Items.Clear();
+            foreach(Funktion fkt in liste[j].Funktionen)
+            {
+                if (fkt != null)
+                {
+                    ListViewItem lvitem = new ListViewItem();
+                    lvitem.SubItems.Add(fkt.Verbraucher);
+                    lvitem.SubItems.Add(fkt.Name);
+                    lvitem.SubItems.Add(fkt.Bedienelement);
+                    lvitem.SubItems.Add(fkt.Sollwert);
+                    lvitem.SubItems.Add(fkt.Kommentar);
+                    listView2.Items.Add(lvitem);
+                }
+            }
+            
+        }
+
+        //Raumliste sortieren
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            int Spalte = e.Column;
+            switch (Spalte)
+            {
+                case 1:
+
+                    for (int j = 0; j < (liste.Length - 1); j++)
+                    {
+                        for (int i = 0; i < (liste.Length - 1); i++)
+                        {
+                            if (liste[i] != null && liste[i + 1] != null)
+                            {
+                                if (string.Compare(liste[i].Typ, liste[i + 1].Typ) > 0)
+                                {
+                                    Raum temp = liste[i];
+                                    liste[i] = liste[i + 1];
+                                    liste[i + 1] = temp;
+                                }
+                            }
+                        }
+                    }
+
+                    listView1.Items.Clear();
+                    
+                    for (int i = 0; i < liste.Length; i++)
+                    {
+                        if (liste[i] != null)
+                        {
+                            ListViewItem lvi = new ListViewItem();
+                            lvi.SubItems.Add(liste[i].Typ);
+                            lvi.SubItems.Add(liste[i].Name);
+                            lvi.SubItems.Add(i.ToString());
+                            listView1.Items.Add(lvi);
+                        }
+                    }
+
+                    break;
+
+                case 2:
+                    for (int j = 0; j < (liste.Length-1); j++)
+                    {
+                        for (int i = 0; i < (liste.Length-1); i++)
+                        {
+                            if (liste[i] != null && liste[i + 1] != null)
+                            {
+                                if (string.Compare(liste[i].Name, liste[i + 1].Name) > 0)
+                                {
+                                    Raum temp = liste[i];
+                                    liste[i] = liste[i + 1];
+                                    liste[i + 1] = temp;
+                                }
+                            }
+                        }
+                    }
+                   
+                    listView1.Items.Clear();
+
+                    for (int i = 0; i < liste.Length; i++)
+                    {
+                        if (liste[i] != null)
+                        {
+                            ListViewItem lvi = new ListViewItem();
+                            lvi.SubItems.Add(liste[i].Typ);
+                            lvi.SubItems.Add(liste[i].Name);
+                            lvi.SubItems.Add(i.ToString());
+                            listView1.Items.Add(lvi);
+                        }
+                    }
+
+                    break;
+              
+            }
+
         }
     }
 }
