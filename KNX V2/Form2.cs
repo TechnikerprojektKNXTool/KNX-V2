@@ -388,13 +388,7 @@ namespace KNX_V2
 
         }
 
-        //Lichtgruppe löschen
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+       
         //Verdunkelung
         private void button5_Click(object sender, EventArgs e)
         {

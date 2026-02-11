@@ -120,19 +120,6 @@ namespace KNX_V2
                     lvi.SubItems[2].Text = dlg.RaumName;
                 }
             }
-
-            //alt:
-            ////Array-Index des ausgewählten Raums auslesen
-            //ListViewItem lvi = listView1.SelectedItems[0];
-            //int i = Convert.ToInt32(lvi.SubItems[3].Text);
-
-            ////Namen im Array ändern
-            //liste[i].Typ = textBox1.Text;
-            //liste[i].Name = textBox2.Text;
-
-            ////Namen in ListView ändern
-            //lvi.SubItems[1].Text = textBox1.Text;
-            //lvi.SubItems[2].Text = textBox2.Text;
         }
 
         //Eintrag löschen
