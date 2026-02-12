@@ -360,6 +360,7 @@
             this.button21.TabIndex = 288;
             this.button21.Text = "Löschen";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button22
             // 
@@ -659,6 +660,7 @@
             this.button19.TabIndex = 288;
             this.button19.Text = "Löschen";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
@@ -963,6 +965,7 @@
             this.button17.TabIndex = 288;
             this.button17.Text = "Löschen";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -1289,6 +1292,7 @@
             this.button15.TabIndex = 288;
             this.button15.Text = "Löschen";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 
