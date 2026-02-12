@@ -22,8 +22,9 @@ namespace KNX_V2
         private Form2 form2;
         int index = 0;
         public static Raum[] liste;
+        string dateipfad = "";
 
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -52,6 +53,9 @@ namespace KNX_V2
 
 
                 index++;
+
+                textBox1.Text = "";
+                textBox2.Text = "";
             }
         }
          
@@ -62,24 +66,31 @@ namespace KNX_V2
             ListViewItem lvi = listView1.SelectedItems[0];
             int i = Convert.ToInt32(lvi.SubItems[3].Text);
 
-            // Raum kopieren und neuen Typ und Name aktualisieren
-            liste[index] = new Raum();
-            liste[index].Funktionen = liste[i].Funktionen;           
-            liste[index].Typ = textBox1.Text;
-            liste[index].Name = textBox2.Text;
-            foreach (string item in liste[i].Schaltstellen) 
+            using (var dlg = new RaumDialog(liste[i].Typ, liste[i].Name))
             {
-                liste[index].Schaltstellen.Add(item);
+                dlg.Text = "Raum kopieren";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    // Raum kopieren und neuen Typ und Name aktualisieren
+                    liste[index] = new Raum();
+                    liste[index].Funktionen = liste[i].Funktionen;
+                    liste[index].Typ = dlg.RaumTyp;
+                    liste[index].Name = dlg.RaumName;
+                    foreach (string item in liste[i].Schaltstellen)
+                    {
+                        liste[index].Schaltstellen.Add(item);
+                    }
+
+                    //anzeigen in ListView
+                    ListViewItem listItem = new ListViewItem();
+                    listItem.SubItems.Add(dlg.RaumTyp);
+                    listItem.SubItems.Add(dlg.RaumName);
+                    listItem.SubItems.Add(index.ToString());
+                    listView1.Items.Add(listItem);
+
+                    index++;
+                }
             }
-
-            //anzeigen in ListView
-            ListViewItem listItem = new ListViewItem();
-            listItem.SubItems.Add(textBox1.Text);
-            listItem.SubItems.Add(textBox2.Text);
-            listItem.SubItems.Add(index.ToString());
-            listView1.Items.Add(listItem);
-
-            index++;
 
         }
 
@@ -142,13 +153,58 @@ namespace KNX_V2
         //Textdatei speichern
         private void button6_Click(object sender, EventArgs e)
         {
+            if (dateipfad == "")
+            {
+                button9_Click(sender, e);
+            }
+            else
+            {
+
+                try
+                {
+                    StreamWriter writer = new StreamWriter(dateipfad);
+
+                    int i = 0;
+                    foreach (Raum raum in liste)
+                    {
+                        if (raum != null && raum.Typ != "invalid")
+                        {
+                            writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\tSchaltstellenliste\t " + string.Join("\t", raum.Schaltstellen));
+                            bool leer = true;
+                            foreach (Funktion funktion in raum.Funktionen)
+                            {
+                                if (funktion != null)
+                                {
+                                    string fkt = funktion.Name + "\t" + funktion.Bedienelement + "\t" + funktion.Verbraucher + "\t" + funktion.Sollwert + "\t" + funktion.Schalten.ToString() + "\t" + funktion.Dimmen.ToString() + "\t" + funktion.Jalousie.ToString() + "\t" + funktion.Kommentar + "\t" + funktion.Art.ToString() + "\t" + funktion.ComboNr.ToString();
+                                    writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t" + fkt);
+                                    leer = false;
+                                }
+                            }
+                            if (leer)
+                            {
+                                //writer.WriteLine(i.ToString() + "\t" + raum.Typ + "\t" + raum.Name + "\t \tleer\t \t \t \t \t \t \t \t ");
+                            }
+
+                            i++;
+                        }
+                    }
+                    writer.Close();
+                }
+                catch { }
+            }
+        }
+
+        //Speichern unter
+        private void button9_Click(object sender, EventArgs e)
+        {
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.ShowDialog();
-                string path = ofd.FileName;
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Textdatei (*.txt)|*.txt|All files (*.*)|*.*";
+                sfd.ShowDialog();
+                dateipfad = sfd.FileName;
 
-                StreamWriter writer = new StreamWriter(path);
+                StreamWriter writer = new StreamWriter(dateipfad);
 
                 int i = 0;
                 foreach (Raum raum in liste)
@@ -175,6 +231,7 @@ namespace KNX_V2
                     }
                 }
                 writer.Close();
+
             }
             catch { }
         }
@@ -182,6 +239,10 @@ namespace KNX_V2
         //Textdatei einlesen
         private void button8_Click(object sender, EventArgs e)
         {
+            if (dateipfad != "")
+            {
+                button6_Click(sender, e);
+            }
             try
             {
                 int j = 0;
@@ -247,6 +308,7 @@ namespace KNX_V2
                 reader.Close();
 
                 index = indx + 1;
+                dateipfad = path;
             }
             catch { }
         }
@@ -254,6 +316,38 @@ namespace KNX_V2
         //Excel-Tabelle erstellen
         private void button7_Click(object sender, EventArgs e)
         {
+            for (int j = 0; j < (liste.Length - 1); j++)
+            {
+                for (int k = 0; k < (liste.Length - 1); k++)
+                {
+                    if (liste[k] != null && liste[k + 1] != null)
+                    {
+                        if (string.Compare(liste[k].Name, liste[k + 1].Name) > 0)
+                        {
+                            Raum temp = liste[k];
+                            liste[k] = liste[k + 1];
+                            liste[k + 1] = temp;
+                        }
+                    }
+                }
+            }
+
+            for (int j = 0; j < (liste.Length - 1); j++)
+            {
+                for (int k = 0; k < (liste.Length - 1); k++)
+                {
+                    if (liste[k] != null && liste[k + 1] != null)
+                    {
+                        if (string.Compare(liste[k].Typ, liste[k + 1].Typ) > 0)
+                        {
+                            Raum temp = liste[k];
+                            liste[k] = liste[k + 1];
+                            liste[k + 1] = temp;
+                        }
+                    }
+                }
+            }
+
             Excel.Application oXL;
             Excel._Workbook oWB;
             Excel._Worksheet oSheet;
@@ -446,6 +540,22 @@ namespace KNX_V2
                         {
                             if (liste[i] != null && liste[i + 1] != null)
                             {
+                                if (string.Compare(liste[i].Name, liste[i + 1].Name) > 0)
+                                {
+                                    Raum temp = liste[i];
+                                    liste[i] = liste[i + 1];
+                                    liste[i + 1] = temp;
+                                }
+                            }
+                        }
+                    }
+
+                    for (int j = 0; j < (liste.Length - 1); j++)
+                    {
+                        for (int i = 0; i < (liste.Length - 1); i++)
+                        {
+                            if (liste[i] != null && liste[i + 1] != null)
+                            {
                                 if (string.Compare(liste[i].Typ, liste[i + 1].Typ) > 0)
                                 {
                                     Raum temp = liste[i];
@@ -460,7 +570,7 @@ namespace KNX_V2
                     
                     for (int i = 0; i < liste.Length; i++)
                     {
-                        if (liste[i] != null)
+                        if (liste[i] != null && liste[i].Typ != "invalid")
                         {
                             ListViewItem lvi = new ListViewItem();
                             lvi.SubItems.Add(liste[i].Typ);
@@ -493,7 +603,7 @@ namespace KNX_V2
 
                     for (int i = 0; i < liste.Length; i++)
                     {
-                        if (liste[i] != null)
+                        if (liste[i] != null && liste[i].Typ != "invalid")
                         {
                             ListViewItem lvi = new ListViewItem();
                             lvi.SubItems.Add(liste[i].Typ);
@@ -508,5 +618,6 @@ namespace KNX_V2
             }
 
         }
+
     }
 }
