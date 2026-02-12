@@ -53,6 +53,9 @@ namespace KNX_V2
 
 
                 index++;
+
+                textBox1.Text = "";
+                textBox2.Text = "";
             }
         }
          

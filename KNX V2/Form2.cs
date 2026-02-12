@@ -1033,5 +1033,105 @@ namespace KNX_V2
             
 
         }
+
+        //Verdunkelungsgruppe löschen
+        private void button15_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Verdunkelungsgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox21.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox21.Text);
+            }
+
+            comboBox21.Items.RemoveAt(comboBox21.SelectedIndex);
+
+            AllesLeeren();
+        }
+
+        //Oberlichtgruppe löschen
+        private void button17_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Oberlichtgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox28.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox28.Text);
+            }
+
+            comboBox28.Items.RemoveAt(comboBox28.SelectedIndex);
+
+            AllesLeeren();
+        }
+
+        //Heizgruppe löschen
+        private void button19_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Heizgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox33.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox33.Text);
+            }
+
+            comboBox33.Items.RemoveAt(comboBox33.SelectedIndex);
+
+            AllesLeeren();
+        }
+
+        //Steckdosengruppe löschen
+        private void button21_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Steckdosengruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox38.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox38.Text);
+            }
+
+            comboBox38.Items.RemoveAt(comboBox38.SelectedIndex);
+
+            AllesLeeren();
+        }
     }
 }
