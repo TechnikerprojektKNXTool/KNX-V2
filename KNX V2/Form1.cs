@@ -97,12 +97,16 @@ namespace KNX_V2
         //Raum konfigurieren -> Form2 öffnen
         private void button3_Click(object sender, EventArgs e)
         {
-            //Array-Index des ausgewählten Raums auslesen
-            ListViewItem lvi = listView1.SelectedItems[0];
-            int j = Convert.ToInt32(lvi.SubItems[3].Text);
+            try
+            {
+                //Array-Index des ausgewählten Raums auslesen
+                ListViewItem lvi = listView1.SelectedItems[0];
+                int j = Convert.ToInt32(lvi.SubItems[3].Text);
 
-            form2 = new Form2(j);
-            form2.Show();
+                form2 = new Form2(j);
+                form2.Show();
+            }
+            catch { }
         }
 
         //Eintrag bearbeiten
@@ -256,6 +260,7 @@ namespace KNX_V2
 
                 Array.Clear(liste, 0, 1000);
                 listView1.Items.Clear();
+                listView2.Items.Clear();
 
                 while (reader.Peek() != -1)
                 {

@@ -21,6 +21,19 @@ namespace KNX_V2
         private List<string> meineListe = new List<string>();
         private ListViewItem editingItem = null;
 
+        bool lichtUmbenannt = false;
+        bool verdunkelungUmbenannt = false;
+        bool oberlichtUmbenannt = false;
+        bool heizUmbenannt = false;
+        bool steckdosenUmbenannt = false;
+        bool extraUmbenannt = false;
+        string lichtAlt;
+        string verdunkelungAlt;
+        string oberlichtAlt;
+        string heizAlt;
+        string steckdosenAlt;
+        string extraAlt;
+
         public Form2()
         {
             InitializeComponent();
@@ -301,8 +314,17 @@ namespace KNX_V2
         //Lichtgruppe speichern
         private void button4_Click(object sender, EventArgs e)
         {
+            string gruppe;
+            if (lichtUmbenannt)
+            {
+                gruppe = lichtAlt;
+            }
+            else
+            {
+                gruppe = comboBox1.Text;
+            }
 
-            int stelle = StelleInFunktionen(comboBox1.Text);
+            int stelle = StelleInFunktionen(gruppe);
             bool neu = false;
             bool check = false;
 
@@ -316,7 +338,7 @@ namespace KNX_V2
                 while (stelle != 999)
                 {
                     Form1.liste[index].Funktionen[stelle] = null;
-                    stelle = StelleInFunktionen(comboBox1.Text);
+                    stelle = StelleInFunktionen(gruppe);
                 }
             }
 
@@ -371,6 +393,16 @@ namespace KNX_V2
                 comboBox1.Items.Add(comboBox1.Text);
             }
 
+            if (!neu && lichtUmbenannt)
+            {
+                if (check)
+                {
+                    int comboIndex = comboBox1.Items.IndexOf(lichtAlt);
+                    comboBox1.Items.Insert(comboIndex, comboBox1.Text);
+                }
+                comboBox1.Items.Remove(lichtAlt);
+            }
+            lichtUmbenannt = false;
 
             AllesLeeren();
 
@@ -382,17 +414,21 @@ namespace KNX_V2
 
         }
 
-        //Lichtgruppe bearbeiten
-        private void button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
        
-        //Verdunkelung
+        //Verdunkelung speichern
         private void button5_Click(object sender, EventArgs e)
         {
-            int stelle = StelleInFunktionen(comboBox21.Text);
+            string gruppe;
+            if (verdunkelungUmbenannt)
+            {
+                gruppe = verdunkelungAlt;
+            }
+            else
+            {
+                gruppe = comboBox21.Text;
+            }
+
+            int stelle = StelleInFunktionen(gruppe);
             bool neu = false;
             bool check = false;
 
@@ -406,7 +442,7 @@ namespace KNX_V2
                 while (stelle != 999)
                 {
                     Form1.liste[index].Funktionen[stelle] = null;
-                    stelle = StelleInFunktionen(comboBox21.Text);
+                    stelle = StelleInFunktionen(gruppe);
                 }
             }
 
@@ -441,15 +477,35 @@ namespace KNX_V2
                 comboBox21.Items.Add(comboBox21.Text);
             }
 
+            if(!neu && verdunkelungUmbenannt)
+            {
+                if (check)
+                {
+                    int comboIndex = comboBox21.Items.IndexOf(verdunkelungAlt);
+                    comboBox21.Items.Insert(comboIndex, comboBox21.Text);
+                }
+                comboBox21.Items.Remove(verdunkelungAlt);
+            }
 
+            verdunkelungUmbenannt = false;
             AllesLeeren();
         }
 
 
-        //Oberlichter
+        //Oberlichter speichern
         private void button6_Click(object sender, EventArgs e)
         {
-            int stelle = StelleInFunktionen(comboBox28.Text);
+            string gruppe;
+            if (oberlichtUmbenannt)
+            {
+                gruppe = oberlichtAlt;
+            }
+            else
+            {
+                gruppe = comboBox28.Text;
+            }
+
+            int stelle = StelleInFunktionen(gruppe);
             bool neu = false;
             bool check = false;
 
@@ -465,7 +521,7 @@ namespace KNX_V2
                 while (stelle != 999)
                 {
                     Form1.liste[index].Funktionen[stelle] = null;
-                    stelle = StelleInFunktionen(comboBox28.Text);
+                    stelle = StelleInFunktionen(gruppe);
                 }
             }
 
@@ -501,15 +557,35 @@ namespace KNX_V2
                 comboBox28.Items.Add(comboBox28.Text);
             }
 
+            if (!neu && oberlichtUmbenannt)
+            {
+                if (check)
+                {
+                    int comboIndex = comboBox28.Items.IndexOf(oberlichtAlt);
+                    comboBox28.Items.Insert(comboIndex, comboBox28.Text);
+                }
+                comboBox28.Items.Remove(oberlichtAlt);
+            }
+            oberlichtUmbenannt = false;
+
             AllesLeeren();
 
         }
 
 
-        //Heizgruppen
+        //Heizgruppen speichern
         private void button7_Click(object sender, EventArgs e)
         {
-            int stelle = StelleInFunktionen(comboBox33.Text);
+            string gruppe;
+            if (heizUmbenannt)
+            {
+                gruppe = heizAlt;
+            }
+            else
+            {
+                gruppe = comboBox33.Text;
+            }
+            int stelle = StelleInFunktionen(gruppe);
             bool neu = false;
             bool check = false;
 
@@ -523,7 +599,7 @@ namespace KNX_V2
                 while (stelle != 999)
                 {
                     Form1.liste[index].Funktionen[stelle] = null;
-                    stelle = StelleInFunktionen(comboBox33.Text);
+                    stelle = StelleInFunktionen(gruppe);
                 }
             }
 
@@ -557,14 +633,35 @@ namespace KNX_V2
                 comboBox33.Items.Add(comboBox33.Text);
             }
 
+            if (!neu && heizUmbenannt)
+            {
+                if (check)
+                {
+                    int comboIndex = comboBox33.Items.IndexOf(heizAlt);
+                    comboBox33.Items.Insert(comboIndex, comboBox33.Text);
+                }
+                comboBox33.Items.Remove(heizAlt);
+            }
+            heizUmbenannt = false;
+
             AllesLeeren();
         }
 
 
-        //Steckdosen 
+        //Steckdosen speichern
         private void button8_Click(object sender, EventArgs e)
         {
-            int stelle = StelleInFunktionen(comboBox38.Text);
+            string gruppe;
+            if (steckdosenUmbenannt)
+            {
+                gruppe = steckdosenAlt;
+            }
+            else
+            {
+                gruppe = comboBox38.Text;
+            }
+
+            int stelle = StelleInFunktionen(gruppe);
             bool neu = false;
             bool check = false;
 
@@ -578,7 +675,7 @@ namespace KNX_V2
                 while (stelle != 999)
                 {
                     Form1.liste[index].Funktionen[stelle] = null;
-                    stelle = StelleInFunktionen(comboBox38.Text);
+                    stelle = StelleInFunktionen(gruppe);
                 }
             }
 
@@ -612,155 +709,23 @@ namespace KNX_V2
                 comboBox38.Items.Add(comboBox38.Text);
             }
 
-
+            if (!neu && steckdosenUmbenannt)
+            {
+                if (check)
+                {
+                    int comboIndex = comboBox38.Items.IndexOf(steckdosenAlt);
+                    comboBox38.Items.Insert(comboIndex, comboBox38.Text);
+                }
+                comboBox38.Items.Remove(steckdosenAlt);
+            }
+            steckdosenUmbenannt = false;
 
             AllesLeeren();
         }
         
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            bool aktiv = checkBox1.Checked;
-            label2.Enabled = aktiv;
-            label3.Enabled = aktiv;
-            label4.Enabled = aktiv;
-            comboBox2.Enabled = aktiv;
-            textBox1.Enabled = aktiv;
-            textBox2.Enabled = aktiv;
-
-            label5.Enabled = aktiv;
-            label6.Enabled = aktiv;
-            comboBox3.Enabled = aktiv;
-            textBox3.Enabled = aktiv;
-            textBox4.Enabled = aktiv;
-
-            label7.Enabled = aktiv;
-            label8.Enabled = aktiv;
-            comboBox4.Enabled = aktiv;
-            textBox5.Enabled = aktiv;
-            textBox6.Enabled = aktiv;
-
-            label9.Enabled = aktiv;
-            label10.Enabled = aktiv;
-            comboBox5.Enabled = aktiv;
-            textBox7.Enabled = aktiv;
-            textBox8.Enabled = aktiv;
-
-            label11.Enabled = aktiv;
-            label12.Enabled = aktiv;
-            comboBox6.Enabled = aktiv;
-            textBox9.Enabled = aktiv;
-            textBox10.Enabled = aktiv;
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            bool aktiv = checkBox2.Checked;
-            label13.Enabled = aktiv;
-            label14.Enabled = aktiv;
-            label15.Enabled = aktiv;
-            comboBox7.Enabled = aktiv;
-            textBox11.Enabled = aktiv;
-            textBox12.Enabled = aktiv;
-
-            label16.Enabled = aktiv;
-            label17.Enabled = aktiv;
-            comboBox8.Enabled = aktiv;
-            textBox13.Enabled = aktiv;
-            textBox14.Enabled = aktiv;
-
-            label18.Enabled = aktiv;
-            label19.Enabled = aktiv;
-            comboBox9.Enabled = aktiv;
-            textBox15.Enabled = aktiv;
-            textBox16.Enabled = aktiv;
-
-            label20.Enabled = aktiv;
-            label21.Enabled = aktiv;
-            comboBox10.Enabled = aktiv;
-            textBox17.Enabled = aktiv;
-            textBox18.Enabled = aktiv;
-
-            label22.Enabled = aktiv;
-            label23.Enabled = aktiv;
-            comboBox11.Enabled = aktiv;
-            textBox19.Enabled = aktiv;
-            textBox20.Enabled = aktiv;
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            bool aktiv = checkBox3.Checked;
-            label24.Enabled = aktiv;
-            label25.Enabled = aktiv;
-            label26.Enabled = aktiv;
-            comboBox12.Enabled = aktiv;
-            textBox21.Enabled = aktiv;
-            textBox22.Enabled = aktiv;
-
-            label27.Enabled = aktiv;
-            label28.Enabled = aktiv;
-            comboBox13.Enabled = aktiv;
-            textBox23.Enabled = aktiv;
-            textBox24.Enabled = aktiv;
-
-            label29.Enabled = aktiv;
-            label30.Enabled = aktiv;
-            comboBox14.Enabled = aktiv;
-            textBox25.Enabled = aktiv;
-            textBox26.Enabled = aktiv;
-        }
-
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            bool aktiv = checkBox4.Checked;
-            label31.Enabled = aktiv;
-            label32.Enabled = aktiv;
-            label33.Enabled = aktiv;
-            comboBox15.Enabled = aktiv;
-            textBox27.Enabled = aktiv;
-            textBox28.Enabled = aktiv;
-
-            label34.Enabled = aktiv;
-            label35.Enabled = aktiv;
-            comboBox16.Enabled = aktiv;
-            textBox29.Enabled = aktiv;
-            textBox30.Enabled = aktiv;
-
-            label36.Enabled = aktiv;
-            label37.Enabled = aktiv;
-            comboBox17.Enabled = aktiv;
-            textBox31.Enabled = aktiv;
-            textBox32.Enabled = aktiv;
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            bool aktiv = checkBox5.Checked;
-            label38.Enabled = aktiv;
-            label39.Enabled = aktiv;
-            label40.Enabled = aktiv;
-            comboBox18.Enabled = aktiv;
-            textBox33.Enabled = aktiv;
-            textBox34.Enabled = aktiv;
-
-            label41.Enabled = aktiv;
-            label42.Enabled = aktiv;
-            comboBox19.Enabled = aktiv;
-            textBox35.Enabled = aktiv;
-            textBox36.Enabled = aktiv;
-
-            label43.Enabled = aktiv;
-            label44.Enabled = aktiv;
-            comboBox20.Enabled = aktiv;
-            textBox37.Enabled = aktiv;
-            textBox38.Enabled = aktiv;
-        }
-
+        //Schaltstelle hinzufügen
         private void button9_Click(object sender, EventArgs e)
         {
-            // Schaltstelle hinzufügen 
-
-          
             string text = textBox76.Text.Trim();
 
             if (text == "")
@@ -769,41 +734,41 @@ namespace KNX_V2
             meineListe.Add(text);   // Text in die Liste schreiben
             listView1.Items.Add(text);
             UpdateComboBoxenDynamisch(); // neu
-            textBox76.Clear();    // Textbox leeren
-                      
+            textBox76.Clear();    // Textbox leeren                   
         }
 
-
+        //Schaltstelle umbenennen
         private void button10_Click_1(object sender, EventArgs e)
         {
-            // Wenn noch kein Edit-Modus → Text laden
-            if (editingItem == null)
-            {
-                if (listView1.SelectedItems.Count == 0)
-                {
-                    MessageBox.Show("Bitte einen Eintrag auswählen.");
-                    return;
-                }
 
-                editingItem = listView1.SelectedItems[0];
-                textBox76.Text = editingItem.Text;
-                textBox76.Focus();
-            }
-            // Wenn Edit-Modus aktiv → Text speichern
-            else
+            if (listView1.SelectedItems.Count == 0)
             {
-                if (string.IsNullOrWhiteSpace(textBox76.Text))
-                {
-                    MessageBox.Show("Text darf nicht leer sein.");
-                    return;
-                }
-
-                editingItem.Text = textBox76.Text;
-                editingItem = null;
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
             }
+
+            ListViewItem lvi = listView1.SelectedItems[0];
+            string auswahl = lvi.Text;
+
+            using (var dlg = new Umbenennen(auswahl))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    lvi.Text = dlg.TxtName;
+                    for (int i = 0; i < meineListe.Count; i++)
+                    {
+                        if (meineListe[i] == auswahl)
+                        {
+                            meineListe[i] = dlg.TxtName;
+                        }
+                    }
+                    UpdateComboBoxenDynamisch();
+                }
+            }
+
         }
 
-
+        //Schaltstelle löschen
         private void button11_Click(object sender, EventArgs e)
         {
             // Ausgwählten Listview Eintrag löschen
@@ -839,7 +804,7 @@ namespace KNX_V2
 
         }
 
-        //Lichtgruppen, comboBox Auswahl oben
+        //Lichtgruppen: Schaltgruppe in oberer comboBox auswählen
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboLeerenVonBis(2, 20);
@@ -1000,7 +965,7 @@ namespace KNX_V2
             }
         }
 
-        //Schaltgruppe löschen
+        //Lichtgruppe löschen
         private void button13_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -1133,5 +1098,290 @@ namespace KNX_V2
 
             AllesLeeren();
         }
+
+        //Lichtgruppe umbenennen
+        private void button14_Click_1(object sender, EventArgs e)
+        {
+            if(comboBox1.Text == "" || comboBox1.Text == null)
+            {
+                MessageBox.Show("Bitte eine Lichtgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox1.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if(StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Lichtgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if(!lichtUmbenannt)
+                    {
+                        lichtAlt = comboBox1.Text;
+                    }
+                    comboBox1.Text = dlg.TxtName;    
+                    lichtUmbenannt = true;
+                }
+            }
+        }
+
+        //Verdunkelungsgruppe umbenennen
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (comboBox21.Text == "" || comboBox21.Text == null)
+            {
+                MessageBox.Show("Bitte eine Verdunkelungsgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox21.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Verdunkelungsgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!verdunkelungUmbenannt)
+                    {
+                        verdunkelungAlt = comboBox21.Text;
+                    }
+                    comboBox21.Text = dlg.TxtName;
+                    verdunkelungUmbenannt = true;                 
+                }
+            }
+        }
+
+        //Oberlichtgruppe umbenennen
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (comboBox28.Text == "" || comboBox28.Text == null)
+            {
+                MessageBox.Show("Bitte eine Oberlichtgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox28.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Oberlichtgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!oberlichtUmbenannt)
+                    {
+                        oberlichtAlt = comboBox28.Text;
+                    }
+                    comboBox28.Text = dlg.TxtName;
+                    oberlichtUmbenannt = true;
+                }
+            }
+        }
+
+        //Heizgruppe umbenennen
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (comboBox33.Text == "" || comboBox33.Text == null)
+            {
+                MessageBox.Show("Bitte eine Heizgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox33.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Heizgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!heizUmbenannt)
+                    {
+                        heizAlt = comboBox33.Text;
+                    }
+                    comboBox33.Text = dlg.TxtName;
+                    heizUmbenannt = true;
+                }
+            }
+        }
+
+        //Steckdosengruppe umbenennen
+        private void button22_Click(object sender, EventArgs e)
+        {
+            if (comboBox38.Text == "" || comboBox38.Text == null)
+            {
+                MessageBox.Show("Bitte eine Steckdosengruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox38.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Steckdosengruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!steckdosenUmbenannt)
+                    {
+                        steckdosenAlt = comboBox38.Text;
+                    }
+                    comboBox38.Text = dlg.TxtName;
+                    steckdosenUmbenannt = true;
+                }
+            }
+        }
+ 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox1.Checked;
+            label2.Enabled = aktiv;
+            label3.Enabled = aktiv;
+            label4.Enabled = aktiv;
+            comboBox2.Enabled = aktiv;
+            textBox1.Enabled = aktiv;
+            textBox2.Enabled = aktiv;
+
+            label5.Enabled = aktiv;
+            label6.Enabled = aktiv;
+            comboBox3.Enabled = aktiv;
+            textBox3.Enabled = aktiv;
+            textBox4.Enabled = aktiv;
+
+            label7.Enabled = aktiv;
+            label8.Enabled = aktiv;
+            comboBox4.Enabled = aktiv;
+            textBox5.Enabled = aktiv;
+            textBox6.Enabled = aktiv;
+
+            label9.Enabled = aktiv;
+            label10.Enabled = aktiv;
+            comboBox5.Enabled = aktiv;
+            textBox7.Enabled = aktiv;
+            textBox8.Enabled = aktiv;
+
+            label11.Enabled = aktiv;
+            label12.Enabled = aktiv;
+            comboBox6.Enabled = aktiv;
+            textBox9.Enabled = aktiv;
+            textBox10.Enabled = aktiv;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox2.Checked;
+            label13.Enabled = aktiv;
+            label14.Enabled = aktiv;
+            label15.Enabled = aktiv;
+            comboBox7.Enabled = aktiv;
+            textBox11.Enabled = aktiv;
+            textBox12.Enabled = aktiv;
+
+            label16.Enabled = aktiv;
+            label17.Enabled = aktiv;
+            comboBox8.Enabled = aktiv;
+            textBox13.Enabled = aktiv;
+            textBox14.Enabled = aktiv;
+
+            label18.Enabled = aktiv;
+            label19.Enabled = aktiv;
+            comboBox9.Enabled = aktiv;
+            textBox15.Enabled = aktiv;
+            textBox16.Enabled = aktiv;
+
+            label20.Enabled = aktiv;
+            label21.Enabled = aktiv;
+            comboBox10.Enabled = aktiv;
+            textBox17.Enabled = aktiv;
+            textBox18.Enabled = aktiv;
+
+            label22.Enabled = aktiv;
+            label23.Enabled = aktiv;
+            comboBox11.Enabled = aktiv;
+            textBox19.Enabled = aktiv;
+            textBox20.Enabled = aktiv;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox3.Checked;
+            label24.Enabled = aktiv;
+            label25.Enabled = aktiv;
+            label26.Enabled = aktiv;
+            comboBox12.Enabled = aktiv;
+            textBox21.Enabled = aktiv;
+            textBox22.Enabled = aktiv;
+
+            label27.Enabled = aktiv;
+            label28.Enabled = aktiv;
+            comboBox13.Enabled = aktiv;
+            textBox23.Enabled = aktiv;
+            textBox24.Enabled = aktiv;
+
+            label29.Enabled = aktiv;
+            label30.Enabled = aktiv;
+            comboBox14.Enabled = aktiv;
+            textBox25.Enabled = aktiv;
+            textBox26.Enabled = aktiv;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox4.Checked;
+            label31.Enabled = aktiv;
+            label32.Enabled = aktiv;
+            label33.Enabled = aktiv;
+            comboBox15.Enabled = aktiv;
+            textBox27.Enabled = aktiv;
+            textBox28.Enabled = aktiv;
+
+            label34.Enabled = aktiv;
+            label35.Enabled = aktiv;
+            comboBox16.Enabled = aktiv;
+            textBox29.Enabled = aktiv;
+            textBox30.Enabled = aktiv;
+
+            label36.Enabled = aktiv;
+            label37.Enabled = aktiv;
+            comboBox17.Enabled = aktiv;
+            textBox31.Enabled = aktiv;
+            textBox32.Enabled = aktiv;
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            bool aktiv = checkBox5.Checked;
+            label38.Enabled = aktiv;
+            label39.Enabled = aktiv;
+            label40.Enabled = aktiv;
+            comboBox18.Enabled = aktiv;
+            textBox33.Enabled = aktiv;
+            textBox34.Enabled = aktiv;
+
+            label41.Enabled = aktiv;
+            label42.Enabled = aktiv;
+            comboBox19.Enabled = aktiv;
+            textBox35.Enabled = aktiv;
+            textBox36.Enabled = aktiv;
+
+            label43.Enabled = aktiv;
+            label44.Enabled = aktiv;
+            comboBox20.Enabled = aktiv;
+            textBox37.Enabled = aktiv;
+            textBox38.Enabled = aktiv;
+        }
+
     }
 }

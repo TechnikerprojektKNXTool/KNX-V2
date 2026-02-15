@@ -12,9 +12,17 @@ namespace KNX_V2
 {
     public partial class Umbenennen : Form
     {
+        public string TxtName => txtName.Text;
         public Umbenennen()
         {
             InitializeComponent();
+        }
+
+        public Umbenennen(string alt)
+        {
+            InitializeComponent();
+            txtName.Text = alt;
+            txtName.Focus();
         }
     }
 }

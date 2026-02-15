@@ -59,7 +59,7 @@
             // txtTyp
             // 
             this.txtTyp.Location = new System.Drawing.Point(24, 56);
-            this.txtTyp.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtTyp.Margin = new System.Windows.Forms.Padding(6);
             this.txtTyp.Name = "txtTyp";
             this.txtTyp.Size = new System.Drawing.Size(358, 31);
             this.txtTyp.TabIndex = 42;
@@ -67,7 +67,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(398, 56);
-            this.txtName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtName.Margin = new System.Windows.Forms.Padding(6);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(362, 31);
             this.txtName.TabIndex = 41;
@@ -76,7 +76,7 @@
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Location = new System.Drawing.Point(398, 106);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 44);
             this.button1.TabIndex = 45;
@@ -88,7 +88,7 @@
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.Location = new System.Drawing.Point(614, 106);
-            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 44);
             this.button2.TabIndex = 46;
@@ -106,7 +106,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTyp);
             this.Controls.Add(this.txtName);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "RaumDialog";
             this.Text = "RaumDialog";
             this.ResumeLayout(false);
