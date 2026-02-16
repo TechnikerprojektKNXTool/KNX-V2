@@ -99,6 +99,11 @@ namespace KNX_V2
             comboBox40,
             comboBox41,
             comboBox42,
+
+            comboBox44,
+            comboBox45,
+            comboBox46,
+            comboBox47,
         };
             // Fixe Einträge der Comboboxen zählen und speichern
 
@@ -159,6 +164,12 @@ namespace KNX_V2
                             if (!comboBox38.Items.Contains(fkt.Verbraucher))
                             {
                                 comboBox38.Items.Add(fkt.Verbraucher);
+                            }
+                            break;
+                        case 6:
+                            if (!comboBox43.Items.Contains(fkt.Verbraucher))
+                            {
+                                comboBox43.Items.Add(fkt.Verbraucher);
                             }
                             break;
                         default:
@@ -222,58 +233,13 @@ namespace KNX_V2
                     }
                 }
             }
-        }        
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {   //zurück Button
-            if (tabControl1.SelectedIndex > 0) 
-            {
-                tabControl1.SelectedIndex--;
-            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {   //vor Button
-            if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
-            {
-                tabControl1.SelectedIndex++;
-            }
-        }
-
-        //gibt Index der ersten leeren Stelle im Funktionen-Array zurück
-        public int Index()
-        {
-            int i = 0;
-            while (Form1.liste[index].Funktionen[i] != null)
-            {
-                i++;
-            }
-            return i;
-        }
-
-        // gibt die Stelle der Schaltungsgruppe im Funktionen-Array zurück, wenn es die Schaltungsgruppe noch nicht gibt, gibt die Funktion 999 zurück
-        private int StelleInFunktionen(string Schaltungsgruppe)
-        {
-            int j = 999;
-            bool check = false;
-            int i = 0;
-            while (check == false && i < Form1.liste[index].Funktionen.Length)
-            {
-                if (Form1.liste[index].Funktionen[i] != null && Form1.liste[index].Funktionen[i].Verbraucher == Schaltungsgruppe)
-                {
-                    j = i;
-                    check = true;
-                }
-                i++;
-            }
-            return j;
-        }
 
         // leert alle Text- und Comboboxen
         private void AllesLeeren()
         {
-            for (int i = 1; i < 44; i++)
+            for (int i = 1; i < 48; i++)
             {
                 var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
                 if (combo != null)
@@ -281,7 +247,7 @@ namespace KNX_V2
                     combo.Text = "";
                 }
             }
-            for (int i = 1; i < 75; i++)
+            for (int i = 1; i < 85; i++)
             {
                 var textbox = Controls.Find("textBox" + i, true).FirstOrDefault();
                 if (textbox != null)
@@ -308,6 +274,134 @@ namespace KNX_V2
                 var textbox = Controls.Find("textBox" + i, true).FirstOrDefault();
                 if (textbox != null) { textbox.Text = ""; }
             }
+        }
+
+
+        //gibt Index der ersten leeren Stelle im Funktionen-Array zurück
+        public int Index()
+        {
+            int i = 0;
+            while (Form1.liste[index].Funktionen[i] != null)
+            {
+                i++;
+            }
+            return i;
+        }
+
+
+        // gibt die Stelle der Schaltungsgruppe im Funktionen-Array zurück, wenn es die Schaltungsgruppe noch nicht gibt, gibt die Funktion 999 zurück
+        private int StelleInFunktionen(string Schaltungsgruppe)
+        {
+            int j = 999;
+            bool check = false;
+            int i = 0;
+            while (check == false && i < Form1.liste[index].Funktionen.Length)
+            {
+                if (Form1.liste[index].Funktionen[i] != null && Form1.liste[index].Funktionen[i].Verbraucher == Schaltungsgruppe)
+                {
+                    j = i;
+                    check = true;
+                }
+                i++;
+            }
+            return j;
+        }
+
+
+
+        //zurück Button
+        private void button1_Click(object sender, EventArgs e)
+        {   
+            if (tabControl1.SelectedIndex > 0) 
+            {
+                tabControl1.SelectedIndex--;
+            }
+        }
+
+        //vor Button
+        private void button3_Click(object sender, EventArgs e)
+        {   
+            if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
+            {
+                tabControl1.SelectedIndex++;
+            }
+        }
+
+
+        //Schaltstelle hinzufügen
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string text = textBox76.Text.Trim();
+
+            if (text == "")
+                return; // nichts einfügen, wenn Text leer ist
+           
+            meineListe.Add(text);   // Text in die Liste schreiben
+            listView1.Items.Add(text);
+            UpdateComboBoxenDynamisch(); // neu
+            textBox76.Clear();    // Textbox leeren                   
+        }
+
+        //Schaltstelle umbenennen
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+
+            ListViewItem lvi = listView1.SelectedItems[0];
+            string auswahl = lvi.Text;
+
+            using (var dlg = new Umbenennen(auswahl))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    lvi.Text = dlg.TxtName;
+                    for (int i = 0; i < meineListe.Count; i++)
+                    {
+                        if (meineListe[i] == auswahl)
+                        {
+                            meineListe[i] = dlg.TxtName;
+                        }
+                    }
+                    UpdateComboBoxenDynamisch();
+                }
+            }
+
+        }
+
+        //Schaltstelle löschen
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Ausgwählten Listview Eintrag löschen
+
+            // Prüfen ob ein Eintrag ausgewählt ist
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                return;
+            }
+            //test für merge test2
+            // Sicherheitsabfrage
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+                       
+            int index = listView1.SelectedItems[0].Index;
+
+            meineListe.RemoveAt(index);
+            listView1.Items.RemoveAt(index);
+
+            UpdateComboBoxenDynamisch(index);
+            textBox76.Clear();
         }
 
 
@@ -413,7 +507,6 @@ namespace KNX_V2
             checkBox5.Checked = false;
 
         }
-
        
         //Verdunkelung speichern
         private void button5_Click(object sender, EventArgs e)
@@ -490,7 +583,6 @@ namespace KNX_V2
             verdunkelungUmbenannt = false;
             AllesLeeren();
         }
-
 
         //Oberlichter speichern
         private void button6_Click(object sender, EventArgs e)
@@ -572,7 +664,6 @@ namespace KNX_V2
 
         }
 
-
         //Heizgruppen speichern
         private void button7_Click(object sender, EventArgs e)
         {
@@ -646,7 +737,6 @@ namespace KNX_V2
 
             AllesLeeren();
         }
-
 
         //Steckdosen speichern
         private void button8_Click(object sender, EventArgs e)
@@ -722,89 +812,421 @@ namespace KNX_V2
 
             AllesLeeren();
         }
-        
-        //Schaltstelle hinzufügen
-        private void button9_Click(object sender, EventArgs e)
+
+        //Extraschaltgruppe speichern
+        private void button23_Click(object sender, EventArgs e)
         {
-            string text = textBox76.Text.Trim();
-
-            if (text == "")
-                return; // nichts einfügen, wenn Text leer ist
-           
-            meineListe.Add(text);   // Text in die Liste schreiben
-            listView1.Items.Add(text);
-            UpdateComboBoxenDynamisch(); // neu
-            textBox76.Clear();    // Textbox leeren                   
-        }
-
-        //Schaltstelle umbenennen
-        private void button10_Click_1(object sender, EventArgs e)
-        {
-
-            if (listView1.SelectedItems.Count == 0)
+            string gruppe;
+            if (extraUmbenannt)
             {
-                MessageBox.Show("Bitte einen Eintrag auswählen.");
-                return;
+                gruppe = extraAlt;
+            }
+            else
+            {
+                gruppe = comboBox43.Text;
             }
 
-            ListViewItem lvi = listView1.SelectedItems[0];
-            string auswahl = lvi.Text;
+            int stelle = StelleInFunktionen(gruppe);
+            bool neu = false;
+            bool check = false;
 
-            using (var dlg = new Umbenennen(auswahl))
+            if (stelle == 999)
             {
-                if (dlg.ShowDialog() == DialogResult.OK)
+                neu = true;
+            }
+            else
+            {
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
                 {
-                    lvi.Text = dlg.TxtName;
-                    for (int i = 0; i < meineListe.Count; i++)
-                    {
-                        if (meineListe[i] == auswahl)
-                        {
-                            meineListe[i] = dlg.TxtName;
-                        }
-                    }
-                    UpdateComboBoxenDynamisch();
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(gruppe);
                 }
             }
 
+            for (int i = 44; i < 48; i++)
+            {
+                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
+
+                if (combo.Text != "")
+                {
+                    int a = 2 * i - 11;
+                    int b = a + 1;
+                    var textbox1 = Controls.Find("textBox" + a, true).FirstOrDefault();
+                    var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                    int x = Index();
+                    Funktion fkt = new Funktion();
+                    fkt.Verbraucher = comboBox43.Text;
+                    fkt.Bedienelement = combo.Text;
+                    fkt.Sollwert = textbox1.Text;
+                    fkt.Kommentar = textbox2.Text;
+                    fkt.Name = comboBox43.Text;
+                    fkt.Art = 6;
+                    fkt.ComboNr = i;
+
+                    Form1.liste[index].Funktionen[x] = fkt;
+                    check = true;
+                }
+            }
+
+            if (neu && check)
+            {
+                comboBox43.Items.Add(comboBox43.Text);
+            }
+
+            if (!neu && extraUmbenannt)
+            {
+                if (check)
+                {
+                    int comboIndex = comboBox43.Items.IndexOf(extraAlt);
+                    comboBox43.Items.Insert(comboIndex, comboBox43.Text);
+                }
+                comboBox43.Items.Remove(extraAlt);
+            }
+            extraUmbenannt = false;
+
+            ComboLeerenVonBis(43, 47);
+            TextLeerenVonBis(77, 84);
         }
 
-        //Schaltstelle löschen
-        private void button11_Click(object sender, EventArgs e)
-        {
-            // Ausgwählten Listview Eintrag löschen
 
-            // Prüfen ob ein Eintrag ausgewählt ist
-            if (listView1.SelectedItems.Count == 0)
+        //Lichtgruppe umbenennen
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if(comboBox1.Text == "" || comboBox1.Text == null)
             {
-                MessageBox.Show("Bitte einen Eintrag auswählen.");
+                MessageBox.Show("Bitte eine Lichtgruppe auswählen.");
                 return;
             }
-            //test für merge test2
-            // Sicherheitsabfrage
+
+            using (var dlg = new Umbenennen(comboBox1.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if(StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Lichtgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if(!lichtUmbenannt)
+                    {
+                        lichtAlt = comboBox1.Text;
+                    }
+                    comboBox1.Text = dlg.TxtName;    
+                    lichtUmbenannt = true;
+                }
+            }
+        }
+
+        //Verdunkelungsgruppe umbenennen
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (comboBox21.Text == "" || comboBox21.Text == null)
+            {
+                MessageBox.Show("Bitte eine Verdunkelungsgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox21.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Verdunkelungsgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!verdunkelungUmbenannt)
+                    {
+                        verdunkelungAlt = comboBox21.Text;
+                    }
+                    comboBox21.Text = dlg.TxtName;
+                    verdunkelungUmbenannt = true;                 
+                }
+            }
+        }
+
+        //Oberlichtgruppe umbenennen
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (comboBox28.Text == "" || comboBox28.Text == null)
+            {
+                MessageBox.Show("Bitte eine Oberlichtgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox28.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Oberlichtgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!oberlichtUmbenannt)
+                    {
+                        oberlichtAlt = comboBox28.Text;
+                    }
+                    comboBox28.Text = dlg.TxtName;
+                    oberlichtUmbenannt = true;
+                }
+            }
+        }
+
+        //Heizgruppe umbenennen
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (comboBox33.Text == "" || comboBox33.Text == null)
+            {
+                MessageBox.Show("Bitte eine Heizgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox33.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Heizgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!heizUmbenannt)
+                    {
+                        heizAlt = comboBox33.Text;
+                    }
+                    comboBox33.Text = dlg.TxtName;
+                    heizUmbenannt = true;
+                }
+            }
+        }
+
+        //Steckdosengruppe umbenennen
+        private void button22_Click(object sender, EventArgs e)
+        {
+            if (comboBox38.Text == "" || comboBox38.Text == null)
+            {
+                MessageBox.Show("Bitte eine Steckdosengruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox38.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Steckdosengruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!steckdosenUmbenannt)
+                    {
+                        steckdosenAlt = comboBox38.Text;
+                    }
+                    comboBox38.Text = dlg.TxtName;
+                    steckdosenUmbenannt = true;
+                }
+            }
+        }
+
+        //Extra umbenennen
+        private void button24_Click(object sender, EventArgs e)
+        {
+            if (comboBox43.Text == "" || comboBox43.Text == null)
+            {
+                MessageBox.Show("Bitte eine Schaltgruppe auswählen.");
+                return;
+            }
+
+            using (var dlg = new Umbenennen(comboBox43.Text))
+            {
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (StelleInFunktionen(dlg.TxtName) != 999)
+                    {
+                        MessageBox.Show("Es existiert bereits eine Schaltgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
+                        return;
+                    }
+                    if (!extraUmbenannt)
+                    {
+                        extraAlt = comboBox43.Text;
+                    }
+                    comboBox43.Text = dlg.TxtName;
+                    extraUmbenannt = true;
+                }
+            }
+        }
+
+
+        //Lichtgruppe löschen
+        private void button13_Click(object sender, EventArgs e)
+        {
             DialogResult result = MessageBox.Show(
-                "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
+                "Möchten Sie die ausgewählte Beleuchtungsgruppe wirklich löschen?",
                 "Eintrag löschen",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
             if (result != DialogResult.Yes)
                 return;
-                       
-            int index = listView1.SelectedItems[0].Index;
 
-            meineListe.RemoveAt(index);
-            listView1.Items.RemoveAt(index);
+            int stelle = StelleInFunktionen(comboBox1.Text);
+                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+                while (stelle != 999)
+                {
+                    Form1.liste[index].Funktionen[stelle] = null;
+                    stelle = StelleInFunktionen(comboBox1.Text);
+                }
+            
+            comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
 
-            UpdateComboBoxenDynamisch(index);
-            textBox76.Clear();
+            AllesLeeren();
+
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+
+            
+
         }
-      
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+
+        //Verdunkelungsgruppe löschen
+        private void button15_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Verdunkelungsgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox21.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox21.Text);
+            }
+
+            comboBox21.Items.RemoveAt(comboBox21.SelectedIndex);
+
+            AllesLeeren();
         }
 
-        //Lichtgruppen: Schaltgruppe in oberer comboBox auswählen
+        //Oberlichtgruppe löschen
+        private void button17_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Oberlichtgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox28.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox28.Text);
+            }
+
+            comboBox28.Items.RemoveAt(comboBox28.SelectedIndex);
+
+            AllesLeeren();
+        }
+
+        //Heizgruppe löschen
+        private void button19_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Heizgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox33.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox33.Text);
+            }
+
+            comboBox33.Items.RemoveAt(comboBox33.SelectedIndex);
+
+            AllesLeeren();
+        }
+
+        //Steckdosengruppe löschen
+        private void button21_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Steckdosengruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox38.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox38.Text);
+            }
+
+            comboBox38.Items.RemoveAt(comboBox38.SelectedIndex);
+
+            AllesLeeren();
+        }
+
+        //Extra löschen
+        private void button25_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie die ausgewählte Schaltgruppe wirklich löschen?",
+                "Eintrag löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            int stelle = StelleInFunktionen(comboBox43.Text);
+            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
+            while (stelle != 999)
+            {
+                Form1.liste[index].Funktionen[stelle] = null;
+                stelle = StelleInFunktionen(comboBox43.Text);
+            }
+
+            comboBox43.Items.RemoveAt(comboBox43.SelectedIndex);
+
+            ComboLeerenVonBis(43, 47);
+            TextLeerenVonBis(77, 84);
+        }
+
+
+        //Licht: Schaltgruppe in oberer comboBox auswählen
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboLeerenVonBis(2, 20);
@@ -965,284 +1387,33 @@ namespace KNX_V2
             }
         }
 
-        //Lichtgruppe löschen
-        private void button13_Click(object sender, EventArgs e)
+        //Extra: Schaltgruppe in oberer ComboBox auswählen
+        private void comboBox43_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Möchten Sie die ausgewählte Beleuchtungsgruppe wirklich löschen?",
-                "Eintrag löschen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            ComboLeerenVonBis(44, 47);
+            TextLeerenVonBis(77, 84);
 
-            if (result != DialogResult.Yes)
-                return;
-
-            int stelle = StelleInFunktionen(comboBox1.Text);
-                //löscht bereits vorhandene Funktionen für diese Schaltgruppe
-                while (stelle != 999)
+            int stelle = StelleInFunktionen(comboBox43.Text);
+            if (stelle != 999)
+            {
+                foreach (Funktion fkt in Form1.liste[index].Funktionen)
                 {
-                    Form1.liste[index].Funktionen[stelle] = null;
-                    stelle = StelleInFunktionen(comboBox1.Text);
-                }
-            
-            comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
-
-            AllesLeeren();
-
-            checkBox1.Checked = false;
-            checkBox2.Checked = false;
-            checkBox3.Checked = false;
-            checkBox4.Checked = false;
-            checkBox5.Checked = false;
-
-            
-
-        }
-
-        //Verdunkelungsgruppe löschen
-        private void button15_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "Möchten Sie die ausgewählte Verdunkelungsgruppe wirklich löschen?",
-                "Eintrag löschen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
-                return;
-
-            int stelle = StelleInFunktionen(comboBox21.Text);
-            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
-            while (stelle != 999)
-            {
-                Form1.liste[index].Funktionen[stelle] = null;
-                stelle = StelleInFunktionen(comboBox21.Text);
-            }
-
-            comboBox21.Items.RemoveAt(comboBox21.SelectedIndex);
-
-            AllesLeeren();
-        }
-
-        //Oberlichtgruppe löschen
-        private void button17_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "Möchten Sie die ausgewählte Oberlichtgruppe wirklich löschen?",
-                "Eintrag löschen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
-                return;
-
-            int stelle = StelleInFunktionen(comboBox28.Text);
-            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
-            while (stelle != 999)
-            {
-                Form1.liste[index].Funktionen[stelle] = null;
-                stelle = StelleInFunktionen(comboBox28.Text);
-            }
-
-            comboBox28.Items.RemoveAt(comboBox28.SelectedIndex);
-
-            AllesLeeren();
-        }
-
-        //Heizgruppe löschen
-        private void button19_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "Möchten Sie die ausgewählte Heizgruppe wirklich löschen?",
-                "Eintrag löschen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
-                return;
-
-            int stelle = StelleInFunktionen(comboBox33.Text);
-            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
-            while (stelle != 999)
-            {
-                Form1.liste[index].Funktionen[stelle] = null;
-                stelle = StelleInFunktionen(comboBox33.Text);
-            }
-
-            comboBox33.Items.RemoveAt(comboBox33.SelectedIndex);
-
-            AllesLeeren();
-        }
-
-        //Steckdosengruppe löschen
-        private void button21_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "Möchten Sie die ausgewählte Steckdosengruppe wirklich löschen?",
-                "Eintrag löschen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
-                return;
-
-            int stelle = StelleInFunktionen(comboBox38.Text);
-            //löscht bereits vorhandene Funktionen für diese Schaltgruppe
-            while (stelle != 999)
-            {
-                Form1.liste[index].Funktionen[stelle] = null;
-                stelle = StelleInFunktionen(comboBox38.Text);
-            }
-
-            comboBox38.Items.RemoveAt(comboBox38.SelectedIndex);
-
-            AllesLeeren();
-        }
-
-        //Lichtgruppe umbenennen
-        private void button14_Click_1(object sender, EventArgs e)
-        {
-            if(comboBox1.Text == "" || comboBox1.Text == null)
-            {
-                MessageBox.Show("Bitte eine Lichtgruppe auswählen.");
-                return;
-            }
-
-            using (var dlg = new Umbenennen(comboBox1.Text))
-            {
-
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    if(StelleInFunktionen(dlg.TxtName) != 999)
+                    if (fkt != null && fkt.Verbraucher == comboBox43.Text)
                     {
-                        MessageBox.Show("Es existiert bereits eine Lichtgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
-                        return;
+                        var combobox = Controls.Find("comboBox" + fkt.ComboNr, true).FirstOrDefault();
+                        if (combobox != null) { combobox.Text = fkt.Bedienelement; }
+
+                        int a = 2 * fkt.ComboNr - 11;
+                        int b = a + 1;
+                        var textbox = Controls.Find("textBox" + a, true).FirstOrDefault();
+                        if (textbox != null) { textbox.Text = fkt.Sollwert; }
+                        var textbox2 = Controls.Find("textBox" + b, true).FirstOrDefault();
+                        if (textbox2 != null) { textbox2.Text = fkt.Kommentar; }
                     }
-                    if(!lichtUmbenannt)
-                    {
-                        lichtAlt = comboBox1.Text;
-                    }
-                    comboBox1.Text = dlg.TxtName;    
-                    lichtUmbenannt = true;
                 }
             }
         }
 
-        //Verdunkelungsgruppe umbenennen
-        private void button16_Click(object sender, EventArgs e)
-        {
-            if (comboBox21.Text == "" || comboBox21.Text == null)
-            {
-                MessageBox.Show("Bitte eine Verdunkelungsgruppe auswählen.");
-                return;
-            }
-
-            using (var dlg = new Umbenennen(comboBox21.Text))
-            {
-
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    if (StelleInFunktionen(dlg.TxtName) != 999)
-                    {
-                        MessageBox.Show("Es existiert bereits eine Verdunkelungsgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
-                        return;
-                    }
-                    if (!verdunkelungUmbenannt)
-                    {
-                        verdunkelungAlt = comboBox21.Text;
-                    }
-                    comboBox21.Text = dlg.TxtName;
-                    verdunkelungUmbenannt = true;                 
-                }
-            }
-        }
-
-        //Oberlichtgruppe umbenennen
-        private void button18_Click(object sender, EventArgs e)
-        {
-            if (comboBox28.Text == "" || comboBox28.Text == null)
-            {
-                MessageBox.Show("Bitte eine Oberlichtgruppe auswählen.");
-                return;
-            }
-
-            using (var dlg = new Umbenennen(comboBox28.Text))
-            {
-
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    if (StelleInFunktionen(dlg.TxtName) != 999)
-                    {
-                        MessageBox.Show("Es existiert bereits eine Oberlichtgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
-                        return;
-                    }
-                    if (!oberlichtUmbenannt)
-                    {
-                        oberlichtAlt = comboBox28.Text;
-                    }
-                    comboBox28.Text = dlg.TxtName;
-                    oberlichtUmbenannt = true;
-                }
-            }
-        }
-
-        //Heizgruppe umbenennen
-        private void button20_Click(object sender, EventArgs e)
-        {
-            if (comboBox33.Text == "" || comboBox33.Text == null)
-            {
-                MessageBox.Show("Bitte eine Heizgruppe auswählen.");
-                return;
-            }
-
-            using (var dlg = new Umbenennen(comboBox33.Text))
-            {
-
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    if (StelleInFunktionen(dlg.TxtName) != 999)
-                    {
-                        MessageBox.Show("Es existiert bereits eine Heizgruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
-                        return;
-                    }
-                    if (!heizUmbenannt)
-                    {
-                        heizAlt = comboBox33.Text;
-                    }
-                    comboBox33.Text = dlg.TxtName;
-                    heizUmbenannt = true;
-                }
-            }
-        }
-
-        //Steckdosengruppe umbenennen
-        private void button22_Click(object sender, EventArgs e)
-        {
-            if (comboBox38.Text == "" || comboBox38.Text == null)
-            {
-                MessageBox.Show("Bitte eine Steckdosengruppe auswählen.");
-                return;
-            }
-
-            using (var dlg = new Umbenennen(comboBox38.Text))
-            {
-
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    if (StelleInFunktionen(dlg.TxtName) != 999)
-                    {
-                        MessageBox.Show("Es existiert bereits eine Steckdosengruppe mit diesem Name.\r\nBitte einen neuen Namen vergeben!");
-                        return;
-                    }
-                    if (!steckdosenUmbenannt)
-                    {
-                        steckdosenAlt = comboBox38.Text;
-                    }
-                    comboBox38.Text = dlg.TxtName;
-                    steckdosenUmbenannt = true;
-                }
-            }
-        }
  
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
