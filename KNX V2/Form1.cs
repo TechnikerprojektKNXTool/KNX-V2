@@ -34,7 +34,7 @@ namespace KNX_V2
             liste = new Raum[1000];
         }
 
-        //liest Raumtyp und -namen ein und speichert an der nächsten Stelle
+        //neuen Raum anlegen (liest Raumtyp und -namen ein und speichert an der nächsten Stelle)
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text != "" && textBox2.Text != "")
@@ -94,22 +94,7 @@ namespace KNX_V2
 
         }
 
-        //Raum konfigurieren -> Form2 öffnen
-        private void button3_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //Array-Index des ausgewählten Raums auslesen
-                ListViewItem lvi = listView1.SelectedItems[0];
-                int j = Convert.ToInt32(lvi.SubItems[3].Text);
-
-                form2 = new Form2(j);
-                form2.Show();
-            }
-            catch { }
-        }
-
-        //Eintrag bearbeiten
+        //Raum umbenennen
         private void button4_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 0)
@@ -137,7 +122,7 @@ namespace KNX_V2
             }
         }
 
-        //Eintrag löschen
+        //Raum löschen
         private void button5_Click(object sender, EventArgs e)
         {
             //Array-Index des ausgewählten Raums auslesen
@@ -154,16 +139,32 @@ namespace KNX_V2
             index--; */
         }
 
+        //Raum konfigurieren -> Form2 öffnen
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Array-Index des ausgewählten Raums auslesen
+                ListViewItem lvi = listView1.SelectedItems[0];
+                int j = Convert.ToInt32(lvi.SubItems[3].Text);
+
+                form2 = new Form2(j);
+                form2.Show();
+            }
+            catch { }
+        }
+
+
         //Textdatei speichern
         private void button6_Click(object sender, EventArgs e)
         {
+            //Wenn noch nie gespeichert wurde, wird "Speichern unter" geöffnet
             if (dateipfad == "")
             {
                 button9_Click(sender, e);
             }
             else
             {
-
                 try
                 {
                     StreamWriter writer = new StreamWriter(dateipfad);
@@ -240,9 +241,10 @@ namespace KNX_V2
             catch { }
         }
 
-        //Textdatei einlesen
+        //Textdatei öffnen
         private void button8_Click(object sender, EventArgs e)
         {
+            //Speichert automatisch, bevor neue Datei geöffnet wird
             if (dateipfad != "")
             {
                 button6_Click(sender, e);
@@ -258,6 +260,7 @@ namespace KNX_V2
 
                 StreamReader reader = new StreamReader(path);                
 
+                //Räume von vorheriger Datei löschen
                 Array.Clear(liste, 0, 1000);
                 listView1.Items.Clear();
                 listView2.Items.Clear();
@@ -267,6 +270,7 @@ namespace KNX_V2
                     string[] einlesen = reader.ReadLine().Split('\t');
                     indx = Convert.ToInt32(einlesen[0]);
 
+                    //neuen Raum anlegen
                     if (liste[indx] == null)
                     {
                         liste[indx] = new Raum();
@@ -318,9 +322,36 @@ namespace KNX_V2
             catch { }
         }
 
+
+        public int Listenlaenge ()
+        {
+            int l = 0;
+            for (int i = 0; i < liste.Length; i++)
+            {
+                if (liste[i] != null && liste[i].Funktionen[0] != null)
+                {
+                    l++;
+                    foreach (Funktion funktion in liste[i].Funktionen)
+                    {
+                        if (funktion != null)
+                        {
+                            l++;
+                        }
+                    }
+                    if (liste[i+1] != null && i+1 < liste.Length && liste[i].Typ != liste[i+1].Typ)
+                    {
+                        l++;
+                    }
+                }
+            }
+
+            return l;
+        }
+
         //Excel-Tabelle erstellen
         private void button7_Click(object sender, EventArgs e)
         {
+            //Räume sortieren, bevor Excel-Tabelle erzeugt wird
             for (int j = 0; j < (liste.Length - 1); j++)
             {
                 for (int k = 0; k < (liste.Length - 1); k++)
@@ -478,30 +509,6 @@ namespace KNX_V2
 
         }
 
-        public int Listenlaenge ()
-        {
-            int l = 0;
-            for (int i = 0; i < liste.Length; i++)
-            {
-                if (liste[i] != null && liste[i].Funktionen[0] != null)
-                {
-                    l++;
-                    foreach (Funktion funktion in liste[i].Funktionen)
-                    {
-                        if (funktion != null)
-                        {
-                            l++;
-                        }
-                    }
-                    if (liste[i+1] != null && i+1 < liste.Length && liste[i].Typ != liste[i+1].Typ)
-                    {
-                        l++;
-                    }
-                }
-            }
-
-            return l;
-        }
 
         //Funktionen-Vorschau anzeigen, wenn eine Raum ausgewählt wird
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
