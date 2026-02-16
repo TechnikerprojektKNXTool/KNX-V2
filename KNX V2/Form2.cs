@@ -236,7 +236,7 @@ namespace KNX_V2
         }
 
 
-        // leert alle Text- und Comboboxen
+        /* leert alle Text- und Comboboxen
         private void AllesLeeren()
         {
             for (int i = 1; i < 48; i++)
@@ -255,7 +255,7 @@ namespace KNX_V2
                     textbox.Text = "";
                 }
             }
-        }
+        } */
 
         private void ComboLeerenVonBis(int a, int b)
         {
@@ -498,7 +498,8 @@ namespace KNX_V2
             }
             lichtUmbenannt = false;
 
-            AllesLeeren();
+            ComboLeerenVonBis(1, 20);
+            TextLeerenVonBis(1, 38);
 
             checkBox1.Checked = false;
             checkBox2.Checked = false;
@@ -581,7 +582,8 @@ namespace KNX_V2
             }
 
             verdunkelungUmbenannt = false;
-            AllesLeeren();
+            ComboLeerenVonBis(21, 27);
+            TextLeerenVonBis(39, 50);
         }
 
         //Oberlichter speichern
@@ -660,7 +662,8 @@ namespace KNX_V2
             }
             oberlichtUmbenannt = false;
 
-            AllesLeeren();
+            ComboLeerenVonBis(28, 32);
+            TextLeerenVonBis(51, 58);
 
         }
 
@@ -735,7 +738,8 @@ namespace KNX_V2
             }
             heizUmbenannt = false;
 
-            AllesLeeren();
+            ComboLeerenVonBis(33, 37);
+            TextLeerenVonBis(59, 66);
         }
 
         //Steckdosen speichern
@@ -810,7 +814,8 @@ namespace KNX_V2
             }
             steckdosenUmbenannt = false;
 
-            AllesLeeren();
+            ComboLeerenVonBis(38, 42);
+            TextLeerenVonBis(67, 74);
         }
 
         //Extraschaltgruppe speichern
@@ -1087,16 +1092,14 @@ namespace KNX_V2
             
             comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
 
-            AllesLeeren();
+            ComboLeerenVonBis(1, 20);
+            TextLeerenVonBis(1, 38);
 
             checkBox1.Checked = false;
             checkBox2.Checked = false;
             checkBox3.Checked = false;
             checkBox4.Checked = false;
-            checkBox5.Checked = false;
-
-            
-
+            checkBox5.Checked = false;           
         }
 
         //Verdunkelungsgruppe löschen
@@ -1121,7 +1124,8 @@ namespace KNX_V2
 
             comboBox21.Items.RemoveAt(comboBox21.SelectedIndex);
 
-            AllesLeeren();
+            ComboLeerenVonBis(21, 27);
+            TextLeerenVonBis(39, 50);
         }
 
         //Oberlichtgruppe löschen
@@ -1146,7 +1150,8 @@ namespace KNX_V2
 
             comboBox28.Items.RemoveAt(comboBox28.SelectedIndex);
 
-            AllesLeeren();
+            ComboLeerenVonBis(28, 32);
+            TextLeerenVonBis(51, 58);
         }
 
         //Heizgruppe löschen
@@ -1171,7 +1176,8 @@ namespace KNX_V2
 
             comboBox33.Items.RemoveAt(comboBox33.SelectedIndex);
 
-            AllesLeeren();
+            ComboLeerenVonBis(33, 37);
+            TextLeerenVonBis(59, 66);
         }
 
         //Steckdosengruppe löschen
@@ -1196,7 +1202,8 @@ namespace KNX_V2
 
             comboBox38.Items.RemoveAt(comboBox38.SelectedIndex);
 
-            AllesLeeren();
+            ComboLeerenVonBis(38, 42);
+            TextLeerenVonBis(67, 74);
         }
 
         //Extra löschen
