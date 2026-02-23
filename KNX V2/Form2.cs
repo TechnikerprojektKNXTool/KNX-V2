@@ -37,6 +37,20 @@ namespace KNX_V2
         public Form2()
         {
             InitializeComponent();
+
+            //Schaltstelle Speichern, wenn man Enter in der Textbox drückt 
+            textBox76.KeyDown += textBox76_KeyDown;
+
+            //Textbox blau markieren 
+            foreach (Control c in this.Controls)
+            {
+                if (c is System.Windows.Forms.TextBox tb)
+                {
+                    tb.Enter += TextBox_SelectAll;
+                    tb.MouseUp += TextBox_MouseUp;
+                }
+            }
+
             SetBounds(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
             comboBoxFixCount = new Dictionary<ComboBox, int>();
@@ -179,7 +193,38 @@ namespace KNX_V2
             }            
         }
 
-               
+        //Textbox blau markieren #############################################
+        private void TextBox_SelectAll(object sender, EventArgs e)
+        {
+            ((System.Windows.Forms.TextBox)sender).SelectAll();
+        }
+        //Textbox blau markieren #############################################
+        private void TextBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            var tb = (System.Windows.Forms.TextBox)sender;
+
+            if (tb.SelectionLength == 0)
+                tb.SelectAll();
+        }
+
+        ////################################################################################
+        //private void ComboBox_Check(object sender, EventArgs e)
+        //{
+        //    button4.Enabled =
+        //        !string.IsNullOrWhiteSpace(comboBox1.Text);
+        //}
+
+        //Schaltstelle Speichern, wenn man Enter in der Textbox drückt 
+        private void textBox76_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button9.PerformClick();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+
         private void UpdateComboBoxenDynamisch(int? deletedDynamicIndex = null)
         {
             foreach (ComboBox cb in alleComboBoxen)

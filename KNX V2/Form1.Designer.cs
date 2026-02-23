@@ -64,14 +64,14 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 223);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 31);
+            this.textBox1.Size = new System.Drawing.Size(181, 22);
             this.textBox1.TabIndex = 30;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(199, 223);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(183, 31);
+            this.textBox2.Size = new System.Drawing.Size(183, 22);
             this.textBox2.TabIndex = 29;
             // 
             // button2
@@ -107,7 +107,7 @@
             this.listView1.Location = new System.Drawing.Point(12, 251);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(370, 628);
+            this.listView1.Size = new System.Drawing.Size(370, 480);
             this.listView1.TabIndex = 33;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -183,7 +183,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 50);
             this.button7.TabIndex = 38;
-            this.button7.Text = "Excel- Export";
+            this.button7.Text = "Excel Export";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -193,7 +193,7 @@
             this.label1.Location = new System.Drawing.Point(9, 202);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 25);
+            this.label1.Size = new System.Drawing.Size(31, 16);
             this.label1.TabIndex = 39;
             this.label1.Text = "Typ";
             // 
@@ -203,7 +203,7 @@
             this.label2.Location = new System.Drawing.Point(196, 202);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 25);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 40;
             this.label2.Text = "Name";
             // 
@@ -221,7 +221,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::KNX_V2.Properties.Resources.viereckiges_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(1845, 1);
+            this.pictureBox1.Location = new System.Drawing.Point(1378, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(78, 76);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -244,7 +244,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(139, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(227, 42);
+            this.label4.Size = new System.Drawing.Size(149, 29);
             this.label4.TabIndex = 195;
             this.label4.Text = "Projektname";
             // 
@@ -265,7 +265,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(7, 156);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(138, 42);
+            this.label5.Size = new System.Drawing.Size(90, 29);
             this.label5.TabIndex = 197;
             this.label5.Text = "Räume";
             // 
@@ -281,7 +281,7 @@
             this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(640, 251);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(963, 628);
+            this.listView2.Size = new System.Drawing.Size(816, 480);
             this.listView2.TabIndex = 198;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -318,7 +318,7 @@
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.ClientSize = new System.Drawing.Size(1506, 1055);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button9);
@@ -340,7 +340,7 @@
             this.Controls.Add(this.textBox2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "KNX Tool";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

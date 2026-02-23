@@ -23,15 +23,69 @@ namespace KNX_V2
         int index = 0;
         public static Raum[] liste;
         string dateipfad = "";
+        bool abgebrochen = false;
 
 
         public Form1()
         {
             InitializeComponent();
+            //Speichern bei schließen
+            this.FormClosing += Form1_FormClosing;
+
             SetBounds(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             listView1.FullRowSelect = true;
+
             //hauptarray, in dem die Räume abgespeichert werden
             liste = new Raum[1000];
+
+            //Textbox blau markieren #############################################
+            foreach (Control c in this.Controls)
+            {
+                if (c is System.Windows.Forms.TextBox tb)
+                {
+                    tb.Enter += TextBox_SelectAll;
+                    tb.MouseUp += TextBox_MouseUp;
+                }
+            }
+        }
+
+        //Speichern bei schließen
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie vor dem Beenden speichern?",
+                "Programm beenden",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                abgebrochen = false;
+                button6.PerformClick();   // ruft deinen Speichern-Code auf
+                if (abgebrochen)
+                {
+                    e.Cancel = true;
+                }
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;          // verhindert das Schließen
+            }
+        }
+
+        //Textbox blau markieren #############################################
+        private void TextBox_SelectAll(object sender, EventArgs e)
+        {
+            ((System.Windows.Forms.TextBox)sender).SelectAll();
+        }
+        //Textbox blau markieren #############################################
+        private void TextBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            var tb = (System.Windows.Forms.TextBox)sender;
+
+            if (tb.SelectionLength == 0)
+                tb.SelectAll();
         }
 
         //neuen Raum anlegen (liest Raumtyp und -namen ein und speichert an der nächsten Stelle)
@@ -62,6 +116,15 @@ namespace KNX_V2
         //bestehenden Raum kopieren
         private void button2_Click_1(object sender, EventArgs e)
         {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte zuerst einen Raum auswählen.",
+                                "Keine Auswahl",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
             //Array-Index des ausgewählten Raums auslesen
             ListViewItem lvi = listView1.SelectedItems[0];
             int i = Convert.ToInt32(lvi.SubItems[3].Text);
@@ -99,7 +162,10 @@ namespace KNX_V2
         {
             if (listView1.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Bitte einen Raum auswählen.");
+                MessageBox.Show("Bitte zuerst einen Raum auswählen.",
+                                "Keine Auswahl",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
@@ -125,6 +191,24 @@ namespace KNX_V2
         //Raum löschen
         private void button5_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(
+                "Möchten Sie den ausgewählten Raum wirklich löschen?",
+                "Raum löschen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte zuerst einen Raum auswählen.",
+                                "Keine Auswahl",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
             //Array-Index des ausgewählten Raums auslesen
             ListViewItem lvi = listView1.SelectedItems[0];
             int j = Convert.ToInt32(lvi.SubItems[3].Text);
@@ -142,6 +226,16 @@ namespace KNX_V2
         //Raum konfigurieren -> Form2 öffnen
         private void button3_Click(object sender, EventArgs e)
         {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bitte zuerst einen Raum auswählen.",
+                                "Keine Auswahl",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+
             try
             {
                 //Array-Index des ausgewählten Raums auslesen
@@ -206,7 +300,11 @@ namespace KNX_V2
             {
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "Textdatei (*.txt)|*.txt|All files (*.*)|*.*";
-                sfd.ShowDialog();
+                if (sfd.ShowDialog() != DialogResult.OK)
+                {
+                    abgebrochen = true;
+                    return;
+                }
                 dateipfad = sfd.FileName;
 
                 StreamWriter writer = new StreamWriter(dateipfad);
@@ -236,9 +334,8 @@ namespace KNX_V2
                     }
                 }
                 writer.Close();
-
             }
-            catch { }
+            catch { }          
         }
 
         //Textdatei öffnen
