@@ -453,6 +453,11 @@ namespace KNX_V2
         //Lichtgruppe speichern
         private void button4_Click(object sender, EventArgs e)
         {
+            if (comboBox1.Text == "")
+            {
+                MessageBox.Show("Bitte einen Namen für die Beleuchtungsgruppe vergeben!","", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string gruppe;
             if (lichtUmbenannt)
             {
@@ -557,6 +562,11 @@ namespace KNX_V2
         //Verdunkelung speichern
         private void button5_Click(object sender, EventArgs e)
         {
+            if (comboBox21.Text == "")
+            {
+                MessageBox.Show("Bitte einen Namen für die Verdunkelungsgruppe vergeben!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string gruppe;
             if (verdunkelungUmbenannt)
             {
@@ -634,6 +644,11 @@ namespace KNX_V2
         //Oberlichter speichern
         private void button6_Click(object sender, EventArgs e)
         {
+            if (comboBox28.Text == "")
+            {
+                MessageBox.Show("Bitte einen Namen für die Oberlichtgruppe vergeben!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string gruppe;
             if (oberlichtUmbenannt)
             {
@@ -715,6 +730,11 @@ namespace KNX_V2
         //Heizgruppen speichern
         private void button7_Click(object sender, EventArgs e)
         {
+            if (comboBox33.Text == "")
+            {
+                MessageBox.Show("Bitte einen Namen für die Heizgruppe vergeben!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string gruppe;
             if (heizUmbenannt)
             {
@@ -790,6 +810,11 @@ namespace KNX_V2
         //Steckdosen speichern
         private void button8_Click(object sender, EventArgs e)
         {
+            if (comboBox38.Text == "")
+            {
+                MessageBox.Show("Bitte einen Namen für die Steckdosengruppe vergeben!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string gruppe;
             if (steckdosenUmbenannt)
             {
@@ -866,6 +891,11 @@ namespace KNX_V2
         //Extraschaltgruppe speichern
         private void button23_Click(object sender, EventArgs e)
         {
+            if (comboBox43.Text == "")
+            {
+                MessageBox.Show("Bitte einen Namen für die Schaltgruppe vergeben!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string gruppe;
             if (extraUmbenannt)
             {
