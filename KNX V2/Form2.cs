@@ -1636,5 +1636,9 @@ namespace KNX_V2
             textBox38.Enabled = aktiv;
         }
 
+        private void label92_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
