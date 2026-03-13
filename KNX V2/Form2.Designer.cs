@@ -3355,7 +3355,6 @@
             this.label92.TabIndex = 41;
             this.label92.Text = "Raum";
             this.label92.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label92.Click += new System.EventHandler(this.label92_Click);
             // 
             // pictureBox1
             // 

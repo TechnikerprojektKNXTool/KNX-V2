@@ -36,10 +36,10 @@ namespace KNX_V2
             this.AutoScaleMode = AutoScaleMode.Dpi;
             listView1.FullRowSelect = true;
 
-            //hauptarray, in dem die Räume abgespeichert werden
+            //Hauptarray, in dem die Räume abgespeichert werden
             liste = new Raum[1000];
 
-            //Textbox blau markieren #############################################
+            //Textbox blau markieren 
             foreach (Control c in this.Controls)
             {
                 if (c is System.Windows.Forms.TextBox tb)
@@ -74,12 +74,13 @@ namespace KNX_V2
             }
         }
 
-        //Textbox blau markieren #############################################
+        //Textbox blau markieren 
         private void TextBox_SelectAll(object sender, EventArgs e)
         {
             ((System.Windows.Forms.TextBox)sender).SelectAll();
         }
-        //Textbox blau markieren #############################################
+
+        //Textbox blau markieren 
         private void TextBox_MouseUp(object sender, MouseEventArgs e)
         {
             var tb = (System.Windows.Forms.TextBox)sender;
@@ -419,7 +420,7 @@ namespace KNX_V2
             catch { }
         }
 
-
+        //Gibt Anzahl der gespeicherten Funktionen zurück
         public int Listenlaenge ()
         {
             int l = 0;
@@ -486,7 +487,7 @@ namespace KNX_V2
             Excel._Worksheet oSheet;
             Excel.Range oRng;
 
-            //Start Excel and get Application object.
+            //Startet Excel 
             oXL = new Excel.Application();
             oXL.Visible = true;
 
@@ -494,7 +495,7 @@ namespace KNX_V2
             oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
             oSheet = (Excel._Worksheet)oWB.ActiveSheet;
 
-            //Add table headers going cell by cell.
+            //Spaltenüberschriften
             oSheet.Cells[1, 1] = "Raumtyp";
             oSheet.Cells[1, 2] = "Raumname";
             oSheet.Cells[1, 3] = "Verbraucher";
@@ -506,7 +507,7 @@ namespace KNX_V2
             oSheet.Cells[1, 9] = "Jalousie";
             oSheet.Cells[1, 10] = "Kommentar";
 
-            //Format A1:J1 as bold, vertical alignment = center.
+            //macht Überschriften fett und zentriert
             oSheet.get_Range("A1", "J1").Font.Bold = true;
             oSheet.get_Range("A1", "J1").VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
@@ -521,7 +522,7 @@ namespace KNX_V2
             {
                 if (raum != null && raum.Typ != "invalid" && raum.Funktionen[0] != null)
                 {
-                    // Wenn neuer Raumtyp, dann leere Zeile (ist noch nicht schön so)
+                    // Wenn neuer Raumtyp, dann leere Zeile 
                     string typNeu = raum.Typ;
                     if (typNeu != typAlt)
                     {
@@ -565,17 +566,14 @@ namespace KNX_V2
             }
 
 
-            //Fill A2:B6 with an array of values 
+            //Werte eintragen
             string b = "J" + (l+2).ToString();
             oSheet.get_Range("A3", b).Value2 = xclAusgabe;
 
             //mittig ausrichten
             oSheet.get_Range("A1", b).VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
             oSheet.get_Range("A1", b).HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter;
-
-            //AutoFit columns A:J.
-            //oRng = oSheet.get_Range("A1", "J1");
-            //oRng.EntireColumn.AutoFit();
+            
             oRng = oSheet.get_Range("A1", "A" + (l+2).ToString());
             oRng.EntireColumn.AutoFit();
             oRng = oSheet.get_Range("B1", "B" + (l + 2).ToString());
@@ -598,8 +596,7 @@ namespace KNX_V2
             oRng.EntireColumn.ColumnWidth = 32;
 
 
-            //Make sure Excel is visible and give the user control
-            //of Microsoft Excel's lifetime.
+            //Macht Excel sichtbar und gibt dem User Kontrolle über die Excel-Anwendung
             oXL.Visible = true;
             oXL.UserControl = true;
 

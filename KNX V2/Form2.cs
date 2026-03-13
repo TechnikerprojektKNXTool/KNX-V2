@@ -193,12 +193,12 @@ namespace KNX_V2
             }            
         }
 
-        //Textbox blau markieren #############################################
+        //Textbox blau markieren 
         private void TextBox_SelectAll(object sender, EventArgs e)
         {
             ((System.Windows.Forms.TextBox)sender).SelectAll();
         }
-        //Textbox blau markieren #############################################
+        //Textbox blau markieren 
         private void TextBox_MouseUp(object sender, MouseEventArgs e)
         {
             var tb = (System.Windows.Forms.TextBox)sender;
@@ -207,12 +207,6 @@ namespace KNX_V2
                 tb.SelectAll();
         }
 
-        ////################################################################################
-        //private void ComboBox_Check(object sender, EventArgs e)
-        //{
-        //    button4.Enabled =
-        //        !string.IsNullOrWhiteSpace(comboBox1.Text);
-        //}
 
         //Schaltstelle Speichern, wenn man Enter in der Textbox drückt 
         private void textBox76_KeyDown(object sender, KeyEventArgs e)
@@ -281,27 +275,6 @@ namespace KNX_V2
         }
 
 
-        /* leert alle Text- und Comboboxen
-        private void AllesLeeren()
-        {
-            for (int i = 1; i < 48; i++)
-            {
-                var combo = Controls.Find("comboBox" + i, true).FirstOrDefault();
-                if (combo != null)
-                {
-                    combo.Text = "";
-                }
-            }
-            for (int i = 1; i < 85; i++)
-            {
-                var textbox = Controls.Find("textBox" + i, true).FirstOrDefault();
-                if (textbox != null)
-                {
-                    textbox.Text = "";
-                }
-            }
-        } */
-
         private void ComboLeerenVonBis(int a, int b)
         {
             for (int i = a; i < (b + 1); i++)
@@ -350,26 +323,6 @@ namespace KNX_V2
                 i++;
             }
             return j;
-        }
-
-
-
-        //zurück Button
-        private void button1_Click(object sender, EventArgs e)
-        {   
-            if (tabControl1.SelectedIndex > 0) 
-            {
-                tabControl1.SelectedIndex--;
-            }
-        }
-
-        //vor Button
-        private void button3_Click(object sender, EventArgs e)
-        {   
-            if (tabControl1.SelectedIndex < tabControl1.TabCount - 1)
-            {
-                tabControl1.SelectedIndex++;
-            }
         }
 
 
@@ -429,7 +382,6 @@ namespace KNX_V2
                 MessageBox.Show("Bitte einen Eintrag auswählen.");
                 return;
             }
-            //test für merge test2
             // Sicherheitsabfrage
             DialogResult result = MessageBox.Show(
                 "Möchten Sie den ausgewählten Eintrag wirklich löschen?",
@@ -1636,9 +1588,5 @@ namespace KNX_V2
             textBox38.Enabled = aktiv;
         }
 
-        private void label92_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
