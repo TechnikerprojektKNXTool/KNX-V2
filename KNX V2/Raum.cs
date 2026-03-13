@@ -11,7 +11,6 @@ namespace KNX_V2
         string name;
         string typ;
         Funktion[] funktionen;
-        //string[] schaltstellen;
         List<string> schaltstellen;
 
         public string Name
