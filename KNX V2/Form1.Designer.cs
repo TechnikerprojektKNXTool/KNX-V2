@@ -240,13 +240,14 @@
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label4.Location = new System.Drawing.Point(139, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(149, 29);
+            this.label4.Size = new System.Drawing.Size(149, 75);
             this.label4.TabIndex = 195;
             this.label4.Text = "Projektname";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button9
             // 

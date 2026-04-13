@@ -352,70 +352,74 @@ namespace KNX_V2
                 int j = 0;
                 int indx = -1;
 
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.ShowDialog();
-                string path = ofd.FileName;
-
-                StreamReader reader = new StreamReader(path);                
-
-                //Räume von vorheriger Datei löschen
-                Array.Clear(liste, 0, 1000);
-                listView1.Items.Clear();
-                listView2.Items.Clear();
-
-                while (reader.Peek() != -1)
+              OpenFileDialog ofd = new OpenFileDialog();
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    string[] einlesen = reader.ReadLine().Split('\t');
-                    indx = Convert.ToInt32(einlesen[0]);
+                    string path = ofd.FileName;
 
-                    //neuen Raum anlegen
-                    if (liste[indx] == null)
+                    // Dateiname OHNE Endung ins Label schreiben
+                    label4.Text = System.IO.Path.GetFileNameWithoutExtension(path);
+                    StreamReader reader = new StreamReader(path);
+
+                    //Räume von vorheriger Datei löschen
+                    Array.Clear(liste, 0, 1000);
+                    listView1.Items.Clear();
+                    listView2.Items.Clear();
+
+                    while (reader.Peek() != -1)
                     {
-                        liste[indx] = new Raum();
-                        liste[indx].Typ = einlesen[1];
-                        liste[indx].Name = einlesen[2];
+                        string[] einlesen = reader.ReadLine().Split('\t');
+                        indx = Convert.ToInt32(einlesen[0]);
 
-                        ListViewItem listitem = new ListViewItem();
-                        listitem.SubItems.Add(einlesen[1]);
-                        listitem.SubItems.Add(einlesen[2]);
-                        listitem.SubItems.Add(indx.ToString());
-                        listView1.Items.Add(listitem);
-
-                        j = 0;
-                    }
-
-                    //Schaltstellenlsite einlesen
-                    if (einlesen[3] == "Schaltstellenliste" && einlesen[4] != null)
-                    {
-                        for (int i = 4; i < einlesen.Length; i++)
+                        //neuen Raum anlegen
+                        if (liste[indx] == null)
                         {
-                            liste[indx].Schaltstellen.Add(einlesen[i]);
+                            liste[indx] = new Raum();
+                            liste[indx].Typ = einlesen[1];
+                            liste[indx].Name = einlesen[2];
+
+                            ListViewItem listitem = new ListViewItem();
+                            listitem.SubItems.Add(einlesen[1]);
+                            listitem.SubItems.Add(einlesen[2]);
+                            listitem.SubItems.Add(indx.ToString());
+                            listView1.Items.Add(listitem);
+
+                            j = 0;
+                        }
+
+                        //Schaltstellenlsite einlesen
+                        if (einlesen[3] == "Schaltstellenliste" && einlesen[4] != null)
+                        {
+                            for (int i = 4; i < einlesen.Length; i++)
+                            {
+                                liste[indx].Schaltstellen.Add(einlesen[i]);
+                            }
+                        }
+
+                        //if (einlesen[4] != "leer")
+                        if (einlesen[3] != "Schaltstellenliste")
+                        {
+                            Funktion fkt = new Funktion();
+                            fkt.Name = einlesen[3];
+                            fkt.Bedienelement = einlesen[4];
+                            fkt.Verbraucher = einlesen[5];
+                            fkt.Sollwert = einlesen[6];
+                            fkt.Schalten = Convert.ToBoolean(einlesen[7]);
+                            fkt.Dimmen = Convert.ToBoolean(einlesen[8]);
+                            fkt.Jalousie = Convert.ToBoolean(einlesen[9]);
+                            fkt.Kommentar = einlesen[10];
+                            fkt.Art = Convert.ToInt32(einlesen[11]);
+                            fkt.ComboNr = Convert.ToInt32(einlesen[12]);
+                            liste[indx].Funktionen[j] = fkt;
+                            j++;
                         }
                     }
 
-                    //if (einlesen[4] != "leer")
-                    if (einlesen[3] != "Schaltstellenliste")
-                    {
-                        Funktion fkt = new Funktion();
-                        fkt.Name = einlesen[3];
-                        fkt.Bedienelement = einlesen[4];
-                        fkt.Verbraucher = einlesen[5];
-                        fkt.Sollwert = einlesen[6];
-                        fkt.Schalten = Convert.ToBoolean(einlesen[7]);
-                        fkt.Dimmen = Convert.ToBoolean(einlesen[8]);
-                        fkt.Jalousie = Convert.ToBoolean(einlesen[9]);
-                        fkt.Kommentar = einlesen[10];
-                        fkt.Art = Convert.ToInt32(einlesen[11]);
-                        fkt.ComboNr = Convert.ToInt32(einlesen[12]);
-                        liste[indx].Funktionen[j] = fkt;
-                        j++;
-                    }
+                    reader.Close();
+
+                    index = indx + 1;
+                    dateipfad = path;
                 }
-
-                reader.Close();
-
-                index = indx + 1;
-                dateipfad = path;
             }
             catch { }
         }
